@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dimitris Gkoumas</title>
+<meta name="description" content="Dimitris Gkoumas, PhD: Staff ML Engineer and AI Research Scientist working on LLM systems, agentic AI, RAG and multimodal learning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,650&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F5F6FA; --surface:#FFFFFF; --ink:#1A1F2C; --muted:#5B6275; --rule:#D5D9E4;
+  --accent:#0E7A72; --accent-soft:#E0F1EF; --accent2:#4A4EC2;
+  --display:"Literata",Georgia,serif; --body:"Source Sans 3","Segoe UI",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#11141C; --surface:#191D28; --ink:#E5E8F0; --muted:#9AA1B4; --rule:#2E3446;
+  --accent:#4CC5B9; --accent-soft:#16302E; --accent2:#9195F3; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--body)}
+.wrap{max-width:760px;margin:0 auto;padding:48px max(20px,env(safe-area-inset-left)) 72px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+header{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+.photo{width:128px;height:128px;border-radius:50%;object-fit:cover;background:var(--accent-soft);border:1px solid var(--rule);flex:none}
+.initials{display:grid;place-items:center;font:650 40px var(--display);color:var(--accent)}
+h1{font:650 clamp(32px,6vw,44px)/1.1 var(--display);margin:0 0 6px;letter-spacing:-.01em}
+.role{color:var(--muted);margin:0}
+.links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px;font-size:15px}
+.links a{text-decoration:none;border-bottom:1px solid var(--rule)}
+.links a:hover{border-color:var(--accent)}
+section{margin-top:44px}
+h2{font:500 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+p{margin:0 0 12px;max-width:66ch}
+.feature{display:block;margin-top:28px;padding:18px 20px;border-radius:8px;background:var(--surface);border:1px solid var(--rule);text-decoration:none;color:var(--ink)}
+.feature:hover{border-color:var(--accent)}
+.feature b{font:650 20px var(--display);display:block;margin-bottom:4px}
+.feature span{color:var(--muted);font-size:15px}
+.feature em{font-style:normal;color:var(--accent);font-weight:600}
+ol.cv{list-style:none;margin:0;padding:0}
+ol.cv li{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:10px 0;border-bottom:1px solid var(--rule)}
+ol.cv li:last-child{border-bottom:0}
+.yr{font:13px var(--mono);color:var(--muted);padding-top:3px;font-variant-numeric:tabular-nums}
+.what b{font-weight:600}
+.what small{display:block;color:var(--muted);font-size:15px}
+ul.pubs{margin:0;padding-left:20px}
+ul.pubs li{margin:8px 0}
+ul.pubs .venue{color:var(--muted);font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font:13px var(--mono);padding:3px 10px;border-radius:99px;background:var(--accent-soft);color:var(--ink)}
+nav.top{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px max(20px,env(safe-area-inset-left));background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+nav.top a{text-decoration:none;font-size:15px}
+nav.top .me{color:var(--ink);font-weight:600}
+nav.top .nb{padding:6px 14px;border-radius:99px;background:var(--accent);color:var(--bg);font-weight:600}
+nav.top .nb:hover{filter:brightness(1.1)}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.wrap{position:relative}
+.bgnote{font-size:13px;margin-top:6px}
+footer{margin-top:56px;color:var(--muted);font-size:14px}
+@media (max-width:520px){ol.cv li{grid-template-columns:1fr;gap:2px}}
+</style>
+</head>
+<body>
+<nav class="top"><a class="me" href="index.html">Dimitris Gkoumas</a><a class="nb" href="ai-under-the-hood.html">AI Under the Hood →</a></nav>
+<div class="wrap">
+<header>
+  <img class="photo" src="https://gkoumasd.github.io/assets/images/square.jpg" alt="Dimitris Gkoumas" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://gkoumasd.github.io/assets/images/profile.jpg';return;}this.outerHTML='&lt;div class=&quot;photo initials&quot; aria-hidden=&quot;true&quot;&gt;DG&lt;/div&gt;'">
+  <div>
+    <h1>Dimitris Gkoumas, PhD</h1>
+    <p class="role">Staff ML Engineer &amp; AI Research Scientist · Reading, UK</p>
+    <div class="links">
+      <a href="mailto:gkoumasjim@gmail.com">gkoumasjim@gmail.com</a>
+      <a href="https://www.linkedin.com/in/goumasjim/">LinkedIn</a>
+      <a href="https://scholar.google.com/citations?user=WaqvzcMAAAAJ&amp;hl=en">Google Scholar</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <h2>About</h2>
+  <p>I build and research LLM systems: agentic AI, retrieval-augmented generation, LLM post-training and evaluation, and multimodal learning. At Method (Hitachi Digital) I lead end-to-end AI solution development, building AI systems that capture organisational knowledge and turn it into actionable AI capabilities.</p>
+  <p>Before that I was a Research Scientist at Huawei Noah's Ark Lab, working on LLM reasoning with reinforcement learning and agentic workflows, and a Postdoctoral Research Associate at Queen Mary University of London, working on longitudinal NLP. I hold a PhD in Artificial Intelligence from The Open University (Marie Curie scholarship) on quantum-inspired multimodal representation learning and have published at ACL, EMNLP, AAAI and IJCAI.</p>
+  <a class="feature" href="ai-under-the-hood.html">
+    <b>AI Under the Hood</b>
+    <span>Study notes on ML foundations, why models fail to generalise, how they are optimised, how generative models and transformers work, how training scales across GPUs, how it all comes together in LLMs, how to deploy them, and how agents use tools. <em>Read →</em></span>
+  </a>
+</section>
+
+<section>
+  <h2>Experience</h2>
+  <ol class="cv">
+    <li><span class="yr">2025 – now</span><span class="what"><b>Staff ML Engineer</b>, Method – Hitachi Digital, London<small>Enterprise AI solutions; multi-agent design systems; production AI and MLOps.</small></span></li>
+    <li><span class="yr">2024 – 2025</span><span class="what"><b>Research Scientist in NLP</b>, Huawei Noah's Ark Lab, London<small>LLM mathematical reasoning: reward modelling, RL and execution feedback; agentic code repair.</small></span></li>
+    <li><span class="yr">2021 – 2024</span><span class="what"><b>Postdoctoral Research Associate</b>, Queen Mary University of London<small>Longitudinal NLP; RAG, parameter-efficient fine-tuning, RLHF, efficient inference, hallucination evaluation.</small></span></li>
+    <li><span class="yr">2021 – 2023</span><span class="what"><b>Applied ML Engineer</b>, Huawei Ireland Research Centre, Dublin<small>Large-scale semantic search; distributed LLM training; ML infrastructure.</small></span></li>
+    <li><span class="yr">2017 – 2021</span><span class="what"><b>Early Stage Researcher</b>, The Open University<small>Quantum-inspired neural models for multimodal learning.</small></span></li>
+  </ol>
+</section>
+
+<section>
+  <h2>Education</h2>
+  <ol class="cv">
+    <li><span class="yr">2017 – 2021</span><span class="what"><b>PhD in Artificial Intelligence</b>, The Open University, UK<small>Quantum-inspired multimodal representation learning.</small></span></li>
+    <li><span class="yr">2012 – 2014</span><span class="what"><b>MSc in Machine Learning</b>, Aristotle University of Thessaloniki</span></li>
+    <li><span class="yr">2005 – 2009</span><span class="what"><b>BSc in Computer Science</b>, Technical University of Crete</span></li>
+  </ol>
+</section>
+
+<section>
+  <h2>Selected publications</h2>
+  <ul class="pubs">
+    <li><a href="https://arxiv.org/pdf/2405.13984">Less for More: Enhanced Feedback-aligned Mixed LLMs for Molecule Caption Generation and Fine-Grained NLI Evaluation</a> <span class="venue">ACL 2025 (oral)</span></li>
+    <li><a href="https://aclanthology.org/2023.emnlp-main.986/">Reformulating NLP Tasks to Capture Longitudinal Manifestation of Language Disorders in People with Dementia</a> <span class="venue">EMNLP 2023 (oral)</span></li>
+    <li><a href="https://aclanthology.org/2023.emnlp-main.994/">A Digital Language Coherence Marker for Monitoring Dementia</a> <span class="venue">EMNLP 2023</span></li>
+    <li><a href="https://link.springer.com/article/10.1007/s10579-023-09718-4">A Longitudinal Multi-modal Dataset for Dementia Monitoring and Diagnosis</a> <span class="venue">Language Resources and Evaluation, 2024</span></li>
+    <li><a href="https://www.ijcai.org/proceedings/2021/0239.pdf">An Entanglement-driven Fusion Neural Network for Video Sentiment Analysis</a> <span class="venue">IJCAI 2021</span></li>
+    <li><a href="https://cdn.aaai.org/ojs/16165/16165-13-19659-1-2-20210518.pdf">A Quantum Cognitively Motivated Decision Fusion Framework for Video Sentiment Analysis</a> <span class="venue">AAAI 2021</span></li>
+  </ul>
+  <p style="margin-top:12px;font-size:15px">Full list on <a href="https://scholar.google.com/citations?user=WaqvzcMAAAAJ&amp;hl=en">Google Scholar</a>.</p>
+</section>
+
+<section>
+  <h2>Focus areas</h2>
+  <div class="tags"><span>LLM post-training &amp; evaluation</span><span>Agentic AI</span><span>RAG</span><span>RLHF / RLAIF</span><span>Test-time compute</span><span>Multimodal learning</span><span>Distributed training</span><span>MLOps</span></div>
+</section>
+
+<footer>© 2026 Dimitris Gkoumas · <a href="ai-under-the-hood.html#cite">AI Under the Hood</a> is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><div class="bgnote">Background: particles running stochastic gradient descent with momentum on a slowly drifting loss landscape.</div></footer>
+</div>
+<canvas id="bg" aria-hidden="true"></canvas>
+<script>
+(function(){
+  var c=document.getElementById("bg"),x=c.getContext("2d"),W,H,D=Math.min(window.devicePixelRatio||1,2);
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+  var A1,A2;function colors(){A1=css("--accent");A2=css("--accent2");}
+  function size(){W=innerWidth;H=innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0);colors();}
+  // Loss landscape: a shallow bowl plus Gaussian wells (local minima) that drift slowly, like a shifting data distribution.
+  var wells=[[.22,.28,.11,1],[.75,.22,.10,1.1],[.62,.74,.13,1.3],[.18,.78,.09,.8],[.46,.48,.08,.6]];
+  function grad(px,py,t){var gx=.5*(px-.5),gy=.5*(py-.5);
+    for(var i=0;i<wells.length;i++){var w=wells[i],cx=w[0]+.07*Math.sin(t*.00013*(i+1)+i),cy=w[1]+.07*Math.cos(t*.00011*(i+2)+i),s2=w[2]*w[2],
+      dx=px-cx,dy=py-cy,e=w[3]*Math.exp(-(dx*dx+dy*dy)/(2*s2))/s2;gx+=dx*e;gy+=dy*e;}return[gx,gy];}
+  var N=Math.round(Math.min(70,Math.max(28,innerWidth/18))),P=[],TR=26;
+  function spawn(p){p.x=Math.random();p.y=Math.random();p.vx=0;p.vy=0;p.age=0;p.life=260+Math.random()*320;p.c=Math.random()<.5;p.tr=[];return p;}
+  for(var i=0;i<N;i++){var p=spawn({});p.age=Math.random()*p.life*.8;P.push(p);}
+  // SGD with momentum: v = beta*v - lr*grad + noise ; x = x + v
+  var lr=.00028,beta=.94,noise=.0016;
+  function update(t){for(var i=0;i<N;i++){var p=P[i],g=grad(p.x,p.y,t);
+      p.vx=beta*p.vx-lr*g[0]+noise*(Math.random()-.5);p.vy=beta*p.vy-lr*g[1]+noise*(Math.random()-.5);
+      p.x+=p.vx;p.y+=p.vy;p.age++;p.tr.push(p.x,p.y);if(p.tr.length>TR*2)p.tr.splice(0,2);
+      if(p.age>p.life||p.x<-.05||p.x>1.05||p.y<-.05||p.y>1.05)spawn(p);}}
+  function draw(){x.clearRect(0,0,W,H);x.lineWidth=1.6;x.lineCap="round";
+    for(var i=0;i<N;i++){var p=P[i],tr=p.tr,n=tr.length/2;if(n<2)continue;
+      var life=Math.min(1,p.age/30)*Math.min(1,(p.life-p.age)/60);x.strokeStyle=p.c?A1:A2;
+      for(var k=1;k<n;k++){x.globalAlpha=.38*life*k/n;x.beginPath();x.moveTo(tr[2*k-2]*W,tr[2*k-1]*H);x.lineTo(tr[2*k]*W,tr[2*k+1]*H);x.stroke();}
+      x.globalAlpha=.55*life;x.fillStyle=x.strokeStyle;x.beginPath();x.arc(p.x*W,p.y*H,2,0,6.283);x.fill();}
+    x.globalAlpha=1;}
+  size();addEventListener("resize",size);
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change",colors);
+  if(reduce){for(var k=0;k<200;k++)update(k*30);draw();return;}
+  var last=0;(function loop(t){requestAnimationFrame(loop);if(document.hidden||t-last<30)return;last=t;update(t);draw();})(0);
+})();
+</script>
+</body>
+</html>
