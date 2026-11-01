@@ -133,89 +133,95 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <div class="wrap">
 <aside><nav aria-label="Contents">
   <div class="k">Contents</div>
-  <details class="grp"><summary>I · ML foundations</summary><ol>
-    <li><a href="#distributions"><span class="tn">1</span>Data distributions</a></li>
-    <li><a href="#eda"><span class="tn">2</span>Exploratory data analysis</a></li>
-    <li><a href="#curation"><span class="tn">3</span>Data curation &amp; quality</a></li>
-    <li><a href="#missing-imbalance"><span class="tn">4</span>Missing data, imbalance &amp; resampling</a></li>
-    <li><a href="#features"><span class="tn">5</span>Feature engineering</a></li>
-    <li><a href="#feature-importance"><span class="tn">6</span>Feature importance &amp; PCA</a></li>
-    <li><a href="#mle"><span class="tn">7</span>Likelihood → loss → gradients</a></li>
-    <li><a href="#metrics"><span class="tn">8</span>Evaluation metrics</a></li>
-    <li><a href="#outliers-scaling"><span class="tn">9</span>Outliers &amp; scaling in training</a></li>
-    <li><a href="#iid"><span class="tn">10</span>i.i.d. &amp; dependent data</a></li>
+  <details class="grp"><summary>I · Statistics foundations</summary><ol>
+    <li><a href="#stats-data"><span class="tn">1</span>Data &amp; measurement</a></li>
+    <li><a href="#stats-descriptive"><span class="tn">2</span>Descriptive statistics</a></li>
+    <li><a href="#distributions"><span class="tn">3</span>Probability &amp; distributions</a></li>
+    <li><a href="#stats-sampling"><span class="tn">4</span>Sampling &amp; correlation</a></li>
+    <li><a href="#stats-inference"><span class="tn">5</span>Inferential statistics</a></li>
   </ol></details>
-  <details class="grp"><summary>II · Generalisation</summary><ol>
-    <li><a href="#bias-variance"><span class="tn">11</span>Bias &amp; variance</a></li>
-    <li><a href="#overfitting"><span class="tn">12</span>Overfitting</a></li>
-    <li><a href="#data-centric"><span class="tn">13</span>Data-centric fixes</a></li>
-    <li><a href="#model-centric"><span class="tn">14</span>Model-centric fixes</a></li>
-    <li><a href="#evaluation"><span class="tn">15</span>Cross-validation</a></li>
-    <li><a href="#modern"><span class="tn">16</span>Double descent &amp; grokking</a></li>
-    <li><a href="#underfitting"><span class="tn">17</span>Underfitting</a></li>
+  <details class="grp"><summary>II · ML foundations</summary><ol>
+    <li><a href="#eda"><span class="tn">6</span>Exploratory data analysis</a></li>
+    <li><a href="#curation"><span class="tn">7</span>Data curation &amp; quality</a></li>
+    <li><a href="#missing-imbalance"><span class="tn">8</span>Missing data, imbalance &amp; resampling</a></li>
+    <li><a href="#features"><span class="tn">9</span>Feature engineering</a></li>
+    <li><a href="#feature-importance"><span class="tn">10</span>Feature importance &amp; PCA</a></li>
+    <li><a href="#mle"><span class="tn">11</span>Likelihood → loss → gradients</a></li>
+    <li><a href="#metrics"><span class="tn">12</span>Evaluation metrics</a></li>
+    <li><a href="#outliers-scaling"><span class="tn">13</span>Outliers &amp; scaling in training</a></li>
+    <li><a href="#iid"><span class="tn">14</span>i.i.d. &amp; dependent data</a></li>
   </ol></details>
-  <details class="grp"><summary>III · Optimisation</summary><ol>
-    <li><a href="#landscape"><span class="tn">18</span>Loss landscapes</a></li>
-    <li><a href="#gd"><span class="tn">19</span>Gradient descent</a></li>
-    <li><a href="#momentum"><span class="tn">20</span>Momentum</a></li>
-    <li><a href="#adaptive"><span class="tn">21</span>Adam &amp; AdamW</a></li>
-    <li><a href="#schedules"><span class="tn">22</span>LR schedules</a></li>
-    <li><a href="#clipping"><span class="tn">23</span>Gradient clipping</a></li>
+  <details class="grp"><summary>III · Generalisation</summary><ol>
+    <li><a href="#bias-variance"><span class="tn">15</span>Bias &amp; variance</a></li>
+    <li><a href="#overfitting"><span class="tn">16</span>Overfitting</a></li>
+    <li><a href="#data-centric"><span class="tn">17</span>Data-centric fixes</a></li>
+    <li><a href="#model-centric"><span class="tn">18</span>Model-centric fixes</a></li>
+    <li><a href="#evaluation"><span class="tn">19</span>Cross-validation</a></li>
+    <li><a href="#modern"><span class="tn">20</span>Double descent &amp; grokking</a></li>
+    <li><a href="#underfitting"><span class="tn">21</span>Underfitting</a></li>
   </ol></details>
-  <details class="grp"><summary>IV · Generative models</summary><ol>
-    <li><a href="#gen-vs-disc"><span class="tn">24</span>Generative vs discriminative</a></li>
-    <li><a href="#vae"><span class="tn">25</span>VAEs</a></li>
-    <li><a href="#gan"><span class="tn">26</span>GANs</a></li>
-    <li><a href="#flow"><span class="tn">27</span>Flow-based models</a></li>
-    <li><a href="#autoregressive"><span class="tn">28</span>Autoregressive models</a></li>
-    <li><a href="#diffusion"><span class="tn">29</span>Diffusion &amp; consistency</a></li>
-    <li><a href="#gen-compare"><span class="tn">30</span>Comparison</a></li>
+  <details class="grp"><summary>IV · Optimisation</summary><ol>
+    <li><a href="#landscape"><span class="tn">22</span>Loss landscapes</a></li>
+    <li><a href="#gd"><span class="tn">23</span>Gradient descent</a></li>
+    <li><a href="#momentum"><span class="tn">24</span>Momentum</a></li>
+    <li><a href="#adaptive"><span class="tn">25</span>Adam &amp; AdamW</a></li>
+    <li><a href="#schedules"><span class="tn">26</span>LR schedules</a></li>
+    <li><a href="#clipping"><span class="tn">27</span>Gradient clipping</a></li>
   </ol></details>
-  <details class="grp"><summary>V · Transformers &amp; attention</summary><ol>
-    <li><a href="#embeddings"><span class="tn">31</span>Embeddings &amp; positions</a></li>
-    <li><a href="#attention"><span class="tn">32</span>Attention</a></li>
-    <li><a href="#transformer"><span class="tn">33</span>Transformer architecture</a></li>
-    <li><a href="#families"><span class="tn">34</span>Model families</a></li>
-    <li><a href="#moe"><span class="tn">35</span>Mixture of experts</a></li>
-    <li><a href="#efficient-attention"><span class="tn">36</span>Efficient attention &amp; KV cache</a></li>
-    <li><a href="#ssm"><span class="tn">37</span>State space models</a></li>
+  <details class="grp"><summary>V · Generative models</summary><ol>
+    <li><a href="#gen-vs-disc"><span class="tn">28</span>Generative vs discriminative</a></li>
+    <li><a href="#vae"><span class="tn">29</span>VAEs</a></li>
+    <li><a href="#gan"><span class="tn">30</span>GANs</a></li>
+    <li><a href="#flow"><span class="tn">31</span>Flow-based models</a></li>
+    <li><a href="#autoregressive"><span class="tn">32</span>Autoregressive models</a></li>
+    <li><a href="#diffusion"><span class="tn">33</span>Diffusion &amp; consistency</a></li>
+    <li><a href="#gen-compare"><span class="tn">34</span>Comparison</a></li>
   </ol></details>
-  <details class="grp"><summary>VI · Training at scale</summary><ol>
-    <li><a href="#mem-budget"><span class="tn">38</span>The memory budget</a></li>
-    <li><a href="#single-gpu"><span class="tn">39</span>Saving memory on one GPU</a></li>
-    <li><a href="#parallelism"><span class="tn">40</span>Parallelism across GPUs</a></li>
-    <li><a href="#zero"><span class="tn">41</span>ZeRO &amp; FSDP</a></li>
-    <li><a href="#combining"><span class="tn">42</span>Combining strategies</a></li>
+  <details class="grp"><summary>VI · Transformers &amp; attention</summary><ol>
+    <li><a href="#embeddings"><span class="tn">35</span>Embeddings &amp; positions</a></li>
+    <li><a href="#attention"><span class="tn">36</span>Attention</a></li>
+    <li><a href="#transformer"><span class="tn">37</span>Transformer architecture</a></li>
+    <li><a href="#families"><span class="tn">38</span>Model families</a></li>
+    <li><a href="#moe"><span class="tn">39</span>Mixture of experts</a></li>
+    <li><a href="#efficient-attention"><span class="tn">40</span>Efficient attention &amp; KV cache</a></li>
+    <li><a href="#ssm"><span class="tn">41</span>State space models</a></li>
   </ol></details>
-  <details class="grp"><summary>VII · LLMs in practice</summary><ol>
-    <li><a href="#temperature"><span class="tn">43</span>Decoding strategies</a></li>
-    <li><a href="#test-time"><span class="tn">44</span>Test-time compute</a></li>
-    <li><a href="#serving"><span class="tn">45</span>Serving with vLLM</a></li>
-    <li><a href="#latency"><span class="tn">46</span>Latency optimisation</a></li>
-    <li><a href="#distillation"><span class="tn">47</span>Knowledge distillation</a></li>
-    <li><a href="#lora"><span class="tn">48</span>LoRA</a></li>
-    <li><a href="#rag"><span class="tn">49</span>RAG: pipeline &amp; chunking</a></li>
-    <li><a href="#retrieval"><span class="tn">50</span>Retrieval, reranking &amp; evaluation</a></li>
-    <li><a href="#vector-index"><span class="tn">51</span>Vector search indexes</a></li>
-    <li><a href="#graph-mm-rag"><span class="tn">52</span>Graph &amp; multimodal RAG</a></li>
-    <li><a href="#llms"><span class="tn">53</span>Putting it together</a></li>
+  <details class="grp"><summary>VII · Training at scale</summary><ol>
+    <li><a href="#mem-budget"><span class="tn">42</span>The memory budget</a></li>
+    <li><a href="#single-gpu"><span class="tn">43</span>Saving memory on one GPU</a></li>
+    <li><a href="#parallelism"><span class="tn">44</span>Parallelism across GPUs</a></li>
+    <li><a href="#zero"><span class="tn">45</span>ZeRO &amp; FSDP</a></li>
+    <li><a href="#combining"><span class="tn">46</span>Combining strategies</a></li>
   </ol></details>
-  <details class="grp"><summary>VIII · Deployment &amp; operations</summary><ol>
-    <li><a href="#mlops"><span class="tn">54</span>The MLOps lifecycle</a></li>
-    <li><a href="#deployment"><span class="tn">55</span>Deploying in production</a></li>
-    <li><a href="#realtime"><span class="tn">56</span>Batch &amp; real-time serving</a></li>
-    <li><a href="#serving-options"><span class="tn">57</span>Model serving options</a></li>
-    <li><a href="#kubernetes"><span class="tn">58</span>Serving on Kubernetes</a></li>
-    <li><a href="#cicd"><span class="tn">59</span>CI/CD for ML</a></li>
-    <li><a href="#drift"><span class="tn">60</span>Drift &amp; monitoring</a></li>
-    <li><a href="#governance"><span class="tn">61</span>Versioning &amp; governance</a></li>
+  <details class="grp"><summary>VIII · LLMs in practice</summary><ol>
+    <li><a href="#temperature"><span class="tn">47</span>Decoding strategies</a></li>
+    <li><a href="#test-time"><span class="tn">48</span>Test-time compute</a></li>
+    <li><a href="#serving"><span class="tn">49</span>Serving with vLLM</a></li>
+    <li><a href="#latency"><span class="tn">50</span>Latency optimisation</a></li>
+    <li><a href="#distillation"><span class="tn">51</span>Knowledge distillation</a></li>
+    <li><a href="#lora"><span class="tn">52</span>LoRA</a></li>
+    <li><a href="#rag"><span class="tn">53</span>RAG: pipeline &amp; chunking</a></li>
+    <li><a href="#retrieval"><span class="tn">54</span>Retrieval, reranking &amp; evaluation</a></li>
+    <li><a href="#vector-index"><span class="tn">55</span>Vector search indexes</a></li>
+    <li><a href="#graph-mm-rag"><span class="tn">56</span>Graph &amp; multimodal RAG</a></li>
+    <li><a href="#llms"><span class="tn">57</span>Putting it together</a></li>
   </ol></details>
-  <details class="grp"><summary>IX · Agents &amp; tool use</summary><ol>
-    <li><a href="#mcp"><span class="tn">62</span>Model Context Protocol</a></li>
-    <li><a href="#agent-memory"><span class="tn">63</span>Agent memory</a></li>
+  <details class="grp"><summary>IX · Deployment &amp; operations</summary><ol>
+    <li><a href="#mlops"><span class="tn">58</span>The MLOps lifecycle</a></li>
+    <li><a href="#deployment"><span class="tn">59</span>Deploying in production</a></li>
+    <li><a href="#realtime"><span class="tn">60</span>Batch &amp; real-time serving</a></li>
+    <li><a href="#serving-options"><span class="tn">61</span>Model serving options</a></li>
+    <li><a href="#kubernetes"><span class="tn">62</span>Serving on Kubernetes</a></li>
+    <li><a href="#cicd"><span class="tn">63</span>CI/CD for ML</a></li>
+    <li><a href="#drift"><span class="tn">64</span>Drift &amp; monitoring</a></li>
+    <li><a href="#governance"><span class="tn">65</span>Versioning &amp; governance</a></li>
+  </ol></details>
+  <details class="grp"><summary>X · Agents &amp; tool use</summary><ol>
+    <li><a href="#mcp"><span class="tn">66</span>Model Context Protocol</a></li>
+    <li><a href="#agent-memory"><span class="tn">67</span>Agent memory</a></li>
   </ol></details>
   <details class="grp"><summary>Review</summary><ol>
-    <li><a href="#quiz"><span class="tn">64</span>Check yourself</a></li>
+    <li><a href="#quiz"><span class="tn">68</span>Check yourself</a></li>
     <li><a href="#cite"><span class="tn">·</span>License &amp; citation</a></li>
   </ol></details>
 </nav></aside>
@@ -224,17 +230,89 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <header>
   <p style="margin:0 0 10px;font-size:15px"><a href="index.html">← Dimitris Gkoumas</a></p>
   <h1>AI Under the Hood</h1>
-  <p>Study notes on ML foundations, why models fail to generalise, how they are optimised, how generative models and transformers work, how training scales across GPUs, how it all comes together in LLMs, how to deploy them, and how agents use tools.</p>
+  <p>Study notes on statistics and ML foundations, why models fail to generalise, how they are optimised, how generative models and transformers work, how training scales across GPUs, how it all comes together in LLMs, how to deploy them, and how agents use tools.</p>
 </header>
 
-<!-- ============ PART FOUNDATIONS ============ -->
-<div class="part"><div class="k">Part I</div><h2>ML foundations</h2><p>Data, features, likelihood, and how to measure a model.</p></div>
+<!-- ============ PART STATS ============ -->
+<div class="part"><div class="k">Part I</div><h2>Statistics foundations</h2><p>Describing data, probability, sampling and drawing conclusions from samples: the toolkit the rest of the notes rely on.</p></div>
+
+<section id="stats-data">
+<h2><span class="n">01</span>Data and measurement</h2>
+<p><strong>Statistics</strong> is the science of collecting, organising, analysing and interpreting data. <strong>Descriptive statistics</strong> summarise the data you have; <strong>inferential statistics</strong> use a sample to draw conclusions about a larger population.</p>
+<div class="tbl"><table>
+<tr><th></th><th>Population</th><th>Sample</th></tr>
+<tr><td><strong>What</strong></td><td>Every member of the group you care about</td><td>A subset you actually observe</td></tr>
+<tr><td><strong>Size</strong></td><td>N</td><td>n</td></tr>
+<tr><td><strong>Summaries are called</strong></td><td>Parameters: μ, σ², p</td><td>Statistics (estimates): x̄, s², p̂</td></tr>
+<tr><td><strong>ML example</strong></td><td>All future users of a model</td><td>Your training and test sets</td></tr>
+</table></div>
+<h3>Types of data</h3>
+<div class="tbl"><table>
+<tr><th>Type</th><th>Subtype</th><th>Values</th><th>Examples</th></tr>
+<tr><td rowspan="2"><strong>Qualitative</strong> (categorical)</td><td>Nominal</td><td>Labels, no order</td><td>Gender, blood group, colour, city</td></tr>
+<tr><td>Ordinal</td><td>Labels with a rank</td><td>Customer rating 1–5, education level</td></tr>
+<tr><td rowspan="2"><strong>Quantitative</strong> (numerical)</td><td>Discrete</td><td>Countable whole numbers</td><td>Children in a family, number of sales</td></tr>
+<tr><td>Continuous</td><td>Any value in a range</td><td>Height, house price, river length</td></tr>
+</table></div>
+<h3>Scales of measurement</h3>
+<p>The scale decides which statistics, tests and encodings are valid.</p>
+<div class="tbl"><table>
+<tr><th>Scale</th><th>Order</th><th>Differences</th><th>True zero (ratios)</th><th>Example</th><th>Valid centre</th><th>ML encoding</th></tr>
+<tr><td><strong>Nominal</strong></td><td>✗</td><td>✗</td><td>✗</td><td>Colour, city</td><td>Mode</td><td>One-hot, embeddings</td></tr>
+<tr><td><strong>Ordinal</strong></td><td>✓</td><td>✗</td><td>✗</td><td>Ranking, agree/disagree</td><td>Median, mode</td><td>Integer codes in order</td></tr>
+<tr><td><strong>Interval</strong></td><td>✓</td><td>✓</td><td>✗</td><td>Temperature in °C, calendar year</td><td>Mean, median, mode</td><td>Numeric, scaled</td></tr>
+<tr><td><strong>Ratio</strong></td><td>✓</td><td>✓</td><td>✓</td><td>Height, income, exam marks</td><td>All, plus ratios</td><td>Numeric, often log-scaled</td></tr>
+</table></div>
+<ul>
+  <li><strong>Interval vs ratio:</strong> 20 °C isn't “twice as hot” as 10 °C, because 0 °C is arbitrary; 20 kg <em>is</em> twice 10 kg.</li>
+  <li><strong>Likert scales</strong> (totally agree … totally disagree) are ordinal. They are often averaged as if interval, which assumes equal gaps between answers.</li>
+</ul>
+</section>
+
+<section id="stats-descriptive">
+<h2><span class="n">02</span>Descriptive statistics</h2>
+<h3>Central tendency</h3>
+<div class="eq"><div class="math">\begin{aligned}\mu &amp;= \frac{1}{N}\sum_{i=1}^{N} x_i &amp;&amp;\text{population mean} \qquad \bar x = \frac{1}{n}\sum_{i=1}^{n} x_i \;\;\text{sample mean}\\ \text{median} &amp;= \text{middle value of the sorted data (average of the two middle values if } n \text{ is even)}\\ \text{mode} &amp;= \text{most frequent value (there can be several, or none)}\end{aligned}</div><span class="c">The mean uses every value, so a single outlier moves it; the median and mode are robust. Use the median for skewed data such as income, and the mode for nominal data.</span></div>
+<h3>Dispersion</h3>
+<div class="eq"><div class="math">\begin{aligned}\sigma^2 &amp;= \frac{1}{N}\sum_{i=1}^{N}(x_i-\mu)^2 &amp;&amp; s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar x)^2\\ \sigma &amp;= \sqrt{\sigma^2}, \quad s=\sqrt{s^2} &amp;&amp; \text{IQR} = Q_3 - Q_1, \quad \text{range} = \max - \min\end{aligned}</div><span class="c">Dividing by n − 1 (<strong>Bessel's correction</strong>) makes s² an unbiased estimator of σ²: the sample mean sits closer to the sample points than the true mean does, so dividing by n would underestimate the spread. The more spread out the data, the larger the variance.</span></div>
+<h3>z-scores and skewness</h3>
+<div class="eq"><div class="math">z = \frac{x-\bar x}{s} \qquad\qquad \text{skewness} = \frac{1}{n}\sum_{i=1}^{n}\Big(\frac{x_i-\bar x}{s}\Big)^3</div><span class="c">A z-score says how many standard deviations a value lies from the mean; it is the same formula as standardisation in <a href="#features">feature engineering</a>. Skewness &gt; 0: long right tail (mean &gt; median); &lt; 0: long left tail. Kurtosis (fourth power) measures how heavy the tails are.</span></div>
+<h3>Worked example</h3>
+<p>Heights of seven cricketers from one camp: 175, 180, 140, 140, 135, 160, 135 cm.</p>
+<div class="tbl"><table>
+<tr><th>Statistic</th><th>Value</th><th>How</th></tr>
+<tr><td>Mean</td><td>152.1 cm</td><td>1065 / 7</td></tr>
+<tr><td>Median</td><td>140 cm</td><td>Sorted: 135, 135, 140, <strong>140</strong>, 160, 175, 180</td></tr>
+<tr><td>Mode</td><td>135 and 140 cm</td><td>Each appears twice: the data is bimodal</td></tr>
+<tr><td>Sample variance s²</td><td>373.8 cm²</td><td>2242.9 / (7 − 1)</td></tr>
+<tr><td>Standard deviation s</td><td>19.3 cm</td><td>√373.8</td></tr>
+<tr><td>IQR</td><td>40 cm</td><td>Q₃ − Q₁ = 175 − 135 (medians of each half)</td></tr>
+<tr><td>z-score of 140 cm</td><td>−0.63</td><td>(140 − 152.1) / 19.3</td></tr>
+</table></div>
+<figure>
+  <div class="scroll"><svg id="fig-heights" viewBox="0 0 600 220" role="img" aria-label="Seven heights on a number line with a box showing the interquartile range, the median at 140, the mean at 152, a one-standard-deviation band, and the z-score of 140"></svg></div>
+  <figcaption><b>Figure 1.</b> The worked example. The mean sits right of the median because the two tall values pull it up: the data is right-skewed. All values are computed from the data.</figcaption>
+</figure>
+</section>
 
 <section id="distributions">
-<h2><span class="n">01</span>Data distributions</h2>
+<h2><span class="n">03</span>Probability and distributions</h2>
+<h3>Probability basics</h3>
+<p>The <strong>sample space</strong> Ω is the set of all outcomes (rolling a die: {1, …, 6}); an <strong>event</strong> is a subset of it. Probabilities lie in [0, 1] and sum to 1 over Ω.</p>
+<div class="eq"><div class="math">\begin{aligned} &amp;P(A\cup B) = P(A)+P(B)-P(A\cap B) &amp;&amp; \text{addition rule}\\ &amp;P(A\mid B) = \frac{P(A\cap B)}{P(B)} &amp;&amp; \text{conditional probability}\\ &amp;P(A\cap B) = P(A)\,P(B) &amp;&amp; \text{if } A, B \text{ are independent}\\ &amp;P(A\mid B) = \frac{P(B\mid A)\,P(A)}{P(B)} &amp;&amp; \text{Bayes' rule}\end{aligned}</div><span class="c">Set operations from the notes: with A = {1, …, 8} and B = {3, …, 7}, A ∩ B = {3, …, 7}, A ∪ B = {1, …, 8}, A − B = {1, 2, 8}, and B ⊂ A. Bayes' rule reappears in <a href="#gen-vs-disc">generative vs discriminative models</a>.</span></div>
+<h3>Random variables and distributions</h3>
+<div class="tbl"><table>
+<tr><th></th><th>Discrete</th><th>Continuous</th></tr>
+<tr><td><strong>Values</strong></td><td>Countable outcomes</td><td>Any value in a range</td></tr>
+<tr><td><strong>Described by</strong></td><td>PMF: P(X = x)</td><td>PDF: f(x), a density; P(X = x) = 0 for any single x</td></tr>
+<tr><td><strong>Probability of an interval</strong></td><td>Sum the PMF</td><td>Integrate the PDF (area under the curve)</td></tr>
+<tr><td><strong>Both</strong></td><td colspan="2">CDF: F(x) = P(X ≤ x), rising from 0 to 1</td></tr>
+</table></div>
+<div class="eq"><div class="math">\mathbb E[X] = \sum_x x\,P(X=x) \;\;\text{or}\;\; \int x\,f(x)\,dx \qquad \mathrm{Var}(X) = \mathbb E\big[(X-\mathbb E[X])^2\big]</div></div>
+<h3>Common distributions</h3>
 <figure>
-  <div class="scroll"><svg id="fig-dists" viewBox="0 0 600 310" role="img" aria-label="Six distributions: uniform, Bernoulli, binomial, normal, log-normal with positive skew, and a negatively skewed distribution, with mean, median and mode marked"></svg></div>
-  <figcaption><b>Figure 1.</b> Common distributions. For skewed data the mean is pulled towards the long tail: positive (right) skew gives mean &gt; median, negative (left) skew gives mean &lt; median.</figcaption>
+  <div class="scroll"><svg id="fig-dists" viewBox="0 0 600 465" role="img" aria-label="Six distributions: uniform, Bernoulli, binomial, normal, log-normal with positive skew, and a negatively skewed distribution, with mean, median and mode marked"></svg></div>
+  <figcaption><b>Figure 2.</b> Common distributions. For skewed data the mean is pulled towards the long tail: positive (right) skew gives mean &gt; median, negative (left) skew gives mean &lt; median. Bottom row: Poisson counts, exponential waiting times (mean 1, median ln 2 ≈ 0.69), and a power law whose long tail decays slowly, so rare extreme values still occur.</figcaption>
 </figure>
 <div class="tbl"><table>
 <tr><th>Distribution</th><th>Type</th><th>Typical data</th></tr>
@@ -247,14 +325,122 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <tr><td><strong>Exponential</strong></td><td>Continuous</td><td>Waiting times</td></tr>
 <tr><td><strong>Power law / long tail</strong></td><td>Heavy-tailed</td><td>Word frequencies, popularity</td></tr>
 </table></div>
+<div class="tbl"><table>
+<tr><th>Distribution</th><th>PMF / PDF</th><th>Mean</th><th>Variance</th></tr>
+<tr><td><strong>Bernoulli(p)</strong></td><td>P(1) = p, P(0) = 1 − p</td><td>p</td><td>p(1 − p)</td></tr>
+<tr><td><strong>Binomial(n, p)</strong></td><td>C(n, k) pᵏ (1 − p)ⁿ⁻ᵏ</td><td>np</td><td>np(1 − p)</td></tr>
+<tr><td><strong>Poisson(λ)</strong></td><td>λᵏ e⁻λ / k!</td><td>λ</td><td>λ</td></tr>
+<tr><td><strong>Uniform(a, b)</strong></td><td>1 / (b − a) on [a, b]</td><td>(a + b) / 2</td><td>(b − a)² / 12</td></tr>
+<tr><td><strong>Normal(μ, σ²)</strong></td><td>exp(−(x − μ)² / 2σ²) / (σ√(2π))</td><td>μ</td><td>σ²</td></tr>
+<tr><td><strong>Exponential(λ)</strong></td><td>λ e⁻λˣ, x ≥ 0</td><td>1/λ</td><td>1/λ²</td></tr>
+</table></div>
+<h3>The normal distribution and the empirical rule</h3>
+<p>Symmetric, bell-shaped and unimodal, with mean = median = mode. Blood pressure, heights and measurement errors are roughly normal, and averages of many values tend towards it (the <a href="#stats-inference">central limit theorem</a>).</p>
+<figure>
+  <div class="scroll"><svg id="fig-empirical" viewBox="0 0 600 250" role="img" aria-label="Standard normal curve with shaded bands: 68.3 percent within one standard deviation, 95.4 percent within two, 99.7 percent within three"></svg></div>
+  <figcaption><b>Figure 3.</b> The empirical (68–95–99.7) rule, with percentages computed from the normal CDF.</figcaption>
+</figure>
+<h3>Checking whether data is normal</h3>
+<ul>
+  <li><strong>Plots:</strong> a histogram, and a <strong>Q-Q plot</strong> of sorted data against normal quantiles: points on a straight line mean normal.</li>
+  <li><strong>Tests:</strong> Shapiro–Wilk, D'Agostino–Pearson, Kolmogorov–Smirnov. With large n they flag tiny, harmless departures, so look at the plot too.</li>
+  <li><strong>If skewed:</strong> try a log or Box-Cox transform, or use tests that don't assume normality.</li>
+</ul>
+<figure>
+  <div class="scroll"><svg id="fig-qq" viewBox="0 0 600 250" role="img" aria-label="Two Q-Q plots: normal data lies on the diagonal line; right-skewed data curves upwards away from it"></svg></div>
+  <figcaption><b>Figure 4.</b> Q-Q plots for 120 simulated values. Normal data follows the line; right-skewed (log-normal) data bends upwards because its large values are too large.</figcaption>
+</figure>
 <p>Right-skewed and log-normal features are good candidates for a <strong>log transform</strong> before training (see <a href="#features">feature engineering</a>).</p>
 </section>
 
+
+<section id="stats-sampling">
+<h2><span class="n">04</span>Sampling and correlation</h2>
+<h3>Sampling techniques</h3>
+<div class="tbl"><table>
+<tr><th>Technique</th><th>How</th><th>Example</th></tr>
+<tr><td colspan="3"><strong>Probability sampling</strong>: every member has a known chance of selection, so results generalise</td></tr>
+<tr><td>Simple random</td><td>Everyone equally likely</td><td>Draw 100 customer IDs at random</td></tr>
+<tr><td>Stratified</td><td>Split into groups (strata), sample each in proportion</td><td>Keep class balance in <a href="#evaluation">train/test splits</a></td></tr>
+<tr><td>Systematic</td><td>Every k-th member of a list</td><td>Every 10th employee in an alphabetical list</td></tr>
+<tr><td>Cluster</td><td>Randomly pick whole groups</td><td>Survey all students in 5 random schools</td></tr>
+<tr><td colspan="3"><strong>Non-probability sampling</strong>: cheaper, but prone to bias</td></tr>
+<tr><td>Convenience</td><td>Whoever is easiest to reach</td><td>Asking students in your own lectures</td></tr>
+<tr><td>Purposive</td><td>Chosen for a specific trait</td><td>Interviewing students with disabilities about support services</td></tr>
+<tr><td>Snowball</td><td>Participants recruit others</td><td>Hard-to-reach communities</td></tr>
+</table></div>
+<p><strong>Sampling bias</strong> is why a model trained on convenient data can fail on real users: the sample doesn't represent the population (see <a href="#curation">data curation</a>).</p>
+<h3>Covariance and correlation</h3>
+<div class="eq"><div class="math">\mathrm{cov}(X,Y) = \frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar x)(y_i-\bar y) \qquad r = \frac{\mathrm{cov}(X,Y)}{s_X\,s_Y}\in[-1,1]</div><span class="c">Covariance gives the direction of a relationship but depends on units. Pearson's r rescales it to [−1, 1]: +1 perfect positive, 0 no <em>linear</em> relationship, −1 perfect negative. <strong>Spearman's ρ</strong> applies the same formula to ranks, capturing any monotonic relationship and resisting outliers.</span></div>
+<figure>
+  <div class="scroll"><svg id="fig-corr" viewBox="0 0 600 180" role="img" aria-label="Four scatter plots: strong positive correlation, no correlation, negative correlation, and a U-shaped relationship with a Pearson correlation near zero"></svg></div>
+  <figcaption><b>Figure 5.</b> Simulated data, r computed from each sample. The last panel has a strong relationship but r ≈ 0, because Pearson's r only measures straight-line association.</figcaption>
+</figure>
+<div class="box mistake"><span class="lab">Common mistake</span><p><strong>Correlation isn't causation.</strong> Ice-cream sales and drownings both rise in summer: a third variable (temperature) drives both. Plot the data before trusting r (Anscombe's quartet has four very different datasets with the same r).</p></div>
+</section>
+
+<section id="stats-inference">
+<h2><span class="n">05</span>Inferential statistics</h2>
+<h3>Estimates and the central limit theorem</h3>
+<p>A <strong>point estimate</strong> is a single value for an unknown parameter (x̄ for μ); an <strong>interval estimate</strong> gives a range of plausible values. Intervals rely on the <strong>central limit theorem (CLT)</strong>: whatever the population's shape, the mean of a large enough sample is approximately normal.</p>
+<div class="eq"><div class="math">\bar X \;\approx\; \mathcal N\!\Big(\mu,\; \frac{\sigma^2}{n}\Big) \qquad \text{standard error: } \mathrm{SE} = \frac{\sigma}{\sqrt n}\;\;\big(\text{estimated by } s/\sqrt n\big)</div></div>
+<figure>
+  <div class="scroll"><svg id="fig-clt" viewBox="0 0 600 220" role="img" aria-label="Histograms of sample means from a skewed exponential population for sample sizes 1, 5 and 30; the histograms become narrower and bell-shaped as n grows"></svg></div>
+  <figcaption><b>Figure 6.</b> The CLT in action: 3,000 simulated sample means from a skewed exponential population, with the normal curve the CLT predicts overlaid. Skew fades and the spread shrinks as σ/√n.</figcaption>
+</figure>
+<h3>Confidence intervals</h3>
+<div class="eq"><div class="math">\bar x \pm z_{\alpha/2}\,\frac{\sigma}{\sqrt n} \;\;(\sigma\text{ known}) \qquad\qquad \bar x \pm t_{\alpha/2,\,n-1}\,\frac{s}{\sqrt n} \;\;(\sigma\text{ unknown})</div><span class="c">For 95%, z = 1.96. A 95% CI means that if you repeated the sampling many times, 95% of the intervals would contain the true value; not that this interval has a 95% chance of containing it.</span></div>
+<ul>
+  <li><strong>Model metrics need intervals too:</strong> report “accuracy 0.84 (95% CI 0.82–0.86)”. For metrics without a formula, use the <a href="#missing-imbalance">bootstrap</a>: resample the test set, recompute the metric, and take the 2.5th and 97.5th percentiles.</li>
+</ul>
+<h3>Hypothesis testing</h3>
+<ol>
+  <li>State the <strong>null hypothesis H₀</strong> (no effect: “the new model is no better”) and the <strong>alternative H₁</strong>.</li>
+  <li>Choose a <strong>significance level α</strong>, usually 0.05.</li>
+  <li>Compute a <strong>test statistic</strong> from the sample.</li>
+  <li>Find the <strong>p-value</strong>: the probability of a result at least this extreme <em>if H₀ were true</em>.</li>
+  <li>If p &lt; α, reject H₀; otherwise you fail to reject it (which is not proof that H₀ is true).</li>
+</ol>
+<figure>
+  <div class="scroll"><svg id="fig-pvalue" viewBox="0 0 600 250" role="img" aria-label="Standard normal curve under the null hypothesis with two-tailed rejection regions beyond plus and minus 1.96, an observed z of 2.3, and the p-value shaded in both tails"></svg></div>
+  <figcaption><b>Figure 7.</b> A two-tailed z-test at α = 0.05. The observed z = 2.3 falls in the rejection region; its p-value (both tails beyond ±2.3) is computed from the normal CDF.</figcaption>
+</figure>
+<div class="tbl"><table>
+<tr><th></th><th>H₀ true</th><th>H₀ false</th></tr>
+<tr><td><strong>Reject H₀</strong></td><td>Type I error (false positive), probability α</td><td>Correct: <strong>power</strong> = 1 − β</td></tr>
+<tr><td><strong>Fail to reject</strong></td><td>Correct</td><td>Type II error (false negative), probability β</td></tr>
+</table></div>
+<div class="box mistake"><span class="lab">What a p-value is not</span><p>It isn't the probability that H₀ is true, and it isn't the size or importance of an effect. A tiny, useless improvement becomes “significant” with enough data, so always report an <strong>effect size</strong> and a confidence interval.</p></div>
+<h3>Choosing a test</h3>
+<div class="eq"><div class="math">z = \frac{\bar x-\mu_0}{\sigma/\sqrt n} \qquad t = \frac{\bar x-\mu_0}{s/\sqrt n}\;\;(df=n-1) \qquad \chi^2 = \sum\frac{(O-E)^2}{E} \qquad F = \frac{\text{variance between groups}}{\text{variance within groups}}</div></div>
+<div class="tbl"><table>
+<tr><th>Test</th><th>Question</th><th>Use when</th></tr>
+<tr><td><strong>z-test</strong></td><td>Does a mean (or proportion) differ from a value, or between two groups?</td><td>σ known, or n large (≳ 30)</td></tr>
+<tr><td><strong>t-test</strong></td><td>Same, for means</td><td>σ unknown or n small. One-sample, two-sample (independent groups) or paired (same subjects twice)</td></tr>
+<tr><td><strong>Chi-square</strong></td><td>Do observed counts match expected ones? Are two categorical variables independent?</td><td>Categorical data, counts in a table</td></tr>
+<tr><td><strong>ANOVA</strong></td><td>Do means differ across 3+ groups?</td><td>One-way (one factor, independent groups); repeated measures (same subjects); two-way (two factors). Uses the F statistic</td></tr>
+</table></div>
+<figure>
+  <div class="scroll"><svg id="fig-testchoice" viewBox="0 0 600 290" role="img" aria-label="Decision tree for choosing a test: categorical data goes to chi-square; comparing means of one or two groups goes to z-test or t-test depending on whether sigma is known and n is large, paired data to a paired t-test; three or more groups go to ANOVA"></svg></div>
+  <figcaption><b>Figure 8.</b> Choosing a classic test. If data is clearly non-normal and samples are small, use non-parametric alternatives: Mann–Whitney U, Wilcoxon signed-rank, Kruskal–Wallis.</figcaption>
+</figure>
+<h3>Statistics for ML experiments</h3>
+<ul>
+  <li><strong>Multiple comparisons:</strong> test 20 prompts at α = 0.05 and one will look “significant” by chance. Correct with Bonferroni (α / m) or control the false-discovery rate (Benjamini–Hochberg).</li>
+  <li><strong>Practical vs statistical significance:</strong> decide in advance what improvement matters (the tolerance in a <a href="#cicd">quality gate</a>), then check the CI clears it.</li>
+  <li><strong>A/B tests</strong> in production (<a href="#kubernetes">testing in production</a>) are hypothesis tests: fix the sample size from a power calculation before starting, and don't stop early when the p-value first dips below 0.05.</li>
+  <li><strong>Comparing two models on the same test set</strong> is a paired comparison: use McNemar's test or a paired bootstrap, not two independent intervals.</li>
+</ul>
+</section>
+
+<!-- ============ PART FOUNDATIONS ============ -->
+<div class="part"><div class="k">Part II</div><h2>ML foundations</h2><p>Data, features, likelihood, and how to measure a model.</p></div>
+
 <section id="eda">
-<h2><span class="n">02</span>Exploratory data analysis (EDA)</h2>
+<h2><span class="n">06</span>Exploratory data analysis (EDA)</h2>
 <figure>
   <div class="scroll"><svg id="fig-eda" viewBox="0 0 600 200" role="img" aria-label="EDA flow: understand the data, summary statistics, clean, outliers and cardinality, correlations, then transform and engineer features"></svg></div>
-  <figcaption><b>Figure 2.</b> A typical EDA flow. Cleaning comes before transforming, so scalers aren't fitted on duplicates or bad values.</figcaption>
+  <figcaption><b>Figure 9.</b> A typical EDA flow. Cleaning comes before transforming, so scalers aren't fitted on duplicates or bad values.</figcaption>
 </figure>
 <h3>Outliers</h3>
 <ul>
@@ -271,11 +457,11 @@ details p{margin:8px 0 2px;color:var(--ink)}
   <li>Poor generalisation: the model can memorise individual IDs.</li>
   <li><strong>Fixes:</strong> group rare categories into “other”, target or hash encoding, learned embeddings.</li>
 </ul>
-<div class="box mistake"><span class="lab">Also check</span><p><strong>Class imbalance</strong> (see <a href="#missing-imbalance">section 4</a>; it changes which <a href="#metrics">metric</a> to use) and <strong>target leakage</strong>: features that wouldn't be available at prediction time, such as a “refund issued” flag when predicting fraud.</p></div>
+<div class="box mistake"><span class="lab">Also check</span><p><strong>Class imbalance</strong> (see <a href="#missing-imbalance">section 8</a>; it changes which <a href="#metrics">metric</a> to use) and <strong>target leakage</strong>: features that wouldn't be available at prediction time, such as a “refund issued” flag when predicting fraud.</p></div>
 </section>
 
 <section id="curation">
-<h2><span class="n">03</span>Data curation and quality</h2>
+<h2><span class="n">07</span>Data curation and quality</h2>
 <p>Better data often helps more than a better model. Curation decides what goes into the training set and how trustworthy its labels are.</p>
 <h3>The data pipeline</h3>
 <ul>
@@ -308,14 +494,14 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p><strong>Cleanlab</strong> is a data-centric AI package that flags mislabelled, outlying or ambiguous examples. It uses <strong>confident learning</strong>: out-of-sample predicted probabilities (from cross-validation) plus a confidence threshold per class estimate which given labels are probably wrong. The predictions must be out-of-sample: a model that trained on an example has memorised its label and can't flag it.</p>
 <figure>
   <div class="scroll"><svg id="fig-hitl" viewBox="0 0 600 250" role="img" aria-label="A loop: train a model, find issues with Cleanlab, human review in Argilla, improve the dataset, then train again"></svg></div>
-  <figcaption><b>Figure 3.</b> The data-improvement loop. The model finds suspect examples; people decide what to fix.</figcaption>
+  <figcaption><b>Figure 10.</b> The data-improvement loop. The model finds suspect examples; people decide what to fix.</figcaption>
 </figure>
 <p><strong>Argilla</strong> (now part of Hugging Face) is a collaborative annotation tool. You can send model or generative outputs to its interface for review, or pre-fill suggested corrections above a probability threshold. Apply the same quality rules to your test set, and never let training-time fixes peek at it.</p>
 <h3>Active learning</h3>
 <p>Labelling is expensive, so at each round the model tells you <strong>which examples to label next</strong>, usually the ones it is least sure about.</p>
 <figure>
   <div class="scroll"><svg id="fig-active" viewBox="0 0 600 270" role="img" aria-label="Two classes with a few labelled points and many unlabelled ones; the unlabelled points closest to the decision boundary are selected for labelling"></svg></div>
-  <figcaption><b>Figure 4.</b> Uncertainty sampling: the unlabelled points nearest the current decision boundary are queried first.</figcaption>
+  <figcaption><b>Figure 11.</b> Uncertainty sampling: the unlabelled points nearest the current decision boundary are queried first.</figcaption>
 </figure>
 <div class="tbl"><table>
 <tr><th>Strategy</th><th>Picks examples where…</th></tr>
@@ -330,7 +516,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>A <strong>policy</strong> model generates several candidate outputs (proofs, code, text) per input; a <strong>reward model</strong> or verifier scores them on correctness or usefulness; the best are kept as training data, and the policy is fine-tuned on them. Repeat until performance plateaus. This is <strong>rejection sampling / best-of-n</strong>; variants include STaR, ReST and expert iteration.</p>
 <figure>
   <div class="scroll"><svg id="fig-synth" viewBox="0 0 600 215" role="img" aria-label="Prompts go to a policy model that generates candidates; a reward model scores them; the best are kept and used to fine-tune the policy, in a loop"></svg></div>
-  <figcaption><b>Figure 5.</b> Rejection-sampling loop for synthetic data.</figcaption>
+  <figcaption><b>Figure 12.</b> Rejection-sampling loop for synthetic data.</figcaption>
 </figure>
 <ul>
   <li><span class="con">✗</span> <strong>Reward hacking:</strong> the policy learns to exploit flaws in the reward model; its scores rise while real quality doesn't.</li>
@@ -341,7 +527,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="missing-imbalance">
-<h2><span class="n">04</span>Missing data, imbalance and resampling</h2>
+<h2><span class="n">08</span>Missing data, imbalance and resampling</h2>
 <h3>Missing data</h3>
 <p>The right fix depends on <strong>why</strong> values are missing:</p>
 <div class="tbl"><table>
@@ -359,7 +545,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <h3>Imbalanced data</h3>
 <figure>
   <div class="scroll"><svg id="fig-imbalance" viewBox="0 0 600 270" role="img" aria-label="Class counts for the original data, after undersampling the majority and after oversampling the minority; and SMOTE creating synthetic minority points between real neighbours"></svg></div>
-  <figcaption><b>Figure 6.</b> Left: resampling a 900 / 100 dataset. Right: SMOTE creates new minority points on the lines between real minority neighbours instead of copying them.</figcaption>
+  <figcaption><b>Figure 13.</b> Left: resampling a 900 / 100 dataset. Right: SMOTE creates new minority points on the lines between real minority neighbours instead of copying them.</figcaption>
 </figure>
 <ul>
   <li><strong>Oversample the minority class:</strong> random copies or <strong>SMOTE</strong>.</li>
@@ -380,14 +566,14 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </ul>
 <figure>
   <div class="scroll"><svg id="fig-bootstrap" viewBox="0 0 600 230" role="img" aria-label="Ten data points and three bootstrap samples drawn with replacement, showing repeated points and the out-of-bag points each sample missed"></svg></div>
-  <figcaption><b>Figure 7.</b> Three bootstrap samples of 10 points. Repeats are allowed; points never drawn are “out-of-bag” and can be used for validation. On average a sample contains 1 − 1/e ≈ <strong>63.2%</strong> of the distinct points, leaving <strong>36.8%</strong> out-of-bag.</figcaption>
+  <figcaption><b>Figure 14.</b> Three bootstrap samples of 10 points. Repeats are allowed; points never drawn are “out-of-bag” and can be used for validation. On average a sample contains 1 − 1/e ≈ <strong>63.2%</strong> of the distinct points, leaving <strong>36.8%</strong> out-of-bag.</figcaption>
 </figure>
 </section>
 
 <section id="features">
-<h2><span class="n">05</span>Feature engineering</h2>
+<h2><span class="n">09</span>Feature engineering</h2>
 <h3>Scaling numerical features</h3>
-<p>If feature X spans 154 to 24,917,482 and feature Y spans 5 to 22, X's gradients swamp Y's (see <a href="#outliers-scaling">section 9</a>). Normalisation helps models converge faster, make better predictions, avoid the “NaN trap” from overflowing values, and learn a sensible weight for each feature.</p>
+<p>If feature X spans 154 to 24,917,482 and feature Y spans 5 to 22, X's gradients swamp Y's (see <a href="#outliers-scaling">section 13</a>). Normalisation helps models converge faster, make better predictions, avoid the “NaN trap” from overflowing values, and learn a sensible weight for each feature.</p>
 <div class="tbl"><table>
 <tr><th>Technique</th><th>Formula</th><th>When to use</th></tr>
 <tr><td><strong>Min-max (linear) scaling</strong></td><td>x′ = (x − x_min) / (x_max − x_min)</td><td>Roughly uniform, bounded features; sensitive to outliers</td></tr>
@@ -406,7 +592,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="feature-importance">
-<h2><span class="n">06</span>Feature importance and dimensionality</h2>
+<h2><span class="n">10</span>Feature importance and dimensionality</h2>
 <ul>
   <li><strong>Random-forest importance</strong> ranks features by how much they reduce impurity, but is biased towards continuous and high-cardinality features. <strong>Permutation importance</strong> (shuffle a feature, measure the drop in score) and <strong>SHAP values</strong> are more reliable.</li>
   <li><strong>Correlation analysis</strong> finds redundant features: if two are highly correlated, one may be enough.</li>
@@ -414,12 +600,12 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </ul>
 <figure>
   <div class="scroll"><svg id="fig-pca" viewBox="0 0 600 260" role="img" aria-label="Correlated two-dimensional data with the first principal component along the main spread and the second at right angles"></svg></div>
-  <figcaption><b>Figure 8.</b> PCA on two correlated features, computed from the data's covariance matrix. Arrow lengths are proportional to the standard deviation along each component.</figcaption>
+  <figcaption><b>Figure 15.</b> PCA on two correlated features, computed from the data's covariance matrix. Arrow lengths are proportional to the standard deviation along each component.</figcaption>
 </figure>
 </section>
 
 <section id="mle">
-<h2><span class="n">07</span>From likelihood to loss to gradients</h2>
+<h2><span class="n">11</span>From likelihood to loss to gradients</h2>
 <p><strong>MLE defines the objective → the loss function encodes it → gradients tell us how to reach it.</strong></p>
 <h3>Maximum likelihood estimation (MLE)</h3>
 <p>Given data points (x⁽ⁱ⁾, y⁽ⁱ⁾) drawn from a conditional distribution P(y | x; θ), choose the parameters θ (e.g. w, b) that make the observed data most probable. Products are inconvenient, so take the log:</p>
@@ -437,11 +623,11 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="metrics">
-<h2><span class="n">08</span>Evaluation metrics</h2>
+<h2><span class="n">12</span>Evaluation metrics</h2>
 <h3>Regression</h3>
 <figure>
   <div class="scroll"><svg id="fig-losses" viewBox="0 0 600 270" role="img" aria-label="Loss against error: squared error grows quadratically, absolute error linearly with a kink at zero, and Huber is quadratic near zero and linear beyond"></svg></div>
-  <figcaption><b>Figure 9.</b> How each loss treats an error. Squared error makes large errors (outliers) dominate; absolute error is robust but not differentiable at 0; Huber (δ = 1) combines both.</figcaption>
+  <figcaption><b>Figure 16.</b> How each loss treats an error. Squared error makes large errors (outliers) dominate; absolute error is robust but not differentiable at 0; Huber (δ = 1) combines both.</figcaption>
 </figure>
 <div class="eq"><div class="math">\begin{aligned}\text{MSE} &amp;= \frac{1}{m}\sum_i (y_i-\hat y_i)^2, \qquad \text{RMSE}=\sqrt{\text{MSE}}\\ \text{MAE} &amp;= \frac{1}{m}\sum_i |y_i-\hat y_i|\\ R^2 &amp;= 1-\frac{\text{RSS}}{\text{TSS}} = 1-\frac{\sum_i (y_i-\hat y_i)^2}{\sum_i (y_i-\bar y)^2}\end{aligned}</div><span class="c">RSS: variance left unexplained by the model. TSS: total variance of y around its mean. R² is the fraction of the variance in y explained by the model.</span></div>
 <ul>
@@ -451,7 +637,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <h3>Classification</h3>
 <figure>
   <div class="scroll"><svg id="fig-confusion" viewBox="0 0 600 230" role="img" aria-label="A confusion matrix with 40 true positives, 10 false negatives, 5 false positives and 45 true negatives, and the resulting accuracy, precision, recall and F1"></svg></div>
-  <figcaption><b>Figure 10.</b> A confusion matrix for 100 examples and the metrics computed from it.</figcaption>
+  <figcaption><b>Figure 17.</b> A confusion matrix for 100 examples and the metrics computed from it.</figcaption>
 </figure>
 <div class="tbl"><table>
 <tr><th>Metric</th><th>Formula / idea</th><th>Use when</th></tr>
@@ -467,13 +653,13 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <div class="eq"><div class="math">\begin{aligned}\text{Inertia} &amp;= \sum_i \min_j \lVert x_i-\mu_j\rVert^2\\ \text{Silhouette} &amp;= \frac{b-a}{\max(a,b)}\end{aligned}</div><span class="c">a = mean distance to points in the same cluster; b = mean distance to points in the nearest other cluster. Range −1 to +1: +1 = well separated and compact, 0 = overlapping clusters, negative = points likely in the wrong cluster.</span></div>
 <figure>
   <div class="scroll"><svg id="fig-elbow" viewBox="0 0 600 250" role="img" aria-label="Left: inertia falls as k grows with an elbow at k equals 3. Right: silhouette score peaks at k equals 3"></svg></div>
-  <figcaption><b>Figure 11.</b> Choosing k for k-means. Inertia always falls as k grows, so look for the “elbow”; the silhouette score peaks at a good k. Illustrative values.</figcaption>
+  <figcaption><b>Figure 18.</b> Choosing k for k-means. Inertia always falls as k grows, so look for the “elbow”; the silhouette score peaks at a good k. Illustrative values.</figcaption>
 </figure>
 <div class="box mistake"><span class="lab">Common mistake</span><p>Inertia and silhouette score are <strong>clustering</strong> metrics, not classification metrics.</p></div>
 </section>
 
 <section id="outliers-scaling">
-<h2><span class="n">09</span>How outliers and unscaled features affect training</h2>
+<h2><span class="n">13</span>How outliers and unscaled features affect training</h2>
 <h3>Effect on gradients</h3>
 <p><strong>Outliers</strong> can distort the updates. With MSE regression, the error (ŷ − y) becomes very large when the model is badly wrong, pulling the weights towards fitting the outlier. In logistic regression (ŷ − y) is bounded between −1 and 1, so large <em>feature</em> values cause the big gradients, and mislabelled points keep pulling with maximum force.</p>
 <ul>
@@ -482,7 +668,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p><strong>Unscaled features</strong> cause unstable, slow training. The update for each weight is proportional to its feature's values, ∂J/∂wⱼ = (1/m) Σ (ŷ⁽ⁱ⁾ − y⁽ⁱ⁾) xⱼ⁽ⁱ⁾, so a feature in the thousands dominates one in [0, 1]. The loss surface becomes a long, narrow valley.</p>
 <figure>
   <div class="scroll"><svg id="fig-scaling" viewBox="0 0 600 250" role="img" aria-label="Left: unscaled features give elongated contours and a zig-zag gradient descent path. Right: scaled features give round contours and a direct path"></svg></div>
-  <figcaption><b>Figure 12.</b> Simulated gradient descent, 20 steps each. Scaling turns the narrow valley into a round bowl, so one learning rate suits every direction.</figcaption>
+  <figcaption><b>Figure 19.</b> Simulated gradient descent, 20 steps each. Scaling turns the narrow valley into a round bowl, so one learning rate suits every direction.</figcaption>
 </figure>
 <ul>
   <li><strong>Mitigation:</strong> feature scaling (z-score to mean 0, std 1; or min-max to [0, 1]).</li>
@@ -492,7 +678,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <h3>Effect on the decision boundary</h3>
 <figure>
   <div class="scroll"><svg id="fig-outlier" viewBox="0 0 600 260" role="img" aria-label="Two separable classes; adding a single outlier tilts the decision boundary towards it"></svg></div>
-  <figcaption><b>Figure 13.</b> One extreme point tilts the boundary towards itself. The data is still separated, but the boundary is worse for new points.</figcaption>
+  <figcaption><b>Figure 20.</b> One extreme point tilts the boundary towards itself. The data is still separated, but the boundary is worse for new points.</figcaption>
 </figure>
 <ul>
   <li><strong>Outliers:</strong> dangerous even when data is separable. A single extreme point can tilt the boundary, worst for hard-margin SVMs. The classifier still separates the data, but generalisation suffers.</li>
@@ -502,7 +688,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="iid">
-<h2><span class="n">10</span>The i.i.d. assumption and dependent data</h2>
+<h2><span class="n">14</span>The i.i.d. assumption and dependent data</h2>
 <p>Averaging the loss over a batch treats every sample equally. That assumes samples are <strong>independent and identically distributed (i.i.d.)</strong> draws from the true data distribution.</p>
 <p>With dependent data (time series, sequences, graphs) the problems are:</p>
 <ul>
@@ -518,16 +704,16 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <!-- ============ PART I ============ -->
-<div class="part"><div class="k">Part II</div><h2>Generalisation</h2><p>Why models underfit or overfit, and what to do about it.</p></div>
+<div class="part"><div class="k">Part III</div><h2>Generalisation</h2><p>Why models underfit or overfit, and what to do about it.</p></div>
 
 <section id="bias-variance">
-<h2><span class="n">11</span>Bias and variance</h2>
+<h2><span class="n">15</span>Bias and variance</h2>
 <p><strong>Bias</strong> is error from wrong or overly simple assumptions. A high-bias model <strong>underfits</strong>: it misses real patterns and does badly on training and test data alike.</p>
 <p><strong>Variance</strong> is error from being too sensitive to the particular training sample. A high-variance model <strong>overfits</strong>: it learns the noise, does well on training data and badly on new data, and would change a lot if trained on a different sample.</p>
 
 <figure>
   <div class="scroll"><div class="row" id="fig-fits"></div></div>
-  <figcaption><b>Figure 14.</b> The same noisy data fitted three ways. The dashed line is the true function. A straight line misses the curve (high bias); a curve through every point chases the noise (high variance).</figcaption>
+  <figcaption><b>Figure 21.</b> The same noisy data fitted three ways. The dashed line is the true function. A straight line misses the curve (high bias); a curve through every point chases the noise (high variance).</figcaption>
 </figure>
 
 <p>For squared error, the expected test error splits into three parts:</p>
@@ -535,7 +721,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 
 <figure>
   <div class="scroll"><svg id="fig-tradeoff" viewBox="0 0 600 320" role="img" aria-label="Bias squared falls and variance rises with model complexity; total error is U-shaped"></svg></div>
-  <figcaption><b>Figure 15.</b> The classical trade-off. Total error is lowest where the falling bias² and rising variance balance.</figcaption>
+  <figcaption><b>Figure 22.</b> The classical trade-off. Total error is lowest where the falling bias² and rising variance balance.</figcaption>
 </figure>
 
 <h3>How to diagnose it</h3>
@@ -548,7 +734,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="overfitting">
-<h2><span class="n">12</span>Overfitting</h2>
+<h2><span class="n">16</span>Overfitting</h2>
 <p>The model learns the training data too well, including its noise and outliers (memorisation). Training error is very low, validation error is high.</p>
 <h3>Causes</h3>
 <ol type="a">
@@ -561,12 +747,12 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="data-centric">
-<h2><span class="n">13</span>Data-centric fixes</h2>
+<h2><span class="n">17</span>Data-centric fixes</h2>
 <ol type="A">
   <li><strong>Collect more data.</strong> More examples make memorising noise harder and shrink the train–validation gap. Helps against overfitting, not underfitting.</li>
   <li><strong>Data augmentation or synthetic data.</strong> Augmentations must keep the label valid: flipping a cat photo is fine, flipping a “6” into a “9” is not. Low-quality synthetic data can add bias, and training LLMs heavily on model-generated text can cause <em>model collapse</em> (not the same as GAN <a href="#gan">mode collapse</a>).</li>
   <li><strong>Self-supervised or transfer learning.</strong> The model learns general features from large unlabelled or related data, so it needs fewer labelled examples. Transfer learning is partly model-centric too.</li>
-  <li><strong>Clean labels, remove noise and outliers.</strong> Less noise to memorise (tools: <a href="#curation">section 3</a>).</li>
+  <li><strong>Clean labels, remove noise and outliers.</strong> Less noise to memorise (tools: <a href="#curation">section 7</a>).</li>
   <li><strong>Deduplicate.</strong> Especially important for LLMs: reduces memorisation and prevents train/test leakage.</li>
   <li><strong>Feature selection.</strong> Fewer irrelevant features, fewer spurious patterns.</li>
 </ol>
@@ -576,7 +762,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="model-centric">
-<h2><span class="n">14</span>Model-centric fixes</h2>
+<h2><span class="n">18</span>Model-centric fixes</h2>
 
 <h3>A. L2 and L1 regularisation</h3>
 <p>Add a penalty on weight size to the loss: total loss = standard loss (prediction error) + regularisation term.</p>
@@ -592,13 +778,13 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>During training, each activation is set to zero with probability p, so neurons can't rely on specific partners. At inference all neurons are used (activations are scaled to compensate).</p>
 <figure>
   <div class="scroll"><svg id="fig-dropout" viewBox="0 0 600 240" role="img" aria-label="A standard fully connected network next to one where dropout has removed some hidden neurons"></svg></div>
-  <figcaption><b>Figure 16.</b> Each training step samples a different thinned network. The effect is similar to averaging many smaller networks.</figcaption>
+  <figcaption><b>Figure 23.</b> Each training step samples a different thinned network. The effect is similar to averaging many smaller networks.</figcaption>
 </figure>
 
 <h3>C. Early stopping</h3>
 <figure>
   <div class="scroll"><svg id="fig-early" viewBox="0 0 600 320" role="img" aria-label="Training loss keeps falling while validation loss falls then rises"></svg></div>
-  <figcaption><b>Figure 17.</b> Training loss keeps falling; validation loss turns up once the model starts memorising.</figcaption>
+  <figcaption><b>Figure 24.</b> Training loss keeps falling; validation loss turns up once the model starts memorising.</figcaption>
 </figure>
 <ul>
   <li>Monitor <strong>validation loss</strong>.</li>
@@ -609,8 +795,8 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <h3>D. Fewer trainable parameters</h3>
 <ul>
   <li><strong>Pruning:</strong> train the full model, remove weights (unstructured, usually by smallest magnitude) or whole neurons, heads or channels (structured), retrain, and repeat.</li>
-  <li><strong>Knowledge distillation:</strong> a small student learns to match a large teacher's <em>softened</em> output distribution (full treatment in <a href="#distillation">section 47</a>).</li>
-  <li><strong>LoRA</strong> for fine-tuning: train a small low-rank update instead of all weights. See <a href="#lora">section 48</a>.</li>
+  <li><strong>Knowledge distillation:</strong> a small student learns to match a large teacher's <em>softened</em> output distribution (full treatment in <a href="#distillation">section 51</a>).</li>
+  <li><strong>LoRA</strong> for fine-tuning: train a small low-rank update instead of all weights. See <a href="#lora">section 52</a>.</li>
 </ul>
 <div class="eq"><div class="math">L = \alpha\,\text{CE}(y, p_s) + (1-\alpha)\,T^2\,\mathrm{KL}\big(p_t^{(T)} \,\Vert\, p_s^{(T)}\big)</div><span class="c">p^(T) = softmax(z / T). Soft targets carry extra information (which wrong classes are similar) and act as a regulariser. The student often generalises better than the same small model trained from scratch, but usually not better than the teacher.</span></div>
 <div class="box key"><span class="lab">Key point</span><p>Pruning and distillation are mainly efficiency tools. Better generalisation is a side benefit, not their main purpose.</p></div>
@@ -634,32 +820,32 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <tr><td><strong>LayerNorm</strong></td><td>Each example's features</td><td>Very little</td><td>Transformers</td></tr>
 <tr><td><strong>RMSNorm</strong></td><td>Like LayerNorm, no mean subtraction</td><td>Very little</td><td>Many modern LLMs</td></tr>
 </table></div>
-<p>Where the norm sits also matters: the original Transformer normalised after each residual add (post-LN); modern LLMs normalise before each sub-layer (pre-LN), which trains more stably. See <a href="#transformer">section 33</a>.</p>
+<p>Where the norm sits also matters: the original Transformer normalised after each residual add (post-LN); modern LLMs normalise before each sub-layer (pre-LN), which trains more stably. See <a href="#transformer">section 37</a>.</p>
 </section>
 
 <section id="evaluation">
-<h2><span class="n">15</span>Cross-validation</h2>
+<h2><span class="n">19</span>Cross-validation</h2>
 <p>k-fold cross-validation is an <strong>evaluation and model-selection</strong> method, not an ensemble and not a remedy by itself. It <em>detects</em> overfitting and helps tune hyperparameters such as λ, dropout rate or number of epochs.</p>
 <figure>
   <div class="scroll"><svg id="fig-kfold" viewBox="0 0 600 250" role="img" aria-label="Five-fold cross-validation: each round validates on a different fifth of the data"></svg></div>
-  <figcaption><b>Figure 18.</b> 5-fold CV. Each round holds out a different 1/k of the data; the final score is the average over the k rounds.</figcaption>
+  <figcaption><b>Figure 25.</b> 5-fold CV. Each round holds out a different 1/k of the data; the final score is the average over the k rounds.</figcaption>
 </figure>
 <ul>
   <li><strong>k-fold:</strong> each fold holds out 1/k of the data, not k samples.</li>
   <li><strong>Leave-one-out (LOOCV):</strong> the special case k = n.</li>
   <li><strong>Leave-p-out:</strong> holds out p samples in each round.</li>
   <li><strong>Stratified k-fold</strong> keeps class proportions in each fold; for time series use forward-chaining splits.</li>
-  <li><strong>Bootstrapping</strong> (sampling with replacement) is the other common resampling method: see <a href="#missing-imbalance">section 4</a>.</li>
+  <li><strong>Bootstrapping</strong> (sampling with replacement) is the other common resampling method: see <a href="#missing-imbalance">section 8</a>.</li>
 </ul>
 </section>
 
 <section id="modern">
-<h2><span class="n">16</span>Beyond the classic picture</h2>
+<h2><span class="n">20</span>Beyond the classic picture</h2>
 <h3>Double descent</h3>
 <p>Test error first follows the classical U-curve, then <strong>peaks at the interpolation threshold</strong>: the point where the model has just enough capacity to fit the training data exactly (roughly, parameters ≈ data points). Past that point, error <strong>falls again</strong> as the model grows and can end below the best classical model.</p>
 <figure>
   <div class="scroll"><svg id="fig-dd" viewBox="0 0 600 320" role="img" aria-label="Test error forms a U, spikes at the interpolation threshold, then declines again"></svg></div>
-  <figcaption><b>Figure 19.</b> Model-wise double descent. Very small models still underfit; the good region on the left is the sweet spot of the U.</figcaption>
+  <figcaption><b>Figure 26.</b> Model-wise double descent. Very small models still underfit; the good region on the left is the sweet spot of the U.</figcaption>
 </figure>
 <ul>
   <li>The peak is worse with noisy labels; regularisation and early stopping reduce it.</li>
@@ -670,7 +856,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>The model first memorises the training set (≈100% training accuracy, chance-level validation accuracy). After many more steps, validation accuracy suddenly jumps to near-perfect. The smaller the training set, the more optimisation steps this takes.</p>
 <figure>
   <div class="scroll"><svg id="fig-grok" viewBox="0 0 600 320" role="img" aria-label="Training accuracy reaches 100 percent early; validation accuracy rises sharply much later"></svg></div>
-  <figcaption><b>Figure 20.</b> Grokking, first reported by Power et al. (2022) on small algorithmic tasks such as modular arithmetic.</figcaption>
+  <figcaption><b>Figure 27.</b> Grokking, first reported by Power et al. (2022) on small algorithmic tasks such as modular arithmetic.</figcaption>
 </figure>
 <ul>
   <li>Weight decay is a key ingredient.</li>
@@ -679,7 +865,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="underfitting">
-<h2><span class="n">17</span>Underfitting</h2>
+<h2><span class="n">21</span>Underfitting</h2>
 <p>The model is too simple, or trained too little, to capture the underlying patterns (<strong>high bias</strong>). Training and validation error are both high and close to each other.</p>
 <h3>Causes</h3>
 <ul>
@@ -703,15 +889,15 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <!-- ============ PART II ============ -->
-<div class="part"><div class="k">Part III</div><h2>Optimisation</h2><p>How training actually finds good weights.</p></div>
+<div class="part"><div class="k">Part IV</div><h2>Optimisation</h2><p>How training actually finds good weights.</p></div>
 
 <section id="landscape">
-<h2><span class="n">18</span>Loss landscapes: convex and non-convex</h2>
+<h2><span class="n">22</span>Loss landscapes: convex and non-convex</h2>
 <p>A function is <strong>convex</strong> if the straight line (chord) between any two points on its graph never goes below the graph:</p>
 <div class="eq"><div class="math">f\big(\theta x+(1-\theta)y\big) \le \theta f(x) + (1-\theta) f(y), \qquad \theta\in[0,1]</div><span class="c">For twice-differentiable functions this is the same as f''(x) ≥ 0, or in many dimensions, a positive semi-definite Hessian.</span></div>
 <figure>
   <div class="scroll"><svg id="fig-convex" viewBox="0 0 600 270" role="img" aria-label="Left: a convex bowl with a chord above the curve. Right: a non-convex curve with a local minimum, local maximum and global minimum, where the curve rises above a chord"></svg></div>
-  <figcaption><b>Figure 21.</b> Left: every chord stays above a convex curve. Right: the hump rises above the chord, so the function is not convex.</figcaption>
+  <figcaption><b>Figure 28.</b> Left: every chord stays above a convex curve. Right: the hump rises above the chord, so the function is not convex.</figcaption>
 </figure>
 <ul>
   <li><strong>Key property:</strong> in a convex function <strong>every local minimum is a global minimum</strong>. That is what makes convex optimisation easy.</li>
@@ -723,7 +909,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>A saddle point has zero gradient but curves <strong>up in one direction and down in another</strong>, like f(x, y) = x² − y². It only really exists in two or more dimensions; a flat inflection point is the closest 1D analogue.</p>
 <figure>
   <div class="scroll"><svg id="fig-saddle" viewBox="0 0 600 300" role="img" aria-label="Contour plot of x squared minus y squared with a saddle point at the centre"></svg></div>
-  <figcaption><b>Figure 22.</b> Contours of f(x, y) = x² − y². Along x the centre is a minimum; along y it is a maximum. Gradient descent slows to a crawl near such points.</figcaption>
+  <figcaption><b>Figure 29.</b> Contours of f(x, y) = x² − y². Along x the centre is a minimum; along y it is a maximum. Gradient descent slows to a crawl near such points.</figcaption>
 </figure>
 
 <h3>What this means for deep learning</h3>
@@ -742,12 +928,12 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="gd">
-<h2><span class="n">19</span>Gradient descent</h2>
+<h2><span class="n">23</span>Gradient descent</h2>
 <p>Goal: find the parameters that minimise the loss, w* = argmin_w L(w). Start from initial values and repeatedly step <strong>against</strong> the gradient.</p>
 <div class="eq"><div class="math">w_1 = w_0 - \alpha\,\nabla L(w_0)</div><span class="c">∇L points uphill (steepest ascent), so −∇L is the descent direction. α is the learning rate: too small is slow, too large overshoots or diverges.</span></div>
 <figure>
   <div class="scroll"><svg id="fig-gdstep" viewBox="0 0 600 300" role="img" aria-label="One gradient descent step on a bowl-shaped loss curve: the tangent at w0 slopes up, and the step moves left to w1 with lower loss"></svg></div>
-  <figcaption><b>Figure 23.</b> One step. The slope at w₀ is positive, so the step s = −α∇L(w₀) moves w to the left, to lower loss.</figcaption>
+  <figcaption><b>Figure 30.</b> One step. The slope at w₀ is positive, so the step s = −α∇L(w₀) moves w to the left, to lower loss.</figcaption>
 </figure>
 
 <h3>Batch, stochastic and mini-batch</h3>
@@ -760,17 +946,17 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>Mini-batch is the standard choice. In deep learning, “SGD” almost always means mini-batch SGD.</p>
 <figure>
   <div class="scroll"><svg id="fig-variants" viewBox="0 0 600 320" role="img" aria-label="Paths of batch gradient descent, mini-batch and single-example SGD on a contour plot"></svg></div>
-  <figcaption><b>Figure 24.</b> Simulated paths on the same loss. Batch GD is smooth; SGD jitters around the minimum; mini-batch sits in between.</figcaption>
+  <figcaption><b>Figure 31.</b> Simulated paths on the same loss. Batch GD is smooth; SGD jitters around the minimum; mini-batch sits in between.</figcaption>
 </figure>
 </section>
 
 <section id="momentum">
-<h2><span class="n">20</span>Momentum</h2>
+<h2><span class="n">24</span>Momentum</h2>
 <p>Add a velocity that accumulates past gradients, like a ball rolling downhill. Steps build up along directions where the gradient is consistent and cancel where it zig-zags.</p>
 <div class="eq"><div class="math">\begin{aligned} v &amp;\leftarrow \beta v + \nabla L(w)\\ w &amp;\leftarrow w - \alpha v &amp;&amp; (\beta\approx 0.9)\end{aligned}</div><span class="c">
 <figure>
   <div class="scroll"><svg id="fig-momentum" viewBox="0 0 600 300" role="img" aria-label="On a narrow elongated valley, plain gradient descent zig-zags while momentum takes a smoother path"></svg></div>
-  <figcaption><b>Figure 25.</b> A ravine (high curvature across, low along). Plain GD bounces between the walls; momentum damps the bouncing and keeps moving along the valley.</figcaption>
+  <figcaption><b>Figure 32.</b> A ravine (high curvature across, low along). Plain GD bounces between the walls; momentum damps the bouncing and keeps moving along the valley.</figcaption>
 </figure>
 <ul>
   <li><span class="pro">✓</span> Faster convergence.</li>
@@ -781,7 +967,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="adaptive">
-<h2><span class="n">21</span>Adaptive optimisers: Adam and AdamW</h2>
+<h2><span class="n">25</span>Adaptive optimisers: Adam and AdamW</h2>
 <div class="tbl"><table>
 <tr><th>Optimiser</th><th>Idea</th></tr>
 <tr><td><strong>AdaGrad</strong></td><td>Each parameter gets its own learning rate, which shrinks as its squared gradients add up. The rate can decay too far.</td></tr>
@@ -805,10 +991,10 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="schedules">
-<h2><span class="n">22</span>Learning-rate schedules</h2>
+<h2><span class="n">26</span>Learning-rate schedules</h2>
 <figure>
   <div class="scroll"><svg id="fig-schedule" viewBox="0 0 600 300" role="img" aria-label="Learning rate rises linearly during warmup, then follows a cosine curve down to near zero"></svg></div>
-  <figcaption><b>Figure 26.</b> Linear warmup followed by cosine decay, the standard schedule for transformers.</figcaption>
+  <figcaption><b>Figure 33.</b> Linear warmup followed by cosine decay, the standard schedule for transformers.</figcaption>
 </figure>
 <h3>Warmup</h3>
 <p>Start with a <strong>small learning rate</strong> (small updates, not small weights) and raise it over the first few hundred to few thousand steps.</p>
@@ -821,27 +1007,27 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="clipping">
-<h2><span class="n">23</span>Gradient clipping</h2>
+<h2><span class="n">27</span>Gradient clipping</h2>
 <p>Prevents single huge steps caused by exploding gradients, which lead to instability and divergence. Common in RNNs and transformers.</p>
 <div class="eq"><div class="math">\text{if } \lVert g\rVert_2 &gt; \text{max\_norm}: \quad g \leftarrow g\cdot\frac{\text{max\_norm}}{\lVert g\rVert_2}</div><span class="c">‖g‖₂ is the Euclidean <strong>norm</strong> (length) of the gradient, usually computed over all parameters together (the global norm). Example: max_norm = 1.0, ‖g‖ = 5 → scale factor 1/5.</span></div>
 <figure>
   <div class="scroll"><svg id="fig-clip" viewBox="0 0 600 300" role="img" aria-label="A gradient vector of length 5 is scaled down to length 1, keeping its direction"></svg></div>
-  <figcaption><b>Figure 27.</b> Clipping by norm keeps the gradient's direction and only shortens it. Clipping each value separately (“clip by value”) can change the direction.</figcaption>
+  <figcaption><b>Figure 34.</b> Clipping by norm keeps the gradient's direction and only shortens it. Clipping each value separately (“clip by value”) can change the direction.</figcaption>
 </figure>
 <div class="tbl"><table>
 <tr><th>Technique</th><th>What it targets</th></tr>
 <tr><td>Warmup, cosine decay</td><td>Step size over the course of training</td></tr>
 <tr><td>Gradient clipping</td><td>Single steps that are too large (exploding gradients)</td></tr>
 <tr><td>Weight decay</td><td>Overfitting (a regulariser)</td></tr>
-<tr><td>Temperature</td><td>Randomness of outputs at inference, not training (<a href="#temperature">section 43</a>)</td></tr>
+<tr><td>Temperature</td><td>Randomness of outputs at inference, not training (<a href="#temperature">section 47</a>)</td></tr>
 </table></div>
 </section>
 
 <!-- ============ PART III ============ -->
-<div class="part"><div class="k">Part IV</div><h2>Generative models</h2><p>Models that learn a data distribution and can sample new data from it.</p></div>
+<div class="part"><div class="k">Part V</div><h2>Generative models</h2><p>Models that learn a data distribution and can sample new data from it.</p></div>
 
 <section id="gen-vs-disc">
-<h2><span class="n">24</span>Generative vs discriminative</h2>
+<h2><span class="n">28</span>Generative vs discriminative</h2>
 <div class="tbl"><table>
 <tr><th></th><th>Generative</th><th>Discriminative</th></tr>
 <tr><td><strong>Models</strong></td><td>p(x), or the joint p(x, y)</td><td>p(y | x), labels given inputs</td></tr>
@@ -853,11 +1039,11 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="vae">
-<h2><span class="n">25</span>Variational autoencoders (VAEs)</h2>
+<h2><span class="n">29</span>Variational autoencoders (VAEs)</h2>
 <p>A normal autoencoder maps each input to a single point in a lower-dimensional latent space. A VAE maps each input to a <strong>probability distribution</strong> over the latent space, usually a Gaussian with a mean μ and standard deviation σ per latent dimension. The decoder takes a sample z from that distribution and reconstructs the input.</p>
 <figure>
   <div class="scroll"><svg id="fig-vae" viewBox="0 0 600 250" role="img" aria-label="VAE: the encoder maps x to mu and sigma, z is sampled as mu plus sigma times epsilon, and the decoder reconstructs x-hat"></svg></div>
-  <figcaption><b>Figure 28.</b> Training path (top) and generation path (bottom). At generation time the encoder isn't used: z comes from the prior N(0, I).</figcaption>
+  <figcaption><b>Figure 35.</b> Training path (top) and generation path (bottom). At generation time the encoder isn't used: z comes from the prior N(0, I).</figcaption>
 </figure>
 <h3>Loss: the negative ELBO</h3>
 <div class="eq"><div class="math">L(\theta,\phi) = \underbrace{-\,\mathbb{E}_{z\sim q_\phi(z\mid x)}\big[\log p_\theta(x\mid z)\big]}_{\text{reconstruction loss}} + \underbrace{\mathrm{KL}\big(q_\phi(z\mid x)\,\Vert\,p(z)\big)}_{\text{KL divergence}}</div><span class="c"><strong>Reconstruction loss:</strong> negative log-likelihood of rebuilding x from z; in practice BCE or MSE. <strong>KL divergence:</strong> the regulariser, which keeps the encoder's distribution close to the prior p(z) = N(0, I) so the latent space is smooth and can be sampled. ELBO = evidence lower bound on log p(x).</span></div>
@@ -872,11 +1058,11 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="gan">
-<h2><span class="n">26</span>Generative adversarial networks (GANs)</h2>
+<h2><span class="n">30</span>Generative adversarial networks (GANs)</h2>
 <p>Two networks compete. The <strong>generator</strong> turns noise into fake samples; the <strong>discriminator</strong> tries to tell real from fake. As the generator improves, the discriminator must get sharper, and vice versa, until the discriminator can no longer tell them apart.</p>
 <figure>
   <div class="scroll"><svg id="fig-gan" viewBox="0 0 600 240" role="img" aria-label="GAN: noise goes into the generator to make fake samples; the discriminator sees real and fake samples and outputs a probability of real"></svg></div>
-  <figcaption><b>Figure 29.</b> The adversarial loop. Both networks are trained from the discriminator's output.</figcaption>
+  <figcaption><b>Figure 36.</b> The adversarial loop. Both networks are trained from the discriminator's output.</figcaption>
 </figure>
 <div class="eq"><div class="math">\min_G\max_D\; \mathbb{E}_x\big[\log D(x)\big] + \mathbb{E}_z\big[\log\big(1-D(G(z))\big)\big]</div><span class="c">A two-player minimax game. At the ideal equilibrium the discriminator outputs ½ for every input.</span></div>
 <ul>
@@ -890,12 +1076,12 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="flow">
-<h2><span class="n">27</span>Flow-based models</h2>
+<h2><span class="n">31</span>Flow-based models</h2>
 <p>A chain of <strong>invertible</strong> transformations turns a simple distribution (Gaussian noise) into the complex data distribution. Because every step can be inverted, the model gives an <strong>exact log-likelihood</strong>.</p>
 <div class="eq"><div class="math">\begin{aligned} &amp;x=f(z),\quad z=f^{-1}(x),\quad z\sim\mathcal N(0,I)\\ &amp;\log p(x) = \log p(z) + \log\left|\det\frac{\partial z}{\partial x}\right|\end{aligned}</div><span class="c">Change of variables: the Jacobian determinant accounts for how f stretches or squeezes space.</span></div>
 <figure>
   <div class="scroll"><svg id="fig-flow" viewBox="0 0 600 230" role="img" aria-label="A simple Gaussian density on the left is transformed by invertible steps into a two-peaked data density on the right"></svg></div>
-  <figcaption><b>Figure 30.</b> f maps noise to data (generation); f⁻¹ maps data back to noise (exact likelihood).</figcaption>
+  <figcaption><b>Figure 37.</b> f maps noise to data (generation); f⁻¹ maps data back to noise (exact likelihood).</figcaption>
 </figure>
 <ul>
   <li><span class="con">✗</span> Design constraints: every layer must be invertible, keep the same dimensionality, and have a cheap Jacobian determinant. Sample quality has historically lagged GANs.</li>
@@ -904,7 +1090,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="autoregressive">
-<h2><span class="n">28</span>Autoregressive models</h2>
+<h2><span class="n">32</span>Autoregressive models</h2>
 <p>Factorise the distribution into a chain of conditionals and generate one element at a time, each conditioned on everything generated so far.</p>
 <div class="eq"><div class="math">p(x) = \prod_t p(x_t\mid x_{&lt;t})</div><span class="c">
 <ul>
@@ -912,17 +1098,17 @@ details p{margin:8px 0 2px;color:var(--ink)}
   <li><span class="con">✗</span> Slow generation: one token at a time, sequentially.</li>
   <li><span class="con">✗</span> Errors compound: early mistakes feed into later steps (exposure bias).</li>
   <li><span class="con">✗</span> Long context is costly: transformer attention is O(n²) in sequence length (see <a href="#ssm">SSMs</a>).</li>
-  <li>Examples: GPT-style LLMs, PixelCNN (images), WaveNet (audio). How LLMs decode is covered in <a href="#temperature">section 43</a>.</li>
+  <li>Examples: GPT-style LLMs, PixelCNN (images), WaveNet (audio). How LLMs decode is covered in <a href="#temperature">section 47</a>.</li>
 </ul>
 </section>
 
 <section id="diffusion">
-<h2><span class="n">29</span>Diffusion and consistency models</h2>
+<h2><span class="n">33</span>Diffusion and consistency models</h2>
 <h3>Diffusion models</h3>
 <p>A <strong>forward process</strong> adds Gaussian noise over T steps until only noise is left. It is fixed; nothing is learned. A network learns the <strong>reverse process</strong>: removing noise step by step, which turns fresh noise into new data.</p>
 <figure>
   <div class="scroll"><svg id="fig-diffusion" viewBox="0 0 600 230" role="img" aria-label="A spiral of points becomes progressively noisier from left to right; the learned reverse process goes from noise back to the spiral"></svg></div>
-  <figcaption><b>Figure 31.</b> A 2D spiral dataset under the forward process. Generation runs the learned reverse process from right to left.</figcaption>
+  <figcaption><b>Figure 38.</b> A 2D spiral dataset under the forward process. Generation runs the learned reverse process from right to left.</figcaption>
 </figure>
 <div class="eq"><div class="math">\begin{aligned} x_t &amp;= \sqrt{\bar\alpha_t}\,x_0 + \sqrt{1-\bar\alpha_t}\,\epsilon, \qquad \epsilon\sim\mathcal N(0,I)\\ \text{Loss} &amp;= \big\lVert \epsilon-\epsilon_\theta(x_t,t)\big\rVert^2\end{aligned}</div><span class="c">The network (a U-Net or transformer) usually predicts the noise that was added. ᾱ_t shrinks from 1 to 0 as t goes from 0 to T.</span></div>
 <ul>
@@ -933,7 +1119,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>Introduced by Song et al. (2023). A consistency model learns a function that maps <strong>any point on a noise-to-data trajectory to the same clean sample</strong>, so it can jump from noise to data in one step.</p>
 <figure>
   <div class="scroll"><svg id="fig-consistency" viewBox="0 0 600 240" role="img" aria-label="A curved trajectory from noise to data; diffusion follows it in many small steps while a consistency model jumps from any point straight to the data end"></svg></div>
-  <figcaption><b>Figure 32.</b> Diffusion walks the trajectory in many small steps. A consistency model learns f_θ(x_t, t) = x₀ for every point on it.</figcaption>
+  <figcaption><b>Figure 39.</b> Diffusion walks the trajectory in many small steps. A consistency model learns f_θ(x_t, t) = x₀ for every point on it.</figcaption>
 </figure>
 <ul>
   <li><strong>Consistency distillation:</strong> trained from an existing diffusion model. <strong>Consistency training:</strong> trained from scratch.</li>
@@ -942,7 +1128,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="gen-compare">
-<h2><span class="n">30</span>Comparing generative models</h2>
+<h2><span class="n">34</span>Comparing generative models</h2>
 <div class="tbl"><table>
 <tr><th>Model</th><th>Sample quality</th><th>Diversity</th><th>Generation speed</th><th>Exact likelihood</th><th>Training</th></tr>
 <tr><td><strong>VAE</strong></td><td>Blurry</td><td>Good</td><td>Fast</td><td>No (lower bound)</td><td>Stable</td></tr>
@@ -956,14 +1142,14 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <!-- ============ PART IV ============ -->
-<div class="part"><div class="k">Part V</div><h2>Transformers &amp; attention</h2><p>From token embeddings to attention, the Transformer, and the variants that scale it: mixture of experts, efficient attention and state space models.</p></div>
+<div class="part"><div class="k">Part VI</div><h2>Transformers &amp; attention</h2><p>From token embeddings to attention, the Transformer, and the variants that scale it: mixture of experts, efficient attention and state space models.</p></div>
 
 <section id="embeddings">
-<h2><span class="n">31</span>Embeddings and positions</h2>
+<h2><span class="n">35</span>Embeddings and positions</h2>
 <p><strong>Distributional hypothesis:</strong> words that occur in the same contexts tend to have similar meanings (“you shall know a word by the company it keeps”, Firth). Embeddings put this into practice: each token becomes a vector, and tokens used in similar contexts end up close together.</p>
 <figure>
   <div class="scroll"><svg id="fig-embed" viewBox="0 0 600 300" role="img" aria-label="Words plotted in two dimensions, clustered by meaning, with parallel arrows from man to woman and king to queen"></svg></div>
-  <figcaption><b>Figure 33.</b> An illustrative 2D projection. Related words cluster, and some relations become directions: king − man + woman ≈ queen (word2vec).</figcaption>
+  <figcaption><b>Figure 40.</b> An illustrative 2D projection. Related words cluster, and some relations become directions: king − man + woman ≈ queen (word2vec).</figcaption>
 </figure>
 <ul>
   <li>Similarity is usually measured with <strong>cosine similarity</strong>: cos(a, b) = a·b / (‖a‖ ‖b‖).</li>
@@ -980,7 +1166,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="attention">
-<h2><span class="n">32</span>Attention</h2>
+<h2><span class="n">36</span>Attention</h2>
 <h3>Self-attention</h3>
 <p>Each token builds a <strong>contextual representation</strong> by weighing every other token in the same sequence, all positions in parallel. In <strong>self-attention</strong>, queries, keys and values all come from the same sequence X:</p>
 <div class="eq"><div class="math">\begin{aligned} &amp;Q=XW_Q,\quad K=XW_K,\quad V=XW_V\\ &amp;\text{Attention}(Q,K,V) = \text{softmax}\!\Big(\frac{QK^\top}{\sqrt{d_k}}\Big)V\end{aligned}</div><span class="c">Each query is compared with every key; the softmax turns the scores into weights that sum to 1 per row; the output mixes the values with those weights. Dividing by √d_k stops large dot products from saturating the softmax.</span></div>
@@ -996,7 +1182,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>The prediction at each position may depend only on <strong>the current and previous positions</strong>, never on future ones. Scores for future positions are set to −∞ <strong>before</strong> the softmax, so their weight becomes 0 and each row still sums to 1.</p>
 <figure>
   <div class="scroll"><svg id="fig-attn" viewBox="0 0 600 290" role="img" aria-label="Two attention weight matrices for a six-token sentence: full self-attention, and causal attention where future positions are masked and each row is renormalised"></svg></div>
-  <figcaption><b>Figure 34.</b> Attention weights for a toy sentence (rows = queries, columns = keys). Right: future positions are masked and each row is renormalised, so “The” attends only to itself with weight 1.00.</figcaption>
+  <figcaption><b>Figure 41.</b> Attention weights for a toy sentence (rows = queries, columns = keys). Right: future positions are masked and each row is renormalised, so “The” attends only to itself with weight 1.00.</figcaption>
 </figure>
 
 <h3>Multi-head attention</h3>
@@ -1004,28 +1190,28 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <div class="eq"><div class="math">\begin{aligned} \text{head}_i &amp;= \text{Attention}(XW_Q^{i},\, XW_K^{i},\, XW_V^{i})\\ \text{MultiHead}(X) &amp;= \text{Concat}(\text{head}_1,\dots,\text{head}_h)\,W_O\end{aligned}</div><span class="c">Each head works in d_head = d_model / h dimensions, so h heads cost about the same as one full-size head.</span></div>
 <figure>
   <div class="scroll"><svg id="fig-mha" viewBox="0 0 600 260" role="img" aria-label="Input X goes into h parallel heads, each with its own Q, K, V projections and attention; outputs are concatenated and projected by W_O"></svg></div>
-  <figcaption><b>Figure 35.</b> Multi-head attention: parallel heads, concatenation, output projection.</figcaption>
+  <figcaption><b>Figure 42.</b> Multi-head attention: parallel heads, concatenation, output projection.</figcaption>
 </figure>
 </section>
 
 <section id="transformer">
-<h2><span class="n">33</span>The Transformer architecture</h2>
+<h2><span class="n">37</span>The Transformer architecture</h2>
 <p>The original Transformer (Vaswani et al., 2017) is an encoder–decoder, 6 layers each. The <strong>encoder</strong> reads the input and outputs <strong>one contextual vector per token</strong>. The <strong>decoder</strong> generates the output one token at a time, using its own previous tokens and the encoder's output.</p>
 <figure>
   <div class="scroll"><svg id="fig-transformer" viewBox="0 0 600 470" role="img" aria-label="Transformer encoder and decoder stacks; encoder output feeds the decoder's cross-attention; the decoder ends in a linear layer and softmax"></svg></div>
-  <figcaption><b>Figure 36.</b> Encoder–decoder Transformer. Each sub-layer also has a residual connection, omitted here for clarity.</figcaption>
+  <figcaption><b>Figure 43.</b> Encoder–decoder Transformer. Each sub-layer also has a residual connection, omitted here for clarity.</figcaption>
 </figure>
 <ul>
   <li><strong>Encoder layer:</strong> multi-head self-attention, then a feed-forward network.</li>
   <li><strong>Decoder layer:</strong> <a href="#attention">causal</a> self-attention; <strong>cross-attention</strong> (queries from the decoder, keys and values from the encoder); a feed-forward network.</li>
   <li><strong>Output:</strong> a linear layer and a softmax over the vocabulary give next-token probabilities.</li>
-  <li><strong>Positions</strong> are added at the input (see <a href="#embeddings">section 31</a>).</li>
+  <li><strong>Positions</strong> are added at the input (see <a href="#embeddings">section 35</a>).</li>
   <li><strong>Post-LN vs pre-LN:</strong> the original normalises after each residual add (post-LN). Modern LLMs normalise before each sub-layer (pre-LN), usually with RMSNorm, which trains more stably.</li>
 </ul>
 </section>
 
 <section id="families">
-<h2><span class="n">34</span>Model families</h2>
+<h2><span class="n">38</span>Model families</h2>
 <div class="tbl"><table>
 <tr><th>Family</th><th>Attention</th><th>Examples</th><th>Pretraining</th><th>Good for</th></tr>
 <tr><td><strong>Encoder-only</strong></td><td>Bidirectional</td><td>BERT, RoBERTa</td><td>Masked language modelling</td><td>Classification, NER, embeddings</td></tr>
@@ -1036,11 +1222,11 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="moe">
-<h2><span class="n">35</span>Mixture of experts (MoE)</h2>
+<h2><span class="n">39</span>Mixture of experts (MoE)</h2>
 <p>MoE replaces the single feed-forward network (FFN) in a transformer block with <strong>many expert FFNs plus a router</strong>. Each token is sent to only a few experts, so the model gets far more parameters (more capacity to store knowledge) without a matching increase in compute per token. This is called <strong>sparse</strong> or <strong>conditional</strong> computation.</p>
 <figure>
   <div class="scroll"><svg id="fig-moe" viewBox="0 0 600 300" role="img" aria-label="A token's hidden state goes to a router, which scores eight experts; the top two are used and their outputs are combined with weights 0.55 and 0.45"></svg></div>
-  <figcaption><b>Figure 37.</b> Top-2 routing over 8 experts. Only the two highest-scoring experts run; their outputs are mixed using the router's renormalised scores.</figcaption>
+  <figcaption><b>Figure 44.</b> Top-2 routing over 8 experts. Only the two highest-scoring experts run; their outputs are mixed using the router's renormalised scores.</figcaption>
 </figure>
 <h3>How a token is routed</h3>
 <ol>
@@ -1065,7 +1251,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <h3>Expert designs</h3>
 <figure>
   <div class="scroll"><svg id="fig-moe-designs" viewBox="0 0 600 270" role="img" aria-label="Three MoE designs: four large experts with two active; eight small experts with four active; and seven small routed experts plus one always-active shared expert"></svg></div>
-  <figcaption><b>Figure 38.</b> Three designs, following the DeepSeekMoE paper (Dai et al., 2024). Highlighted experts are active for this token.</figcaption>
+  <figcaption><b>Figure 45.</b> Three designs, following the DeepSeekMoE paper (Dai et al., 2024). Highlighted experts are active for this token.</figcaption>
 </figure>
 <ul>
   <li><strong>(a) Conventional top-2:</strong> a few large experts, 2 active per token.</li>
@@ -1077,7 +1263,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>Left alone, the router sends most tokens to a few popular experts. Those experts train faster, so they get picked even more: a self-reinforcing loop that wastes the other experts (<em>expert collapse</em>). Two separate mechanisms counter this:</p>
 <figure>
   <div class="scroll"><svg id="fig-balance" viewBox="0 0 600 270" role="img" aria-label="Left: unbalanced routing where two experts get most tokens and tokens above the capacity limit are dropped. Right: balanced routing with roughly equal tokens per expert"></svg></div>
-  <figcaption><b>Figure 39.</b> Share of tokens per expert (8 experts, ideal 12.5% each). Left: tokens above an expert's capacity are dropped. Right: after load balancing.</figcaption>
+  <figcaption><b>Figure 46.</b> Share of tokens per expert (8 experts, ideal 12.5% each). Left: tokens above an expert's capacity are dropped. Right: after load balancing.</figcaption>
 </figure>
 <div class="eq"><div class="math">\begin{aligned} L_{\text{aux}} &amp;= \alpha\, N \sum_i f_i\,P_i\\ \text{capacity} &amp;= \text{capacity factor}\times\frac{\text{tokens per batch}}{N}\end{aligned}</div><span class="c">f_i = fraction of tokens sent to expert i; P_i = average router probability for expert i. The loss is smallest when both are uniform. The auxiliary loss <strong>encourages</strong> balance; capacity is a <strong>hard limit</strong>, and overflow tokens skip the expert and pass through the residual connection (Switch Transformer).</span></div>
 <ul>
@@ -1111,7 +1297,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="efficient-attention">
-<h2><span class="n">36</span>Efficient attention and the KV cache</h2>
+<h2><span class="n">40</span>Efficient attention and the KV cache</h2>
 <h3>The KV cache</h3>
 <p>During generation, the keys and values of earlier tokens don't change, so they are stored instead of recomputed. The cache grows with every token and quickly becomes the main memory cost of long contexts:</p>
 <div class="eq"><div class="math">\text{KV cache} = 2 \times n_{\text{layers}} \times n_{\text{kv\_heads}} \times d_{\text{head}} \times \text{seq\_len} \times \text{bytes per value}</div><span class="c">The 2 is for keys and values. The variants below shrink n_kv_heads (GQA, MQA) or replace K and V with a compressed latent (MLA).</span></div>
@@ -1120,7 +1306,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p><strong>Grouped-query attention</strong> lets groups of query heads share one key–value head. Query heads stay separate; only K and V are shared.</p>
 <figure>
   <div class="scroll"><svg id="fig-gqa" viewBox="0 0 600 250" role="img" aria-label="Four query heads connected to four, two, or one key-value heads for MHA, GQA and MQA"></svg></div>
-  <figcaption><b>Figure 40.</b> With 4 query heads: MHA keeps 4 KV heads, GQA shares 2, MQA shares 1.</figcaption>
+  <figcaption><b>Figure 47.</b> With 4 query heads: MHA keeps 4 KV heads, GQA shares 2, MQA shares 1.</figcaption>
 </figure>
 <div class="tbl"><table>
 <tr><th>Variant</th><th>KV heads</th><th>KV cache</th><th>Quality</th></tr>
@@ -1137,7 +1323,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>Introduced in DeepSeek-V2 and used in V3/R1. Instead of sharing K and V, MLA <strong>compresses</strong> them into a small latent vector and caches only that.</p>
 <figure>
   <div class="scroll"><svg id="fig-mla" viewBox="0 0 600 260" role="img" aria-label="MHA caches full keys and values per token; MLA caches only a small compressed latent vector and up-projects it to keys and values"></svg></div>
-  <figcaption><b>Figure 41.</b> What gets cached per token in standard attention versus MLA.</figcaption>
+  <figcaption><b>Figure 48.</b> What gets cached per token in standard attention versus MLA.</figcaption>
 </figure>
 <ol>
   <li><strong>Down-project</strong> each token to a latent vector: c_KV = W_DKV · x, with d_c ≪ n_heads × d_head.</li>
@@ -1151,7 +1337,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </ul>
 <figure>
   <div class="scroll"><svg id="fig-kv" viewBox="0 0 600 230" role="img" aria-label="Bar chart of KV cache size: MHA 17.2 GB, GQA 4.3 GB, MLA 1.2 GB, MQA 0.5 GB"></svg></div>
-  <figcaption><b>Figure 42.</b> KV cache for one 32,768-token sequence, computed with the formula above for an example model: 32 layers, 32 query heads, d_head = 128, 16-bit values. GQA uses 8 KV heads; MLA uses d_c = 512 plus 64 RoPE dimensions (DeepSeek's sizes). Illustrative, not a specific product.</figcaption>
+  <figcaption><b>Figure 49.</b> KV cache for one 32,768-token sequence, computed with the formula above for an example model: 32 layers, 32 query heads, d_head = 128, 16-bit values. GQA uses 8 KV heads; MLA uses d_c = 512 plus 64 RoPE dimensions (DeepSeek's sizes). Illustrative, not a specific product.</figcaption>
 </figure>
 
 <h3>Other efficiency techniques</h3>
@@ -1162,12 +1348,12 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="ssm">
-<h2><span class="n">37</span>State space models</h2>
+<h2><span class="n">41</span>State space models</h2>
 <p>SSMs are a <strong>sequence architecture</strong>, an alternative to attention, not a separate type of generative model. They can be the backbone of an autoregressive generative model. They model an internal hidden state that evolves over time and is usually not observed directly.</p>
 <div class="eq"><div class="math">\begin{aligned} h_t &amp;= A\,h_{t-1} + B\,x_t\\ y_t &amp;= C\,h_t\end{aligned}</div><span class="c">
 <figure>
   <div class="scroll"><svg id="fig-ssm" viewBox="0 0 600 300" role="img" aria-label="Compute cost against sequence length: self-attention grows quadratically, SSMs grow linearly"></svg></div>
-  <figcaption><b>Figure 43.</b> How cost grows with sequence length n. Illustrative shapes, not measured values.</figcaption>
+  <figcaption><b>Figure 50.</b> How cost grows with sequence length n. Illustrative shapes, not measured values.</figcaption>
 </figure>
 <ul>
   <li><strong>Classical SSMs:</strong> Kalman filters, hidden Markov models.</li>
@@ -1178,10 +1364,10 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <!-- ============ PART V: SCALE ============ -->
-<div class="part"><div class="k">Part VI</div><h2>Training at scale</h2><p>Where GPU memory goes, how to save it on one GPU, and how to split training across many.</p></div>
+<div class="part"><div class="k">Part VII</div><h2>Training at scale</h2><p>Where GPU memory goes, how to save it on one GPU, and how to split training across many.</p></div>
 
 <section id="mem-budget">
-<h2><span class="n">38</span>The memory budget</h2>
+<h2><span class="n">42</span>The memory budget</h2>
 <p>Each training step has three phases: forward pass, backward pass, optimizer step. GPU memory has to hold four things:</p>
 <ul>
   <li><strong>Parameters:</strong> the learnable weights.</li>
@@ -1200,7 +1386,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </table></div>
 <figure>
   <div class="scroll"><svg id="fig-mem" viewBox="0 0 600 175" role="img" aria-label="Stacked bar of training memory for a 7B model: weights 14, gradients 14, master weights 28, Adam m 28, Adam v 28, total 112 GB, beyond an 80 GB GPU"></svg></div>
-  <figcaption><b>Figure 44.</b> A 7B-parameter model × 16 bytes = 112 GB before any activations: more than one 80 GB GPU holds.</figcaption>
+  <figcaption><b>Figure 51.</b> A 7B-parameter model × 16 bytes = 112 GB before any activations: more than one 80 GB GPU holds.</figcaption>
 </figure>
 <h3>What drives memory and compute</h3>
 <ul>
@@ -1213,12 +1399,12 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="single-gpu">
-<h2><span class="n">39</span>Saving memory on one GPU</h2>
+<h2><span class="n">43</span>Saving memory on one GPU</h2>
 <h3>Gradient checkpointing (activation recomputation)</h3>
 <p>Instead of storing every activation for the backward pass, keep only a few <strong>checkpoints</strong>. When the backward pass needs a missing activation, recompute it from the nearest checkpoint.</p>
 <figure>
   <div class="scroll"><svg id="fig-ckpt" viewBox="0 0 600 200" role="img" aria-label="Eight layers: without checkpointing every activation is stored; with checkpointing only layers 1, 4 and 7 are stored and the rest are recomputed"></svg></div>
-  <figcaption><b>Figure 45.</b> Trading compute for memory. Full recomputation costs roughly one extra forward pass (~30% more compute).</figcaption>
+  <figcaption><b>Figure 52.</b> Trading compute for memory. Full recomputation costs roughly one extra forward pass (~30% more compute).</figcaption>
 </figure>
 <ul>
   <li><strong>Selective recomputation</strong> recomputes only the parts that are cheap to compute but expensive to store.</li>
@@ -1233,7 +1419,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>Do most computation in 16-bit (BF16 or FP16) and keep <strong>FP32 master weights and optimizer states</strong> for accuracy. Gradients are usually BF16.</p>
 <figure>
   <div class="scroll"><svg id="fig-formats" viewBox="0 0 600 215" role="img" aria-label="Bit layouts: FP32 has 1 sign, 8 exponent and 23 mantissa bits; BF16 1, 8, 7; FP16 1, 5, 10; FP8 E4M3 1, 4, 3"></svg></div>
-  <figcaption><b>Figure 46.</b> Exponent bits set the range; mantissa bits set the precision. BF16 keeps FP32's range with less precision.</figcaption>
+  <figcaption><b>Figure 53.</b> Exponent bits set the range; mantissa bits set the precision. BF16 keeps FP32's range with less precision.</figcaption>
 </figure>
 <ul>
   <li><strong>FP16</strong> needs <strong>loss scaling</strong>: its small range would round tiny gradients to zero. <strong>BF16</strong> has FP32's range, so it doesn't.</li>
@@ -1260,10 +1446,10 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="parallelism">
-<h2><span class="n">40</span>Parallelism across GPUs</h2>
+<h2><span class="n">44</span>Parallelism across GPUs</h2>
 <figure>
   <div class="scroll"><svg id="fig-parallel" viewBox="0 0 600 230" role="img" aria-label="Four strategies with two GPUs each: data parallel copies the model and splits the batch; pipeline splits layers; tensor splits each layer; context splits the sequence"></svg></div>
-  <figcaption><b>Figure 47.</b> What each strategy splits: the batch (DP), the layers (PP), each layer's matrices (TP), or the sequence (CP).</figcaption>
+  <figcaption><b>Figure 54.</b> What each strategy splits: the batch (DP), the layers (PP), each layer's matrices (TP), or the sequence (CP).</figcaption>
 </figure>
 
 <h3>Data parallelism (DP)</h3>
@@ -1277,7 +1463,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p><strong>Naive model parallelism</strong> splits the layers into chunks on different GPUs and passes activations from one to the next. It lets a model larger than one GPU train, but only one GPU works at a time. <strong>Pipeline parallelism</strong> fixes this by splitting each batch into <strong>micro-batches</strong> that flow through the stages, so GPUs work on different micro-batches at once.</p>
 <figure>
   <div class="scroll"><svg id="fig-pipeline" viewBox="0 0 600 310" role="img" aria-label="Timelines for four GPUs: naive model parallelism leaves each GPU idle most of the time; a GPipe pipeline with four micro-batches overlaps work and leaves smaller bubbles"></svg></div>
-  <figcaption><b>Figure 48.</b> F = forward, B = backward, numbers are micro-batches. Shaded empty slots are the pipeline <strong>bubble</strong>: GPUs waiting while the pipeline fills and drains.</figcaption>
+  <figcaption><b>Figure 55.</b> F = forward, B = backward, numbers are micro-batches. Shaded empty slots are the pipeline <strong>bubble</strong>: GPUs waiting while the pipeline fills and drains.</figcaption>
 </figure>
 <div class="eq"><div class="math">\text{bubble fraction} \approx \frac{p-1}{m} \qquad (p=\text{pipeline stages},\ m=\text{micro-batches})</div><span class="c">More micro-batches shrink the bubble, but each micro-batch's activations must be stored until its backward pass.</span></div>
 <ul>
@@ -1290,7 +1476,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>Splits the <strong>matrices inside each layer</strong> across GPUs, so every GPU works on the same tokens with a slice of the weights. Suited to <strong>wide</strong> layers; deep models are pipeline parallelism's job.</p>
 <figure>
   <div class="scroll"><svg id="fig-tp" viewBox="0 0 600 240" role="img" aria-label="Tensor-parallel MLP: GPU 0 holds the first half of A's columns and B's rows, GPU 1 the second half; partial results are summed with one all-reduce"></svg></div>
-  <figcaption><b>Figure 49.</b> Megatron-style MLP: split the first matrix by columns and the second by rows, so only one all-reduce is needed per block in the forward pass. Attention is split by heads.</figcaption>
+  <figcaption><b>Figure 56.</b> Megatron-style MLP: split the first matrix by columns and the second by rows, so only one all-reduce is needed per block in the forward pass. Attention is split by heads.</figcaption>
 </figure>
 <ul>
   <li>TP communicates <strong>activations on every layer</strong>, so keep it inside one node on fast NVLink, typically TP ≤ 8.</li>
@@ -1314,7 +1500,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="zero">
-<h2><span class="n">41</span>ZeRO: sharding the model state</h2>
+<h2><span class="n">45</span>ZeRO: sharding the model state</h2>
 <p>Plain data parallelism stores the same parameters, gradients and optimizer states on every GPU. <strong>ZeRO</strong> (DeepSpeed) removes this redundancy by <strong>partitioning</strong> them across the data-parallel GPUs, so each stores only a slice.</p>
 <div class="tbl"><table>
 <tr><th>Stage</th><th>Partitions</th><th>Memory per GPU</th><th>Communication vs DP</th></tr>
@@ -1326,7 +1512,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>Ψ = number of parameters, N = data-parallel GPUs, mixed precision with Adam.</p>
 <figure>
   <div class="scroll"><svg id="fig-zero" viewBox="0 0 600 260" role="img" aria-label="Memory per GPU for a 7B model on 8 GPUs: 112 GB with plain data parallelism, 38.5 with ZeRO-1, 26.3 with ZeRO-2, 14 with ZeRO-3"></svg></div>
-  <figcaption><b>Figure 50.</b> Memory per GPU for a 7B model on 8 data-parallel GPUs, from the formulas above (activations not included).</figcaption>
+  <figcaption><b>Figure 57.</b> Memory per GPU for a 7B model on 8 data-parallel GPUs, from the formulas above (activations not included).</figcaption>
 </figure>
 <ul>
   <li>PyTorch <strong>FSDP</strong> (Fully Sharded Data Parallel) is essentially ZeRO-3.</li>
@@ -1335,7 +1521,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="combining">
-<h2><span class="n">42</span>Combining strategies</h2>
+<h2><span class="n">46</span>Combining strategies</h2>
 <ul>
   <li><strong>Data + pipeline:</strong> each data-parallel replica is a pipeline spread over several GPUs.</li>
   <li><strong>Data + tensor:</strong> TP inside each node (fast NVLink), DP across nodes. Each data-parallel replica is a TP group.</li>
@@ -1357,16 +1543,16 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <!-- ============ PART VI ============ -->
-<div class="part"><div class="k">Part VII</div><h2>LLMs in practice</h2><p>Generating text, test-time compute, serving and latency, distillation, fine-tuning, retrieval-augmented generation, and how the earlier ideas apply at scale.</p></div>
+<div class="part"><div class="k">Part VIII</div><h2>LLMs in practice</h2><p>Generating text, test-time compute, serving and latency, distillation, fine-tuning, retrieval-augmented generation, and how the earlier ideas apply at scale.</p></div>
 
 <section id="temperature">
-<h2><span class="n">43</span>Decoding strategies</h2>
-<p><strong>Autoregressive decoding</strong> generates one token at a time: the model outputs a probability for every vocabulary token, one is chosen, appended to the input, and the loop repeats until an end token or a length limit. Each step reuses the <strong>KV cache</strong> (<a href="#efficient-attention">section 36</a>). Strategies are either <strong>deterministic</strong> (search) or <strong>stochastic</strong> (sampling).</p>
+<h2><span class="n">47</span>Decoding strategies</h2>
+<p><strong>Autoregressive decoding</strong> generates one token at a time: the model outputs a probability for every vocabulary token, one is chosen, appended to the input, and the loop repeats until an end token or a length limit. Each step reuses the <strong>KV cache</strong> (<a href="#efficient-attention">section 40</a>). Strategies are either <strong>deterministic</strong> (search) or <strong>stochastic</strong> (sampling).</p>
 
 <h3>Deterministic: greedy and beam search</h3>
 <figure>
   <div class="scroll"><svg id="fig-beam" viewBox="0 0 600 300" role="img" aria-label="A token tree from 'The': greedy follows nice then woman for probability 0.20; beam search with width 2 keeps nice and dog and finds dog has with probability 0.36"></svg></div>
-  <figcaption><b>Figure 51.</b> Greedy takes the best token at each step and ends at 0.5 × 0.4 = 0.20. Beam search (width 2) keeps both “nice” and “dog” after step 1 and finds 0.4 × 0.9 = 0.36. Example tree after Hugging Face's <em>How to generate text</em>.</figcaption>
+  <figcaption><b>Figure 58.</b> Greedy takes the best token at each step and ends at 0.5 × 0.4 = 0.20. Beam search (width 2) keeps both “nice” and “dog” after step 1 and finds 0.4 × 0.9 = 0.36. Example tree after Hugging Face's <em>How to generate text</em>.</figcaption>
 </figure>
 <ul>
   <li><strong>Greedy search:</strong> always take the most likely token. Simple and fast, but it misses better sequences hidden behind a lower-probability first token, and can be repetitive.</li>
@@ -1386,7 +1572,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </ul>
 <figure>
   <div class="scroll"><svg id="fig-topkp" viewBox="0 0 600 300" role="img" aria-label="Top-k with k equals 3 and top-p with p equals 0.9 applied to a peaked and a flat distribution; top-k keeps three tokens in both cases, top-p keeps two in the peaked case and seven in the flat case"></svg></div>
-  <figcaption><b>Figure 52.</b> A fixed k fits badly: on the peaked step it lets in unlikely tokens, on the flat step it cuts off good ones. Top-p adapts the number of kept tokens to the distribution. Kept-token counts are computed from the bars shown.</figcaption>
+  <figcaption><b>Figure 59.</b> A fixed k fits badly: on the peaked step it lets in unlikely tokens, on the flat step it cuts off good ones. Top-p adapts the number of kept tokens to the distribution. Kept-token counts are computed from the bars shown.</figcaption>
 </figure>
 <ul>
   <li><strong>Order of operations</strong> in most libraries: temperature first, then top-k, then top-p, then sample. Settings like <code>temperature=0.7, top_p=0.9</code> combine.</li>
@@ -1405,7 +1591,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <div class="eq"><div class="math">p = \text{softmax}(z/T)</div><span class="c">
 <figure>
   <div class="scroll"><svg id="fig-temp" viewBox="0 0 600 260" role="img" aria-label="The same logits turned into probabilities at temperature 0.5, 1 and 2: low temperature is peaked, high temperature is flatter"></svg></div>
-  <figcaption><b>Figure 53.</b> The same five logits at three temperatures.</figcaption>
+  <figcaption><b>Figure 60.</b> The same five logits at three temperatures.</figcaption>
 </figure>
 <div class="tbl"><table>
 <tr><th>T</th><th>Effect</th></tr>
@@ -1419,7 +1605,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="test-time">
-<h2><span class="n">44</span>Test-time compute</h2>
+<h2><span class="n">48</span>Test-time compute</h2>
 <p>Instead of only growing pretraining budgets, test-time methods let a trained model “think longer” on harder problems by spending more compute at inference.</p>
 <div class="tbl"><table>
 <tr><th>Family</th><th>Idea</th><th>Examples</th></tr>
@@ -1436,7 +1622,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>Self-Refine (Madaan et al., 2023) uses the <strong>same model</strong> to generate, critique and rewrite, with no extra training: only a feedback prompt, a refine prompt and a stopping rule.</p>
 <figure>
   <div class="scroll"><svg id="fig-refine" viewBox="0 0 600 170" role="img" aria-label="Self-refine loop: the model generates an answer, critiques it, rewrites it, and repeats until it stops"></svg></div>
-  <figcaption><b>Figure 54.</b> The Self-Refine loop. Every box is the same model with a different prompt.</figcaption>
+  <figcaption><b>Figure 61.</b> The Self-Refine loop. Every box is the same model with a different prompt.</figcaption>
 </figure>
 <ul>
   <li><strong>Stopping rule:</strong> a fixed number of rounds, or the model saying no more changes are needed.</li>
@@ -1458,7 +1644,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </table></div>
 <figure>
   <div class="scroll"><svg id="fig-search" viewBox="0 0 600 280" role="img" aria-label="Three search strategies: best-of-N samples four full solutions; beam search keeps the best partial solutions at each step; DVTS runs independent greedy subtrees"></svg></div>
-  <figcaption><b>Figure 55.</b> Search strategies with N = 4 and beam width M = 2. Green = kept by the verifier, red = pruned, ringed = selected answer.</figcaption>
+  <figcaption><b>Figure 62.</b> Search strategies with N = 4 and beam width M = 2. Green = kept by the verifier, red = pruned, ringed = selected answer.</figcaption>
 </figure>
 <ul>
   <li><strong>Best-of-N:</strong> generate N full solutions and keep the highest-scored one. <strong>Weighted best-of-N</strong> sums the scores of solutions reaching the <em>same</em> answer and usually wins.</li>
@@ -1472,7 +1658,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>A PRM gives one score per step, so a solution needs a reduction to a single number:</p>
 <figure>
   <div class="scroll"><svg id="fig-prm" viewBox="0 0 600 260" role="img" aria-label="Four reasoning steps with PRM scores 0.75, 0.91, 0.83 and 0.99, reduced by min to 0.75, by product to 0.56 and by last to 0.99"></svg></div>
-  <figcaption><b>Figure 56.</b> Three reductions of the same step scores, computed from the values shown. Highlighted cells are the ones each reduction uses.</figcaption>
+  <figcaption><b>Figure 63.</b> Three reductions of the same step scores, computed from the values shown. Highlighted cells are the ones each reduction uses.</figcaption>
 </figure>
 <ul>
   <li><strong>min</strong> is pessimistic: one weak step sinks the whole solution.</li>
@@ -1483,13 +1669,13 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="serving">
-<h2><span class="n">45</span>Serving LLMs with vLLM</h2>
+<h2><span class="n">49</span>Serving LLMs with vLLM</h2>
 <p>Test-time methods multiply the number of generated tokens, so serving speed matters. <strong>vLLM</strong> is a fast, easy-to-use library for LLM inference and serving (not to be confused with a VLM).</p>
 <h3>PagedAttention</h3>
 <p>Stores the <a href="#efficient-attention">KV cache</a> in fixed-size blocks, like pages of virtual memory in an operating system, instead of one contiguous slab per request.</p>
 <figure>
   <div class="scroll"><svg id="fig-paged" viewBox="0 0 600 260" role="img" aria-label="Top: contiguous KV cache allocation reserves the maximum length per request, wasting memory. Bottom: paged allocation uses small blocks anywhere in memory, and two samples share the prompt's blocks"></svg></div>
-  <figcaption><b>Figure 57.</b> Top: reserving the maximum length per request wastes memory. Bottom: blocks are allocated on demand, and two samples from the same prompt share its blocks. Block numbers are illustrative.</figcaption>
+  <figcaption><b>Figure 64.</b> Top: reserving the maximum length per request wastes memory. Bottom: blocks are allocated on demand, and two samples from the same prompt share its blocks. Block numbers are illustrative.</figcaption>
 </figure>
 <ul>
   <li>Almost no memory is lost to fragmentation, so more requests fit at once.</li>
@@ -1499,13 +1685,13 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <h3>Continuous batching</h3>
 <figure>
   <div class="scroll"><svg id="fig-batching" viewBox="0 0 600 280" role="img" aria-label="Static batching waits for the longest request before starting new ones, leaving idle slots; continuous batching fills a slot as soon as a request finishes"></svg></div>
-  <figcaption><b>Figure 58.</b> Four GPU slots over time. With continuous batching, requests join and leave at every generation step, so slots rarely sit idle and all six requests finish sooner.</figcaption>
+  <figcaption><b>Figure 65.</b> Four GPU slots over time. With continuous batching, requests join and leave at every generation step, so slots rarely sit idle and all six requests finish sooner.</figcaption>
 </figure>
 <h3>Speculative decoding</h3>
 <p>A small <strong>draft model</strong> proposes k tokens; the large <strong>target model</strong> checks all of them in one forward pass. Accepted tokens are kept and the first rejected one is replaced, so generation is faster while the <strong>output distribution is unchanged</strong>.</p>
 <figure>
   <div class="scroll"><svg id="fig-specdec" viewBox="0 0 600 210" role="img" aria-label="The draft model proposes four tokens; the target model accepts three and replaces the fourth, producing four tokens from one target pass"></svg></div>
-  <figcaption><b>Figure 59.</b> One verification step: four tokens produced for one pass of the large model instead of four. Tokens are illustrative.</figcaption>
+  <figcaption><b>Figure 66.</b> One verification step: four tokens produced for one pass of the large model instead of four. Tokens are illustrative.</figcaption>
 </figure>
 <h3>Speculative decoding in depth</h3>
 <div class="box mistake"><span class="lab">Notation</span><p>Here <strong>p = draft model</strong> and <strong>q = target model</strong>. The original papers (Leviathan et al., 2023; Chen et al., 2023) use the opposite letters. Pick one convention and state it.</p></div>
@@ -1513,7 +1699,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <div class="eq"><div class="math">\begin{aligned} &amp;\text{Case 1: } q(x)\ge p(x) &amp;&amp; \Rightarrow \text{accept}\\ &amp;\text{Case 2: } q(x)&lt;p(x) &amp;&amp; \Rightarrow \text{accept with probability } \tfrac{q(x)}{p(x)} \;\;(r\sim U(0,1),\ \text{accept if } r&lt;\tfrac{q}{p})\\ &amp;\text{Rejected:} &amp;&amp; \Rightarrow \text{resample from } q'(x)=\frac{\max(0,\,q(x)-p(x))}{\sum_x \max(0,\,q(x)-p(x))}\text{, then stop}\end{aligned}</div><span class="c">Every draft token after a rejection is discarded, because it was conditioned on a token that was thrown away.</span></div>
 <figure>
   <div class="scroll"><svg id="fig-specrule" viewBox="0 0 600 270" role="img" aria-label="Draft and target probabilities for eight tokens; the overlap min of the two is kept by acceptance, and the residual where the target exceeds the draft is refilled by resampling"></svg></div>
-  <figcaption><b>Figure 60.</b> Why the output follows the target exactly. Accepted tokens contribute the overlap min(p, q); rejections are refilled from the residual (q − p)₊. Together: min(p, q) + (q − p)₊ = q. Distributions are illustrative.</figcaption>
+  <figcaption><b>Figure 67.</b> Why the output follows the target exactly. Accepted tokens contribute the overlap min(p, q); rejections are refilled from the residual (q − p)₊. Together: min(p, q) + (q − p)₊ = q. Distributions are illustrative.</figcaption>
 </figure>
 <div class="eq"><div class="math">P(x) = p(x)\min\!\Big(1,\frac{q(x)}{p(x)}\Big) + P(\text{reject})\,q'(x) = \min\big(p(x),q(x)\big) + \max\big(0,\,q(x)-p(x)\big) = q(x)</div><span class="c">
 <h3>Worked example</h3>
@@ -1548,16 +1734,16 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <div class="eq"><div class="math">\mathbb{E}[\text{tokens per target pass}] = \frac{1-\alpha^{k+1}}{1-\alpha}</div><span class="c">α = probability a draft token is accepted. Example: α = 0.8, k = 4 → (1 − 0.8⁵)/0.2 ≈ 3.4 tokens per pass.</span></div>
 <figure>
   <div class="scroll"><svg id="fig-specgain" viewBox="0 0 600 290" role="img" aria-label="Expected tokens per target pass against acceptance rate for k equals 2, 4 and 8; gains grow sharply as acceptance approaches 1"></svg></div>
-  <figcaption><b>Figure 61.</b> Computed from the formula above. A large k only pays off when the draft is usually accepted; at low α every k gives little more than one token per pass. Wall-clock gain is lower, since the draft's own cost is not included.</figcaption>
+  <figcaption><b>Figure 68.</b> Computed from the formula above. A large k only pays off when the draft is usually accepted; at low α every k gives little more than one token per pass. Wall-clock gain is lower, since the draft's own cost is not included.</figcaption>
 </figure>
 <ul>
   <li>A good draft is small, fast, <strong>similar to the target</strong>, and <strong>shares its tokenizer</strong>. Typical k = 3–8.</li>
-  <li>It helps most when decoding is memory-bound (small batches); see <a href="#latency">section 46</a>.</li>
+  <li>It helps most when decoding is memory-bound (small batches); see <a href="#latency">section 50</a>.</li>
 </ul>
 <h3>Other features</h3>
 <ul>
   <li><strong>CUDA/HIP graphs:</strong> record a sequence of GPU operations once and replay it, cutting per-step launch overhead.</li>
-  <li><strong>Quantization:</strong> GPTQ, AWQ, INT4, INT8, FP8 (see <a href="#single-gpu">section 39</a>).</li>
+  <li><strong>Quantization:</strong> GPTQ, AWQ, INT4, INT8, FP8 (see <a href="#single-gpu">section 43</a>).</li>
   <li><strong>Optimised kernels:</strong> FlashAttention and FlashInfer.</li>
   <li><strong>Tensor parallelism</strong> across GPUs and an <strong>OpenAI-compatible API</strong>.</li>
 </ul>
@@ -1569,12 +1755,12 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="latency">
-<h2><span class="n">46</span>Latency optimisation</h2>
+<h2><span class="n">50</span>Latency optimisation</h2>
 <p>Many speed-ups cost no quality at all. Know which phase is slow, then pick the technique that targets it.</p>
 <h3>Prefill and decode</h3>
 <figure>
   <div class="scroll"><svg id="fig-phases" viewBox="0 0 600 220" role="img" aria-label="Prefill processes all prompt tokens in one parallel pass, giving the time to first token; decoding then produces one token per step, each step taking the time per output token"></svg></div>
-  <figcaption><b>Figure 62.</b> Generation has two phases with different bottlenecks. Step widths are illustrative.</figcaption>
+  <figcaption><b>Figure 69.</b> Generation has two phases with different bottlenecks. Step widths are illustrative.</figcaption>
 </figure>
 <div class="tbl"><table>
 <tr><th>Phase</th><th>What happens</th><th>Bottleneck</th><th>Metric</th></tr>
@@ -1596,9 +1782,9 @@ details p{margin:8px 0 2px;color:var(--ink)}
 
 <h3>Model-side techniques</h3>
 <ul>
-  <li><strong>KV cache:</strong> stores past keys and values so they aren't recomputed each step (<a href="#efficient-attention">section 36</a>). <a href="#serving">PagedAttention</a> is a way to <em>manage</em> that cache's memory, not the cache itself.</li>
+  <li><strong>KV cache:</strong> stores past keys and values so they aren't recomputed each step (<a href="#efficient-attention">section 40</a>). <a href="#serving">PagedAttention</a> is a way to <em>manage</em> that cache's memory, not the cache itself.</li>
   <li><strong>Static cache + torch.compile:</strong> torch.compile fuses PyTorch code into optimised kernels but needs <strong>fixed tensor shapes</strong>; a cache that grows each step would trigger recompilation. Pre-allocating the cache to the maximum length keeps shapes fixed, so compiled kernels and CUDA graphs are reused.</li>
-  <li><strong>Speculative decoding</strong> (<a href="#serving">section 45</a>): a small assistant model drafts tokens that the large model verifies.
+  <li><strong>Speculative decoding</strong> (<a href="#serving">section 49</a>): a small assistant model drafts tokens that the large model verifies.
     <ul>
       <li><strong>Self-speculative decoding</strong> (e.g. LayerSkip): the same model exiting at an early layer drafts; the full model checks. The draft is lower quality, the <strong>final output isn't</strong>, and no second model is needed.</li>
       <li><strong>Multi-token prediction:</strong> extra heads trained to predict several future tokens (Medusa heads, DeepSeek-V3's MTP module) can serve as the draft.</li>
@@ -1610,14 +1796,14 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>Speculative decoding where the draft comes from <strong>n-grams already in the prompt</strong> instead of a draft model: free, and lossless because the model still checks every token. Works best when the output copies from the input: summarisation, RAG answers, code edits.</p>
 <figure>
   <div class="scroll"><svg id="fig-lookup" viewBox="0 0 600 210" role="img" aria-label="The last tokens generated match an n-gram in the prompt; the tokens that followed it in the prompt are proposed as a draft and verified by the model"></svg></div>
-  <figcaption><b>Figure 63.</b> The last two generated tokens match a bigram in the prompt, so the tokens that followed it are proposed as the draft. Example text is illustrative.</figcaption>
+  <figcaption><b>Figure 70.</b> The last two generated tokens match a bigram in the prompt, so the tokens that followed it are proposed as the draft. Example text is illustrative.</figcaption>
 </figure>
 
 <h3>GPU-side techniques</h3>
 <p><strong>FlashAttention</strong> splits attention into <strong>tiles</strong> that fit in fast on-chip memory (SRAM) and <strong>never writes the n × n score matrix</strong> to slower GPU memory (HBM). It is IO-aware and <strong>exact</strong>.</p>
 <figure>
   <div class="scroll"><svg id="fig-flash" viewBox="0 0 600 250" role="img" aria-label="Standard attention writes the full score matrix to slow HBM and reads it back; FlashAttention loads blocks of Q, K and V into fast SRAM, computes there, and writes only the output"></svg></div>
-  <figcaption><b>Figure 64.</b> The saving is memory traffic, not arithmetic: the same maths, far fewer slow reads and writes.</figcaption>
+  <figcaption><b>Figure 71.</b> The saving is memory traffic, not arithmetic: the same maths, far fewer slow reads and writes.</figcaption>
 </figure>
 <ul>
   <li><strong>FlashAttention-2</strong> divides the work better and also parallelises over sequence length; <strong>FlashAttention-3</strong> targets H100 (Hopper) GPUs.</li>
@@ -1648,11 +1834,11 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="distillation">
-<h2><span class="n">47</span>Knowledge distillation</h2>
+<h2><span class="n">51</span>Knowledge distillation</h2>
 <p>A small <strong>student</strong> learns from a large <strong>teacher</strong>, giving most of the teacher's quality at a fraction of the cost. Three things can be transferred: outputs, intermediate features, or relations.</p>
 <figure>
   <div class="scroll"><svg id="fig-kdtypes" viewBox="0 0 600 260" role="img" aria-label="Teacher and student networks side by side; response-based distillation matches outputs, feature-based matches intermediate layers through a projection, relation-based matches similarity matrices between samples"></svg></div>
-  <figcaption><b>Figure 65.</b> Where each type of knowledge is taken from. Feature matching needs a projection when widths differ; relation matrices have the same shape whatever the width.</figcaption>
+  <figcaption><b>Figure 72.</b> Where each type of knowledge is taken from. Feature matching needs a projection when widths differ; relation matrices have the same shape whatever the width.</figcaption>
 </figure>
 
 <h3>Response-based: soft targets</h3>
@@ -1660,7 +1846,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <div class="eq"><div class="math">L = \alpha\,T^2\,\mathrm{KL}\Big(\text{softmax}\big(\tfrac{z_t}{T}\big)\,\Big\Vert\,\text{softmax}\big(\tfrac{z_s}{T}\big)\Big) + (1-\alpha)\,\text{CE}\big(y,\text{softmax}(z_s)\big)</div><span class="c">z_t, z_s = teacher and student logits. Temperature T softens <strong>both</strong> distributions; the hard-label term uses T = 1. Softening shrinks gradients by about 1/T², so the T² factor keeps the two terms balanced. Typical T = 2–5, α = 0.5–0.9.</span></div>
 <figure>
   <div class="scroll"><svg id="fig-kdtemp" viewBox="0 0 600 220" role="img" aria-label="The teacher's output probabilities for five classes at temperature 1 and temperature 4: at T equals 4 the similarities between wrong classes become visible"></svg></div>
-  <figcaption><b>Figure 66.</b> The same teacher logits at T = 1 and T = 4, computed with softmax. The hard label only says “2”; the softened distribution also shows that “7” is the most similar wrong class. This “dark knowledge” is what the student learns from, and it acts as a regulariser.</figcaption>
+  <figcaption><b>Figure 73.</b> The same teacher logits at T = 1 and T = 4, computed with softmax. The hard label only says “2”; the softened distribution also shows that “7” is the most similar wrong class. This “dark knowledge” is what the student learns from, and it acts as a regulariser.</figcaption>
 </figure>
 
 <h3>Feature-based</h3>
@@ -1707,7 +1893,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <h3>Forward vs reverse KL</h3>
 <figure>
   <div class="scroll"><svg id="fig-kl" viewBox="0 0 600 250" role="img" aria-label="A two-peaked teacher distribution fitted by a single Gaussian student: forward KL gives a wide fit covering both peaks, reverse KL gives a narrow fit on one peak"></svg></div>
-  <figcaption><b>Figure 67.</b> Fitting a single-peaked student to a two-peaked teacher. Both fits are computed: forward KL by matching mean and variance, reverse KL by grid search.</figcaption>
+  <figcaption><b>Figure 74.</b> Fitting a single-peaked student to a two-peaked teacher. Both fits are computed: forward KL by matching mean and variance, reverse KL by grid search.</figcaption>
 </figure>
 <ul>
   <li><strong>Forward KL(teacher ‖ student)</strong> is <strong>mean-seeking</strong>: the student spreads probability over everything the teacher might say, including the low-probability gap between modes.</li>
@@ -1716,12 +1902,12 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="lora">
-<h2><span class="n">48</span>LoRA (Low-Rank Adaptation)</h2>
+<h2><span class="n">52</span>LoRA (Low-Rank Adaptation)</h2>
 <p>Instead of fine-tuning a full weight matrix W ∈ ℝ^(d×k), freeze it and train a small low-rank update.</p>
 <div class="eq"><div class="math">\begin{aligned} &amp;\Delta W = BA,\quad B\in\mathbb R^{d\times r},\ A\in\mathbb R^{r\times k},\ r\ll\min(d,k)\\ &amp;h = Wx + \frac{\alpha}{r}\,BAx\end{aligned}</div><span class="c">W stays frozen; only A and B are trained.</span></div>
 <figure>
   <div class="scroll"><svg id="fig-lora" viewBox="0 0 600 260" role="img" aria-label="The frozen d by k matrix W plus alpha over r times a tall thin d by r matrix B multiplied by a short wide r by k matrix A"></svg></div>
-  <figcaption><b>Figure 68.</b> B is tall and thin, A is short and wide; their product has the same shape as W but rank at most r.</figcaption>
+  <figcaption><b>Figure 75.</b> B is tall and thin, A is short and wide; their product has the same shape as W but rank at most r.</figcaption>
 </figure>
 <ul>
   <li><strong>r (rank):</strong> higher r gives more expressive updates but more parameters and memory. Typical values: 4 to 64.</li>
@@ -1736,11 +1922,11 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="rag">
-<h2><span class="n">49</span>Retrieval-augmented generation (RAG)</h2>
+<h2><span class="n">53</span>Retrieval-augmented generation (RAG)</h2>
 <p>RAG gives an LLM access to knowledge it wasn't trained on. A <strong>retriever</strong> finds relevant passages for the question, and a <strong>reader</strong> (the LLM) answers using them. This keeps answers current, grounded in sources you control, and citable.</p>
 <figure>
   <div class="scroll"><svg id="fig-rag" viewBox="0 0 600 280" role="img" aria-label="RAG pipeline: offline, documents are chunked, embedded and stored; online, a query is rewritten, embedded, searched, reranked, put into a prompt, answered by the LLM and verified"></svg></div>
-  <figcaption><b>Figure 69.</b> The two halves of RAG. Indexing runs offline (pre-production); retrieval and reading run for every query (production). Frameworks such as LlamaIndex, LangChain and Haystack wire these steps together.</figcaption>
+  <figcaption><b>Figure 76.</b> The two halves of RAG. Indexing runs offline (pre-production); retrieval and reading run for every query (production). Frameworks such as LlamaIndex, LangChain and Haystack wire these steps together.</figcaption>
 </figure>
 <h3>Design questions first</h3>
 <ul>
@@ -1761,7 +1947,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <h3>Chunking</h3>
 <figure>
   <div class="scroll"><svg id="fig-chunk" viewBox="0 0 600 220" role="img" aria-label="One document split three ways: fixed-size chunks with overlap, recursive chunks that follow paragraph boundaries, and semantic chunks that follow topic changes"></svg></div>
-  <figcaption><b>Figure 70.</b> The same document, with three paragraphs per colour-coded topic, split three ways. Thin lines mark paragraph boundaries.</figcaption>
+  <figcaption><b>Figure 77.</b> The same document, with three paragraphs per colour-coded topic, split three ways. Thin lines mark paragraph boundaries.</figcaption>
 </figure>
 <div class="tbl"><table>
 <tr><th>Method</th><th>How it splits</th></tr>
@@ -1786,12 +1972,12 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="retrieval">
-<h2><span class="n">50</span>Retrieval: search, reranking and context</h2>
+<h2><span class="n">54</span>Retrieval: search, reranking and context</h2>
 <h3>Vector stores and nearest-neighbour search</h3>
 <ul>
   <li><strong>FAISS is a library, not a database:</strong> a fast in-memory index without persistence, metadata filtering or access control.</li>
   <li><strong>Vector databases:</strong> MongoDB Atlas Vector Search (convenient if your data already lives in MongoDB), pgvector, Qdrant, Weaviate, Milvus, Chroma.</li>
-  <li><strong>Approximate nearest-neighbour (ANN) indexes:</strong> HNSW (graph-based), IVF (clusters), PQ (compression). They trade a little recall for a lot of speed; see <a href="#vector-index">section 51</a>.</li>
+  <li><strong>Approximate nearest-neighbour (ANN) indexes:</strong> HNSW (graph-based), IVF (clusters), PQ (compression). They trade a little recall for a lot of speed; see <a href="#vector-index">section 55</a>.</li>
   <li><strong>Distance metric:</strong> for unit-length vectors, cosine and dot product give the same ranking, and Euclidean too (‖a − b‖² = 2 − 2·cos). But use the metric the embedding model was <strong>trained with</strong>: for a model trained on raw dot product, normalising changes the results.</li>
 </ul>
 
@@ -1800,7 +1986,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <div class="eq"><div class="math">\text{RRF}(d) = \sum_{\text{lists}} \frac{1}{k+\text{rank}(d)}, \qquad k\approx 60</div><span class="c">Only ranks are used, so scores on different scales (BM25 vs cosine) don't need calibrating.</span></div>
 <figure>
   <div class="scroll"><svg id="fig-hybrid" viewBox="0 0 600 230" role="img" aria-label="A BM25 ranking and a vector ranking of documents are merged with reciprocal rank fusion into one list"></svg></div>
-  <figcaption><b>Figure 71.</b> RRF with k = 60. Documents ranked well by both lists (D1, D3) rise to the top; scores are computed from the formula above.</figcaption>
+  <figcaption><b>Figure 78.</b> RRF with k = 60. Documents ranked well by both lists (D1, D3) rise to the top; scores are computed from the formula above.</figcaption>
 </figure>
 
 <h3>Query reformulation</h3>
@@ -1815,7 +2001,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>“Learning to rank” is the broad family. In RAG the reranker is usually a <strong>cross-encoder</strong> (e.g. bge-reranker, Cohere Rerank).</p>
 <figure>
   <div class="scroll"><svg id="fig-encoders" viewBox="0 0 600 240" role="img" aria-label="Bi-encoder: query and document encoded separately into vectors compared by cosine. Cross-encoder: query and document encoded together into one relevance score"></svg></div>
-  <figcaption><b>Figure 72.</b> A bi-encoder can precompute every document vector; a cross-encoder must run once per query–document pair but sees both texts together.</figcaption>
+  <figcaption><b>Figure 79.</b> A bi-encoder can precompute every document vector; a cross-encoder must run once per query–document pair but sees both texts together.</figcaption>
 </figure>
 <div class="tbl"><table>
 <tr><th></th><th>Bi-encoder (retriever)</th><th>Cross-encoder (reranker)</th></tr>
@@ -1842,7 +2028,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="vector-index">
-<h2><span class="n">51</span>Vector search indexes</h2>
+<h2><span class="n">55</span>Vector search indexes</h2>
 <p>Retrieval needs the nearest vectors to a query among millions. There are two ways to make that faster than comparing against everything:</p>
 <div class="tbl"><table>
 <tr><th>Lever</th><th>How</th><th>Indexes</th></tr>
@@ -1858,7 +2044,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>Unlike cryptographic hashes, LSH <strong>wants</strong> collisions: similar vectors should land in the same bucket. FAISS <code>IndexLSH</code> projects each vector onto nbits random hyperplanes and keeps the sign of each projection as one bit; vectors are compared by <strong>Hamming distance</strong> between their codes.</p>
 <figure>
   <div class="scroll"><svg id="fig-lsh" viewBox="0 0 600 260" role="img" aria-label="Three random lines through the origin split 2D points into regions; each region has a 3-bit code and points are coloured by their bucket"></svg></div>
-  <figcaption><b>Figure 73.</b> Random-hyperplane LSH with nbits = 3. Each line contributes one bit (which side the point is on); points in the same region share a code. The query is compared only with its own bucket, or nearby codes.</figcaption>
+  <figcaption><b>Figure 80.</b> Random-hyperplane LSH with nbits = 3. Each line contributes one bit (which side the point is on); points in the same region share a code. The query is compared only with its own bucket, or nearby codes.</figcaption>
 </figure>
 <ul>
   <li><strong>Curse of dimensionality:</strong> as d grows, nbits must grow to keep recall, and search slows down.</li>
@@ -1869,7 +2055,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>k-means splits the space into <strong>nlist</strong> cells (Voronoi cells). A query searches only the <strong>nprobe</strong> cells whose centroids are nearest.</p>
 <figure>
   <div class="scroll"><svg id="fig-ivf" viewBox="0 0 600 270" role="img" aria-label="Points coloured by their nearest of twelve centroids; the query's three nearest cells are highlighted as the search scope"></svg></div>
-  <figcaption><b>Figure 74.</b> IVF with nlist = 12 and nprobe = 3. Only highlighted points are compared. A query near a cell edge would miss its true neighbour with nprobe = 1: the <strong>edge problem</strong>.</figcaption>
+  <figcaption><b>Figure 81.</b> IVF with nlist = 12 and nprobe = 3. Only highlighted points are compared. A query near a cell edge would miss its true neighbour with nprobe = 1: the <strong>edge problem</strong>.</figcaption>
 </figure>
 <ul>
   <li><strong>Raising nprobe</strong> fixes the edge problem and doesn't increase memory, but it <strong>does increase search time</strong>: it trades speed for recall.</li>
@@ -1885,7 +2071,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </ol>
 <figure>
   <div class="scroll"><svg id="fig-pq" viewBox="0 0 600 300" role="img" aria-label="A 128-dimensional vector split into 8 subvectors, each replaced by a centroid ID, giving an 8-byte code; at query time distances come from a lookup table"></svg></div>
-  <figcaption><b>Figure 75.</b> Top: encoding a 128-dim float32 vector (512 bytes) into 8 one-byte IDs, 64× smaller. Bottom: asymmetric distance computation. Codes and table values are illustrative.</figcaption>
+  <figcaption><b>Figure 82.</b> Top: encoding a 128-dim float32 vector (512 bytes) into 8 one-byte IDs, 64× smaller. Bottom: asymmetric distance computation. Codes and table values are illustrative.</figcaption>
 </figure>
 <ul>
   <li><strong>Asymmetric distance computation (ADC):</strong> for each query, precompute the distance from each query subvector to every centroid (an m × 256 table). A database vector's distance is then the <strong>sum of m table lookups</strong>.</li>
@@ -1897,7 +2083,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>In a <strong>navigable small world</strong> graph, each vector links to its near neighbours, plus some long links, so any node is reachable in a few hops. <strong>HNSW</strong> stacks several such graphs like express lanes.</p>
 <figure>
   <div class="scroll"><svg id="fig-hnsw" viewBox="0 0 600 330" role="img" aria-label="Three graph layers: the top layer has few nodes and long links, the bottom has all nodes; a greedy search path moves towards the query on each layer and drops down"></svg></div>
-  <figcaption><b>Figure 76.</b> Greedy search, computed on a toy graph: on each layer, move to whichever neighbour is closest to the query until none is closer, then drop to the layer below and continue.</figcaption>
+  <figcaption><b>Figure 83.</b> Greedy search, computed on a toy graph: on each layer, move to whichever neighbour is closest to the query until none is closer, then drop to the layer below and continue.</figcaption>
 </figure>
 <ul>
   <li>Each node gets a <strong>maximum layer</strong> drawn with exponentially decreasing probability, so higher layers hold far fewer nodes. Layer 0 holds every node.</li>
@@ -1932,17 +2118,17 @@ details p{margin:8px 0 2px;color:var(--ink)}
   <li><strong>Disk-based indexes</strong> (DiskANN) or memory-mapped files for billion-scale data.</li>
   <li><strong>Composite indexes:</strong> IVF with an HNSW coarse quantiser, IVF-PQ, HNSW-PQ.</li>
 </ul>
-<p>Hybrid search (dense + BM25) is covered in <a href="#retrieval">section 50</a>. For dense retrieval use sentence-embedding models (SBERT, E5, BGE): raw BERT embeddings are poor for similarity. <strong>Learned sparse</strong> retrieval (SPLADE) sits between keyword and dense search.</p>
+<p>Hybrid search (dense + BM25) is covered in <a href="#retrieval">section 54</a>. For dense retrieval use sentence-embedding models (SBERT, E5, BGE): raw BERT embeddings are poor for similarity. <strong>Learned sparse</strong> retrieval (SPLADE) sits between keyword and dense search.</p>
 <p>Further reading: Pinecone, <em>Faiss: The Missing Manual</em>.</p>
 </section>
 
 <section id="graph-mm-rag">
-<h2><span class="n">52</span>Graph RAG and multimodal RAG</h2>
+<h2><span class="n">56</span>Graph RAG and multimodal RAG</h2>
 <h3>Knowledge-graph RAG</h3>
 <p>A knowledge graph stores <strong>entities as nodes</strong> and <strong>relationships as edges</strong>, which helps with questions that chain facts together (“where is Alice's employer based?”).</p>
 <figure>
   <div class="scroll"><svg id="fig-graphrag" viewBox="0 0 600 260" role="img" aria-label="A small knowledge graph with Alice working at Acme, Acme located in Paris, and a question answered by translating it to a Cypher query and turning the result back into text"></svg></div>
-  <figcaption><b>Figure 77.</b> Building the graph (left) and answering with it (right). The example graph and query are illustrative.</figcaption>
+  <figcaption><b>Figure 84.</b> Building the graph (left) and answering with it (right). The example graph and query are illustrative.</figcaption>
 </figure>
 <ol>
   <li><strong>Extract</strong> entities and relations from text with an LLM or NER tools (e.g. NuExtract, Haystack, or LangChain's <code>LLMGraphTransformer</code>; LlamaIndex's equivalent is <code>PropertyGraphIndex</code>).</li>
@@ -1965,7 +2151,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <div class="eq"><div class="math">\text{score}(q,d) = \sum_{i\,\in\,\text{query tokens}}\ \max_{j\,\in\,\text{page patches}}\ q_i\cdot d_j</div><span class="c">
 <figure>
   <div class="scroll"><svg id="fig-colpali" viewBox="0 0 600 260" role="img" aria-label="Late interaction: each query token is matched to its most similar image patch on a page, and the best similarities are summed into one score"></svg></div>
-  <figcaption><b>Figure 78.</b> MaxSim on a toy page with illustrative similarities. Each query token picks its best patch (outlined); the page score is the sum.</figcaption>
+  <figcaption><b>Figure 85.</b> MaxSim on a toy page with illustrative similarities. Each query token picks its best patch (outlined); the page score is the sum.</figcaption>
 </figure>
 <ul>
   <li><strong>Strengths:</strong> tables, charts, scans and layout work without parsing. <strong>ColQwen2</strong> is the same idea built on Qwen2-VL.</li>
@@ -1986,7 +2172,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="llms">
-<h2><span class="n">53</span>Putting it together for LLMs</h2>
+<h2><span class="n">57</span>Putting it together for LLMs</h2>
 <ul>
   <li><strong>Scale changes the picture.</strong> LLMs are hugely over-parameterised yet generalise well (double descent). Huge deduplicated datasets, about one epoch of pretraining, and the implicit regularisation of SGD keep variance in check.</li>
   <li><strong>Typical architecture:</strong> decoder-only Transformer, pre-LN with RMSNorm, RoPE positions, GQA or MLA attention, and often <a href="#moe">mixture-of-experts</a> feed-forward layers (Mixtral, DeepSeek-V3).</li>
@@ -2001,14 +2187,14 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <!-- ============ PART VIII ============ -->
-<div class="part"><div class="k">Part VIII</div><h2>Deployment &amp; operations</h2><p>Running ML and LLM systems in production: the MLOps lifecycle, serving, Kubernetes, CI/CD, monitoring, drift and governance.</p></div>
+<div class="part"><div class="k">Part IX</div><h2>Deployment &amp; operations</h2><p>Running ML and LLM systems in production: the MLOps lifecycle, serving, Kubernetes, CI/CD, monitoring, drift and governance.</p></div>
 
 <section id="mlops">
-<h2><span class="n">54</span>The MLOps lifecycle</h2>
+<h2><span class="n">58</span>The MLOps lifecycle</h2>
 <p><strong>MLOps</strong> is a set of practices that streamline the whole machine-learning lifecycle, from data and development to deployment, monitoring and maintenance. It is a <strong>loop</strong>, not a line: what monitoring finds feeds back into data and retraining.</p>
 <figure>
   <div class="scroll"><svg id="fig-mlops" viewBox="0 0 600 290" role="img" aria-label="A loop of six stages: data management, model development, CI/CD, model serving, monitoring and observability, governance; monitoring feeds back into data"></svg></div>
-  <figcaption><b>Figure 79.</b> The MLOps loop, with typical tools per stage and the section that covers each.</figcaption>
+  <figcaption><b>Figure 86.</b> The MLOps loop, with typical tools per stage and the section that covers each.</figcaption>
 </figure>
 <div class="tbl"><table>
 <tr><th>Stage</th><th>Does</th><th>Tools</th></tr>
@@ -2025,18 +2211,18 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="deployment">
-<h2><span class="n">55</span>Deploying LLMs in production</h2>
+<h2><span class="n">59</span>Deploying LLMs in production</h2>
 <p>Production work runs along three axes: making each request fast, building infrastructure that scales, and operating the system safely. The first axis is covered in earlier sections; this one links to them and adds the rest.</p>
 <figure>
   <div class="scroll"><svg id="fig-axes" viewBox="0 0 600 250" role="img" aria-label="Three columns: inference latency (smaller models, fast generation, GPU optimisation), infrastructure (GPU choice, replicas and parallelism, containers, storage), and operations (monitoring, benchmarking, safe releases, security)"></svg></div>
-  <figcaption><b>Figure 80.</b> The three axes of LLM deployment and what belongs on each.</figcaption>
+  <figcaption><b>Figure 87.</b> The three axes of LLM deployment and what belongs on each.</figcaption>
 </figure>
 
 <h3>Axis 1: inference latency</h3>
 <ul>
   <li><strong>Smaller models:</strong> quantization (INT8/INT4/FP8), pruning, <a href="#distillation">distillation</a>. All are lossy: “minimal accuracy loss”, not “preserved accuracy”, so measure quality on your task. For inference, run in <strong>FP16/BF16</strong> rather than FP32; “mixed precision” is a <a href="#single-gpu">training</a> term.</li>
   <li><strong>Fast generation:</strong> <a href="#serving">speculative decoding</a> and multi-token prediction, both lossless when the target verifies the draft.</li>
-  <li><strong>GPU optimisation:</strong> MQA/GQA shrink the <strong>KV cache</strong> (more requests fit, less memory traffic per step); FlashAttention and PagedAttention (<a href="#latency">section 46</a>).</li>
+  <li><strong>GPU optimisation:</strong> MQA/GQA shrink the <strong>KV cache</strong> (more requests fit, less memory traffic per step); FlashAttention and PagedAttention (<a href="#latency">section 50</a>).</li>
 </ul>
 <h3>Batching: dynamic vs continuous</h3>
 <div class="tbl"><table>
@@ -2059,7 +2245,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <p>Replicas are not model parallelism, and ZeRO/FSDP are training techniques that don't apply here.</p>
 <figure>
   <div class="scroll"><svg id="fig-reqpath" viewBox="0 0 600 260" role="img" aria-label="Request path: clients go through a gateway with auth, rate limiting, caching and guardrails, then a load balancer to three model replicas; each replica runs vLLM with tensor parallelism on two GPUs; monitoring collects metrics from every layer"></svg></div>
-  <figcaption><b>Figure 81.</b> A typical serving stack. Each replica is a tensor-parallel group; the autoscaler adds replicas based on queue depth or KV-cache usage.</figcaption>
+  <figcaption><b>Figure 88.</b> A typical serving stack. Each replica is a tensor-parallel group; the autoscaler adds replicas based on queue depth or KV-cache usage.</figcaption>
 </figure>
 <ul>
   <li><strong>GPU choice:</strong> memory ≈ bytes per weight × parameters, plus 20–30% headroom for the KV cache. A 7B model in BF16 needs about 14 GB for weights alone.</li>
@@ -2085,7 +2271,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </ul>
 <figure>
   <div class="scroll"><svg id="fig-canary" viewBox="0 0 600 250" role="img" aria-label="Canary rollout: traffic to the new model steps from 0 to 5, 25, 50 and 100 percent, with metric checks at each step; a failing check triggers rollback to 0 percent"></svg></div>
-  <figcaption><b>Figure 82.</b> Releasing a new model. A <strong>shadow</strong> phase first sends real traffic to the new model without showing its answers; the <strong>canary</strong> then grows its share in steps, each gated on latency, error and quality metrics. The dashed line shows an automatic rollback. Percentages are illustrative.</figcaption>
+  <figcaption><b>Figure 89.</b> Releasing a new model. A <strong>shadow</strong> phase first sends real traffic to the new model without showing its answers; the <strong>canary</strong> then grows its share in steps, each gated on latency, error and quality metrics. The dashed line shows an automatic rollback. Percentages are illustrative.</figcaption>
 </figure>
 
 <h3>Security, caching and cost</h3>
@@ -2097,7 +2283,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 </section>
 
 <section id="realtime">
-<h2><span class="n">56</span>Batch and real-time serving</h2>
+<h2><span class="n">60</span>Batch and real-time serving</h2>
 <p><strong>Model serving</strong> turns a trained model into a network service that other applications can call, typically over a REST API.</p>
 <div class="tbl"><table>
 <tr><th>Mode</th><th>Latency</th><th>Example</th><th>Cost</th></tr>
@@ -2108,7 +2294,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 
 <h3>Building a real-time LLM endpoint</h3>
 <ol>
-  <li><strong>Reduce latency first:</strong> model size, fast generation, GPU optimisation (<a href="#latency">section 46</a>), e.g. serve with vLLM.</li>
+  <li><strong>Reduce latency first:</strong> model size, fast generation, GPU optimisation (<a href="#latency">section 50</a>), e.g. serve with vLLM.</li>
   <li><strong>Serving layer:</strong> an API framework such as FastAPI.</li>
   <li><strong>Async handlers</strong> so one worker serves many users.</li>
   <li><strong>Stream tokens</strong> so users see text as it is generated.</li>
@@ -2135,24 +2321,24 @@ async def chat(msg: str):
 </ul>
 <figure>
   <div class="scroll"><svg id="fig-async" viewBox="0 0 600 226" role="img" aria-label="Three requests on one worker: blocking code handles them one after another; async code starts all three and handles them while waiting, finishing much sooner"></svg></div>
-  <figcaption><b>Figure 83.</b> Three requests on one worker, each mostly waiting on the LLM. Blocking code serves them in turn; async code overlaps the waiting. Durations are illustrative.</figcaption>
+  <figcaption><b>Figure 90.</b> Three requests on one worker, each mostly waiting on the LLM. Blocking code serves them in turn; async code overlaps the waiting. Durations are illustrative.</figcaption>
 </figure>
 
 <h3>Scaling up and out</h3>
 <figure>
   <div class="scroll"><svg id="fig-scale" viewBox="0 0 600 200" role="img" aria-label="Vertical scaling replaces a server with a bigger one; horizontal scaling adds more servers behind a load balancer"></svg></div>
-  <figcaption><b>Figure 84.</b> Vertical scaling makes one machine bigger; horizontal scaling adds machines.</figcaption>
+  <figcaption><b>Figure 91.</b> Vertical scaling makes one machine bigger; horizontal scaling adds machines.</figcaption>
 </figure>
 <ul>
   <li><strong>Vertical:</strong> a bigger GPU or more memory. Needed when the model doesn't fit at all.</li>
   <li><strong>Horizontal:</strong> more replicas behind a load balancer. Adds throughput and removes single points of failure.</li>
   <li>LLMs usually need both: a big enough GPU per replica, then enough replicas.</li>
-  <li><strong>Microservices:</strong> split the system (UI, retrieval, model, guardrails) into services that scale independently (<a href="#kubernetes">section 58</a>). Data and model parallelism for training are covered in <a href="#parallelism">section 40</a>.</li>
+  <li><strong>Microservices:</strong> split the system (UI, retrieval, model, guardrails) into services that scale independently (<a href="#kubernetes">section 62</a>). Data and model parallelism for training are covered in <a href="#parallelism">section 44</a>.</li>
 </ul>
 </section>
 
 <section id="serving-options">
-<h2><span class="n">57</span>Model serving options</h2>
+<h2><span class="n">61</span>Model serving options</h2>
 <p>Model serving bridges development and production: it packages a trained model into a network-accessible service so other applications can request predictions, classifications or generated content.</p>
 <div class="tbl"><table>
 <tr><th>Approach</th><th>Type</th><th>What it does</th><th>Hosting</th><th>Artifact storage</th><th>Why it's good</th><th>Open source?</th></tr>
@@ -2169,15 +2355,15 @@ async def chat(msg: str):
 <tr><td><strong>General serving frameworks</strong></td><td>Triton, Ray Serve, BentoML, KServe</td><td>Multi-model, multi-framework serving on your own cluster</td></tr>
 </table></div>
 
-<p>For self-hosting on your own cluster, see <a href="#kubernetes">section 58</a>; for how vLLM works inside, see <a href="#serving">section 45</a>.</p>
+<p>For self-hosting on your own cluster, see <a href="#kubernetes">section 62</a>; for how vLLM works inside, see <a href="#serving">section 49</a>.</p>
 </section>
 
 <section id="kubernetes">
-<h2><span class="n">58</span>Serving on Kubernetes</h2>
+<h2><span class="n">62</span>Serving on Kubernetes</h2>
 <p>A common path from notebook to production: wrap the model in a Python app, give it a <strong>Gradio</strong> interface, package it in a <strong>Docker</strong> container, and run it on <strong>Kubernetes</strong> (K8s), which handles deployment, scaling and recovery.</p>
 <figure>
   <div class="scroll"><svg id="fig-k8spipe" viewBox="0 0 600 170" role="img" aria-label="Six steps: LLM app, Gradio interface, Docker container, Kubernetes Deployment and Service, autoscaling, monitoring and logging"></svg></div>
-  <figcaption><b>Figure 85.</b> From inference code to a monitored service.</figcaption>
+  <figcaption><b>Figure 92.</b> From inference code to a monitored service.</figcaption>
 </figure>
 
 <h3>Gradio</h3>
@@ -2195,7 +2381,7 @@ demo.launch()</pre>
 <p>If the model runs inside the Gradio process, every UI pod loads its own copy onto a GPU, wasting expensive GPUs on an idle interface.</p>
 <figure>
   <div class="scroll"><svg id="fig-k8scluster" viewBox="0 0 600 270" role="img" aria-label="Kubernetes cluster: ingress routes users to two Gradio UI pods on CPU nodes, which call a model Service that load-balances across three vLLM pods on GPU nodes; weights are mounted from a shared volume; Prometheus collects metrics"></svg></div>
-  <figcaption><b>Figure 86.</b> UI pods on cheap CPU nodes, model pods on GPU nodes, each scaled on its own signal. Weights come from a volume instead of being baked into the image.</figcaption>
+  <figcaption><b>Figure 93.</b> UI pods on cheap CPU nodes, model pods on GPU nodes, each scaled on its own signal. Weights come from a volume instead of being baked into the image.</figcaption>
 </figure>
 <div class="tbl"><table>
 <tr><th>Pods</th><th>Runs</th><th>Hardware</th><th>Scales on</th></tr>
@@ -2237,7 +2423,7 @@ spec:
 <h3>Autoscaling</h3>
 <figure>
   <div class="scroll"><svg id="fig-k8sscale" viewBox="0 0 600 280" role="img" aria-label="Over a traffic spike, CPU usage of GPU inference pods barely changes while the request queue grows; scaling on queue length adds replicas, scaling on CPU adds none"></svg></div>
-  <figcaption><b>Figure 87.</b> Simulated traffic spike. GPU inference keeps CPU low, so a CPU-based autoscaler never reacts; a queue-based one adds replicas as requests wait. Values are illustrative.</figcaption>
+  <figcaption><b>Figure 94.</b> Simulated traffic spike. GPU inference keeps CPU low, so a CPU-based autoscaler never reacts; a queue-based one adds replicas as requests wait. Values are illustrative.</figcaption>
 </figure>
 <ul>
   <li>The default <strong>Horizontal Pod Autoscaler (HPA)</strong> scales on CPU or memory, which barely move for GPU inference.</li>
@@ -2265,11 +2451,11 @@ spec:
 </section>
 
 <section id="cicd">
-<h2><span class="n">59</span>CI/CD for ML</h2>
+<h2><span class="n">63</span>CI/CD for ML</h2>
 <p><strong>Continuous integration (CI)</strong> tests every change automatically; <strong>continuous deployment (CD)</strong> ships changes that pass. For ML, “every change” includes code, data and models, so the pipeline also trains, evaluates and versions models.</p>
 <figure>
   <div class="scroll"><svg id="fig-cicd" viewBox="0 0 600 300" role="img" aria-label="Code and data go to a pull request; CI runs lint and tests, data validation, training, evaluation and a quality gate, then posts a CML report; after merge, CD registers the model, builds an image and deploys with a canary rollout"></svg></div>
-  <figcaption><b>Figure 88.</b> CI runs on every pull request and blocks the merge if any check fails; CD runs only after CI passes on main.</figcaption>
+  <figcaption><b>Figure 95.</b> CI runs on every pull request and blocks the merge if any check fails; CD runs only after CI passes on main.</figcaption>
 </figure>
 
 <h3>Triggers</h3>
@@ -2316,7 +2502,7 @@ jobs:
 </table></div>
 <figure>
   <div class="scroll"><svg id="fig-gate" viewBox="0 0 600 230" role="img" aria-label="Five pull requests' model scores compared with the production baseline; three pass and two fail the quality gate"></svg></div>
-  <figcaption><b>Figure 89.</b> A quality gate on five pull requests: each new model must match the production model's score within a tolerance and stay under the latency limit. Scores are illustrative.</figcaption>
+  <figcaption><b>Figure 96.</b> A quality gate on five pull requests: each new model must match the production model's score within a tolerance and stay under the latency limit. Scores are illustrative.</figcaption>
 </figure>
 
 <h3>Versioning models and data</h3>
@@ -2331,7 +2517,7 @@ jobs:
   <li>Fetch the trained model (CI artifact or registry).</li>
   <li>Upload it to the model registry or Hugging Face Hub.</li>
   <li>Build and push a Docker image.</li>
-  <li>Deploy to Hugging Face Spaces (Gradio) or <a href="#kubernetes">Kubernetes</a>, releasing via shadow → canary → full rollout with automatic rollback (<a href="#deployment">section 55</a>).</li>
+  <li>Deploy to Hugging Face Spaces (Gradio) or <a href="#kubernetes">Kubernetes</a>, releasing via shadow → canary → full rollout with automatic rollback (<a href="#deployment">section 59</a>).</li>
 </ol>
 <ul>
   <li><strong>Authentication:</strong> store tokens such as <code>HF_TOKEN</code> as <strong>GitHub Secrets</strong>, never in code; for cloud providers prefer OIDC to long-lived keys.</li>
@@ -2348,7 +2534,7 @@ jobs:
 </section>
 
 <section id="drift">
-<h2><span class="n">60</span>Drift and model monitoring</h2>
+<h2><span class="n">64</span>Drift and model monitoring</h2>
 <p>A deployed model can get worse without any code change, because the world it sees changes. Labelled “golden” data is rarely available in production, so monitoring relies on <strong>proxy signals</strong>.</p>
 <div class="tbl"><table>
 <tr><th>Drift</th><th>What changes</th><th>Signal without labels</th></tr>
@@ -2358,7 +2544,7 @@ jobs:
 </table></div>
 <figure>
   <div class="scroll"><svg id="fig-drift" viewBox="0 0 600 260" role="img" aria-label="Distributions of input similarity to a baseline for last month and this week; this week's distribution has shifted lower, and the KS statistic is computed between them"></svg></div>
-  <figcaption><b>Figure 90.</b> Cosine similarity of each input's embedding to the baseline centroid, simulated for two periods. The shift is measured with a two-sample Kolmogorov–Smirnov statistic (largest gap between the cumulative distributions), computed from the samples.</figcaption>
+  <figcaption><b>Figure 97.</b> Cosine similarity of each input's embedding to the baseline centroid, simulated for two periods. The shift is measured with a two-sample Kolmogorov–Smirnov statistic (largest gap between the cumulative distributions), computed from the samples.</figcaption>
 </figure>
 <ul>
   <li><strong>Embedding-based detection:</strong> compare embeddings of current inputs and outputs with a baseline; a falling similarity suggests a shift in meaning. For full embeddings, use multivariate tests (MMD) or a <strong>classifier</strong> trained to tell old inputs from new.</li>
@@ -2380,7 +2566,7 @@ jobs:
 </section>
 
 <section id="governance">
-<h2><span class="n">61</span>Versioning, rollbacks and governance</h2>
+<h2><span class="n">65</span>Versioning, rollbacks and governance</h2>
 <h3>Model versioning</h3>
 <p>Track, reproduce and roll back models safely as they evolve. Version every artifact of the pipeline:</p>
 <ul>
@@ -2414,14 +2600,14 @@ jobs:
 </section>
 
 <!-- ============ PART IX ============ -->
-<div class="part"><div class="k">Part IX</div><h2>Agents &amp; tool use</h2><p>How LLMs reach tools and data, how agents remember, and how agents are built on top.</p></div>
+<div class="part"><div class="k">Part X</div><h2>Agents &amp; tool use</h2><p>How LLMs reach tools and data, how agents remember, and how agents are built on top.</p></div>
 
 <section id="mcp">
-<h2><span class="n">62</span>Model Context Protocol (MCP)</h2>
+<h2><span class="n">66</span>Model Context Protocol (MCP)</h2>
 <p><strong>MCP</strong> is an open protocol that standardises how AI applications connect to tools and data. Instead of a custom connector for every pair of app and system, each app implements an MCP <strong>client</strong> and each system an MCP <strong>server</strong>.</p>
 <figure>
   <div class="scroll"><svg id="fig-mxn" viewBox="0 0 600 220" role="img" aria-label="Left: three apps each wired to four systems with custom connectors, twelve links. Right: the same apps and systems connected through MCP, seven links"></svg></div>
-  <figcaption><b>Figure 91.</b> Without a standard, M apps and N systems need M × N connectors (here 3 × 4 = 12); with MCP they need M + N (here 3 + 4 = 7).</figcaption>
+  <figcaption><b>Figure 98.</b> Without a standard, M apps and N systems need M × N connectors (here 3 × 4 = 12); with MCP they need M + N (here 3 + 4 = 7).</figcaption>
 </figure>
 
 <h3>Host, client and server</h3>
@@ -2433,7 +2619,7 @@ jobs:
 </ul>
 <figure>
   <div class="scroll"><svg id="fig-mcparch" viewBox="0 0 600 270" role="img" aria-label="A host containing an LLM and three MCP clients; two clients connect over stdio to local servers for files and git, one connects over HTTP to a remote financial-data server that calls an external API"></svg></div>
-  <figcaption><b>Figure 92.</b> One host, three servers, three clients. Local servers use stdio; the remote server uses Streamable HTTP.</figcaption>
+  <figcaption><b>Figure 99.</b> One host, three servers, three clients. Local servers use stdio; the remote server uses Streamable HTTP.</figcaption>
 </figure>
 <h3>Transports</h3>
 <div class="tbl"><table>
@@ -2446,7 +2632,7 @@ jobs:
 <h3>A tool call, step by step</h3>
 <figure>
   <div class="scroll"><svg id="fig-mcpseq" viewBox="0 0 600 340" role="img" aria-label="Sequence: the user asks for Apple's 2025 earnings; the host gives the LLM the question and tool list; the LLM proposes get_earnings; the client sends tools/call to the server; the server calls the financial API; results flow back to the LLM, which writes the answer shown to the user"></svg></div>
-  <figcaption><b>Figure 93.</b> The example from the notes as a sequence. The returned value is illustrative.</figcaption>
+  <figcaption><b>Figure 100.</b> The example from the notes as a sequence. The returned value is illustrative.</figcaption>
 </figure>
 <div class="box key"><span class="lab">Key point</span><p>The <strong>LLM never talks to the server directly</strong>. It only <em>proposes</em> a tool call; the host and client execute it. That is also where the host can ask the user for approval.</p></div>
 
@@ -2480,17 +2666,17 @@ jobs:
 <ul>
   <li><strong>Prompt injection through tool results:</strong> a web page or email returned by a tool can contain instructions aimed at the LLM.</li>
   <li><strong>Tool poisoning:</strong> a malicious server hides instructions in its tool <em>descriptions</em>.</li>
-  <li><strong>Mitigations:</strong> install only trusted servers; give each <strong>least privilege</strong> (read-only where possible); require <strong>user approval</strong> for sensitive actions; use <strong>OAuth</strong> for remote HTTP servers; log every tool call (<a href="#governance">section 61</a>).</li>
+  <li><strong>Mitigations:</strong> install only trusted servers; give each <strong>least privilege</strong> (read-only where possible); require <strong>user approval</strong> for sensitive actions; use <strong>OAuth</strong> for remote HTTP servers; log every tool call (<a href="#governance">section 65</a>).</li>
 </ul>
 <p>Further reading: <em>modelcontextprotocol.io</em>, the specification and documentation.</p>
 </section>
 
 <section id="agent-memory">
-<h2><span class="n">63</span>Agent memory</h2>
+<h2><span class="n">67</span>Agent memory</h2>
 <p>An LLM forgets everything between calls. Agents add memory around it: <strong>short-term memory</strong> holds the immediate context of one interaction; <strong>long-term memory</strong> persists knowledge across sessions, tasks and time. The taxonomy follows cognitive science and the CoALA framework (Sumers et al., 2023).</p>
 <figure>
   <div class="scroll"><svg id="fig-memarch" viewBox="0 0 600 300" role="img" aria-label="The orchestrator assembles short-term working memory for each LLM call from three long-term stores: episodic, semantic and procedural memory"></svg></div>
-  <figcaption><b>Figure 94.</b> For every LLM call, the orchestrator builds the context window from the three long-term memories, and writes new episodes back afterwards.</figcaption>
+  <figcaption><b>Figure 101.</b> For every LLM call, the orchestrator builds the context window from the three long-term memories, and writes new episodes back afterwards.</figcaption>
 </figure>
 
 <h3>Short-term (working) memory</h3>
@@ -2515,7 +2701,7 @@ jobs:
 <h3>Writing and managing memory</h3>
 <figure>
   <div class="scroll"><svg id="fig-memlife" viewBox="0 0 600 220" role="img" aria-label="Memory lifecycle: an interaction is written to episodic memory in the hot path or in the background, consolidated into semantic facts, updated or forgotten, and retrieved into the next context window"></svg></div>
-  <figcaption><b>Figure 95.</b> The memory lifecycle. Consolidation turns many episodes into a few durable facts.</figcaption>
+  <figcaption><b>Figure 102.</b> The memory lifecycle. Consolidation turns many episodes into a few durable facts.</figcaption>
 </figure>
 <ul>
   <li><strong>Hot path:</strong> the agent calls a <code>save_memory</code> tool during the conversation. Memory is immediate, but each turn is slower.</li>
@@ -2529,14 +2715,14 @@ jobs:
 <div class="eq"><div class="math">\text{score}(m) = \alpha\cdot\text{recency}(m) + \beta\cdot\text{importance}(m) + \gamma\cdot\text{relevance}(m,q), \qquad \text{recency}(m) = 0.995^{\,\text{hours since last access}}</div><span class="c">Each term is scaled to [0, 1]. Importance is rated by the LLM when the memory is written; relevance is the cosine similarity between the memory and the query q.</span></div>
 <figure>
   <div class="scroll"><svg id="fig-memscore" viewBox="0 0 600 250" role="img" aria-label="Four memories with stacked recency, importance and relevance bars; the most relevant memory is not the top-ranked one once recency and importance are added"></svg></div>
-  <figcaption><b>Figure 96.</b> Scoring four memories for the query “book a restaurant tonight” with α = β = γ = 1. Scores are computed from the formula; the inputs are illustrative.</figcaption>
+  <figcaption><b>Figure 103.</b> Scoring four memories for the query “book a restaurant tonight” with α = β = γ = 1. Scores are computed from the formula; the inputs are illustrative.</figcaption>
 </figure>
 
 <h3>Risks</h3>
 <ul>
   <li><strong>Stale or wrong memories</strong> keep misleading the agent until corrected.</li>
-  <li><strong>Memory poisoning:</strong> a prompt injection that gets <em>saved</em> affects every future session. Validate what gets written (<a href="#mcp">section 62</a>).</li>
-  <li><strong>Privacy:</strong> memories are personal data. Let users view and delete them; the right to erasure applies (<a href="#governance">section 61</a>).</li>
+  <li><strong>Memory poisoning:</strong> a prompt injection that gets <em>saved</em> affects every future session. Validate what gets written (<a href="#mcp">section 66</a>).</li>
+  <li><strong>Privacy:</strong> memories are personal data. Let users view and delete them; the right to erasure applies (<a href="#governance">section 65</a>).</li>
   <li><strong>Cost:</strong> every retrieval adds latency and context tokens.</li>
 </ul>
 <h3>Tools</h3>
@@ -2549,8 +2735,18 @@ jobs:
 </section>
 
 <section id="quiz">
-<h2><span class="n">64</span>Check yourself</h2>
+<h2><span class="n">68</span>Check yourself</h2>
 <p>Try to answer before opening each one.</p>
+<div class="qgroup">Statistics foundations</div>
+<details><summary>Parameter vs statistic?</summary><p>A parameter describes the population (μ, σ); a statistic is computed from a sample (x̄, s) and estimates it.</p></details>
+<details><summary>Why can't you say 20 °C is twice as hot as 10 °C?</summary><p>Celsius is an interval scale: its zero is arbitrary, so ratios are meaningless. Ratio scales (kg, cm) have a true zero.</p></details>
+<details><summary>Why does sample variance divide by n − 1?</summary><p>Bessel's correction: deviations from the sample mean are slightly too small, so dividing by n underestimates σ²; n − 1 makes the estimate unbiased.</p></details>
+<details><summary>A value has z = −2. What does that mean?</summary><p>It lies two standard deviations below the mean; for normal data only about 2.3% of values are lower.</p></details>
+<details><summary>PMF vs PDF?</summary><p>A PMF gives probabilities of discrete values; a PDF is a density for continuous values, and probabilities are areas under it.</p></details>
+<details><summary>What does the central limit theorem say?</summary><p>The mean of a large enough sample is approximately normal around μ with standard error σ/√n, whatever the population's shape.</p></details>
+<details><summary>p = 0.03: is there a 3% chance the null hypothesis is true?</summary><p>No. It is the probability of data this extreme if H₀ were true. It says nothing about effect size either.</p></details>
+<details><summary>Comparing average scores across four prompt variants: which test?</summary><p>One-way ANOVA (or repeated-measures ANOVA if the same inputs are scored under every prompt), followed by corrected pairwise tests.</p></details>
+<details><summary>Pearson r ≈ 0: does that mean no relationship?</summary><p>Only no linear relationship. A U-shaped relationship can have r ≈ 0; plot the data.</p></details>
 <div class="qgroup">ML foundations</div>
 <details><summary>Positive (right) skew: is the mean above or below the median?</summary><p>Above. The long right tail pulls the mean up; the median and mode are more robust.</p></details>
 <details><summary>Why fit the scaler on the training set only?</summary><p>Fitting on all the data leaks information about the validation and test sets into training.</p></details>
@@ -3566,9 +3762,13 @@ function arr(svg,A,x1,y1,x2,y2,cls="l-mut",m="ink"){return el("line",{x1,y1,x2,y
   panel(0,"Uniform",{xmin:0,xmax:1,ymax:1.4,f:x=>x>0.15&&x<0.85?1/0.7:0});
   panel(1,"Bernoulli (p = 0.3)",{xmin:-0.6,xmax:1.6,ymax:0.85,bars:[[0,0.7],[1,0.3]],bw:0.45,lab:true});
   panel(2,"Binomial (n = 10, p = 0.5)",{xmin:-0.8,xmax:10.8,ymax:0.28,bars:[...Array(11)].map((_,k)=>[k,C(10,k)/1024]),bw:0.7});
-  panel(3,"Normal",{xmin:-3.2,xmax:3.2,ymax:0.46,f:x=>N(x,0,1),marks:[[0,"mean = median = mode","l-ink"]]});
+  panel(3,"Normal",{xmin:-3.2,xmax:3.2,ymax:0.46,f:x=>N(x,0,1),marks:[[0,"mean = median = mode","l-ink"]],legend:16});
   panel(4,"Log-normal: positive skew",{xmin:0,xmax:3.6,ymax:0.8,f:LN,marks:[[Math.exp(-0.36),"mode","l-ink"],[1,"median","l-acc2"],[Math.exp(0.18),"mean","l-warn"]],legend:120});
   panel(5,"Negative skew",{xmin:0,xmax:1,ymax:2.8,f:BETA,marks:[[0.8,"mode","l-ink"],[0.736,"median","l-acc2"],[5/7,"mean","l-warn"]],legend:16});
+  const fact=k=>{let r=1;for(let i=2;i<=k;i++)r*=i;return r;};
+  panel(6,"Poisson (λ = 3)",{xmin:-0.8,xmax:10.8,ymax:0.26,bars:[...Array(11)].map((_,k)=>[k,Math.exp(-3)*3**k/fact(k)]),bw:0.7});
+  panel(7,"Exponential (λ = 1)",{xmin:0,xmax:5,ymax:1.1,f:x=>Math.exp(-x),marks:[[Math.log(2),"median","l-acc2"],[1,"mean","l-warn"]],legend:120});
+  panel(8,"Power law (α = 2)",{xmin:1,xmax:12,ymax:1.05,f:x=>x<1?0:1/(x*x)});
 })();
 
 /* EDA flow */
@@ -4720,6 +4920,124 @@ function arr(svg,A,x1,y1,x2,y2,cls="l-mut",m="ink"){return el("line",{x1,y1,x2,y
   el("text",{x:x0,y:240,class:"t",style:"font-size:10px"},svg,"most relevant (2023) ranks last: old and unimportant");
 })();
 
+/* stats helpers */
+function erfA(x){const s=Math.sign(x);x=Math.abs(x);const t=1/(1+0.3275911*x);const y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);return s*y;}
+const Phi=z=>0.5*(1+erfA(z/Math.SQRT2)), phi=z=>Math.exp(-z*z/2)/Math.sqrt(2*Math.PI);
+function invPhi(p){const a=[-39.6968302866538,220.946098424521,-275.928510446969,138.357751867269,-30.6647980661472,2.50662827745924],b=[-54.4760987982241,161.585836858041,-155.698979859887,66.8013118877197,-13.2806815528857],c=[-0.00778489400243029,-0.322396458041136,-2.40075827716184,-2.54973253934373,4.37466414146497,2.93816398269878],d=[0.00778469570904146,0.32246712907004,2.445134137143,3.75440866190742];
+  const pl=0.02425;let q,r;if(p<pl){q=Math.sqrt(-2*Math.log(p));return(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);}
+  if(p>1-pl){q=Math.sqrt(-2*Math.log(1-p));return-(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);}
+  q=p-0.5;r=q*q;return(((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);}
+
+/* heights */
+(function(){
+  const svg=document.getElementById("fig-heights");const A=arrowDefs(svg);
+  const d=[175,180,140,140,135,160,135],n=d.length,m=d.reduce((a,b)=>a+b)/n,s=Math.sqrt(d.reduce((a,x)=>a+(x-m)**2,0)/(n-1));
+  const st=d.slice().sort((a,b)=>a-b),med=st[3],q1=st[1],q3=st[5];
+  const X=v=>40+(v-120)/(195-120)*520,y=120;
+  el("line",{x1:X(120),x2:X(195),y1:y+40,y2:y+40,class:"ax"},svg);
+  for(let v=120;v<=190;v+=10){el("line",{x1:X(v),x2:X(v),y1:y+40,y2:y+45,class:"ax"},svg);el("text",{x:X(v),y:y+60,"text-anchor":"middle",class:"t"},svg,v+" cm");}
+  el("rect",{x:X(m-s),y:y-50,width:X(m+s)-X(m-s),height:76,class:"f-soft2",style:"opacity:.55"},svg);
+  el("text",{x:X(m+s)-4,y:y-38,"text-anchor":"end",class:"t",style:"font-size:10px"},svg,"mean ± 1 s");
+  el("rect",{x:X(q1),y:y-14,width:X(q3)-X(q1),height:28,rx:3,style:"fill:none;stroke:var(--ink);stroke-width:1.6"},svg);
+  el("line",{x1:X(med),x2:X(med),y1:y-14,y2:y+14,style:"stroke:var(--ink);stroke-width:3"},svg);
+  el("line",{x1:X(st[0]),x2:X(q1),y1:y,y2:y,style:"stroke:var(--ink)"},svg);el("line",{x1:X(q3),x2:X(st[6]),y1:y,y2:y,style:"stroke:var(--ink)"},svg);
+  const seen={};d.forEach(v=>{seen[v]=(seen[v]||0)+1;el("circle",{cx:X(v),cy:y+28-seen[v]*0,r:5,class:"f-acc",style:"opacity:.85",transform:`translate(0 ${-(seen[v]-1)*12})`},svg);});
+  el("path",{d:`M${X(m)} ${y-24} l-6 -10 h12 z`,class:"f-warn"},svg);
+  el("text",{x:X(m),y:y-60,"text-anchor":"middle",class:"tk",style:"font-size:11.5px"},svg,"mean "+m.toFixed(1));
+  el("text",{x:X(med)-8,y:y-22,"text-anchor":"end",class:"tk",style:"font-size:11.5px"},svg,"median "+med);
+  el("text",{x:X(q1),y:y+80,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"Q1 = "+q1);
+  el("text",{x:X(q3),y:y+80,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"Q3 = "+q3);
+  el("text",{x:(X(q1)+X(q3))/2,y:y+96,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"IQR = "+(q3-q1));
+  el("text",{x:20,y:24,class:"t"},svg,"z(140) = (140 − "+m.toFixed(1)+") / "+s.toFixed(1)+" = "+((140-m)/s).toFixed(2));
+})();
+
+/* empirical rule */
+(function(){
+  const ch=chart(document.getElementById("fig-empirical"),{w:600,h:250,xmin:-3.6,xmax:3.6,ymax:0.46,pad:{l:20,r:20,t:20,b:40}});
+  [[3,"f-soft",1],[2,"f-soft2",1],[1,"f-acc2",.45]].forEach(([k,c,o])=>{const pts=[];for(let i=0;i<=100;i++){const x=-k+2*k*i/100;pts.push([x,phi(x)]);}
+    el("path",{d:"M"+ch.sx(-k)+" "+ch.sy(0)+pts.map(q=>"L"+ch.sx(q[0]).toFixed(1)+" "+ch.sy(q[1]).toFixed(1)).join("")+"L"+ch.sx(k)+" "+ch.sy(0)+"Z",class:c,style:"opacity:"+o},ch.svg);});
+  ch.line(phi,"l-ink",-3.6,3.6,200);ch.svg.lastChild.setAttribute("style","stroke-dasharray:none");
+  [-3,-2,-1,0,1,2,3].forEach(k=>el("text",{x:ch.sx(k),y:ch.sy(0)+16,"text-anchor":"middle",class:"t"},ch.svg,k===0?"μ":(k>0?"μ+":"μ−")+(Math.abs(k)===1?"":Math.abs(k))+"σ"));
+  [[1,0.30],[2,0.20],[3,0.10]].forEach(([k,y])=>{const p=(Phi(k)-Phi(-k))*100;
+    el("line",{x1:ch.sx(-k),x2:ch.sx(k),y1:ch.sy(y),y2:ch.sy(y),style:"stroke:var(--ink);stroke-width:1.2"},ch.svg);
+    el("text",{x:ch.sx(0),y:ch.sy(y)-4,"text-anchor":"middle",style:"font:600 11.5px var(--body);fill:var(--ink);paint-order:stroke;stroke:var(--surface);stroke-width:3px"},ch.svg,p.toFixed(1)+"%");});
+})();
+
+/* QQ */
+(function(){
+  const svg=document.getElementById("fig-qq");const r=rng(77),n=120;
+  function panel(ox,title,gen,cls){const g=el("g",{transform:`translate(${ox} 0)`},svg);
+    let v=[...Array(n)].map(gen).sort((a,b)=>a-b);const m=v.reduce((a,b)=>a+b)/n,s=Math.sqrt(v.reduce((a,x)=>a+(x-m)**2,0)/(n-1));v=v.map(x=>(x-m)/s);
+    const ch=chart(g,{w:290,h:250,xmin:-3,xmax:3,ymin:-3,ymax:4.2,pad:{l:30,r:10,t:26,b:34}});
+    el("text",{x:150,y:14,"text-anchor":"middle",class:"tk"},g,title);
+    el("line",{x1:ch.sx(-3),y1:ch.sy(-3),x2:ch.sx(3),y2:ch.sy(3),style:"stroke:var(--muted);stroke-dasharray:5 4"},g);
+    v.forEach((y,i)=>{const x=invPhi((i+0.5)/n);if(y<4.2)el("circle",{cx:ch.sx(x),cy:ch.sy(y),r:2.6,class:cls},g);});
+    el("text",{x:150,y:244,"text-anchor":"middle",class:"t",style:"font-size:10px"},g,"theoretical normal quantiles");}
+  panel(0,"Normal data",()=>gauss(r),"f-acc");
+  panel(305,"Right-skewed data",()=>Math.exp(0.7*gauss(r)),"f-warn");
+})();
+
+/* correlation */
+(function(){
+  const svg=document.getElementById("fig-corr");const r=rng(55),n=60;
+  const pear=(xs,ys)=>{const mx=xs.reduce((a,b)=>a+b)/n,my=ys.reduce((a,b)=>a+b)/n;let sxy=0,sxx=0,syy=0;xs.forEach((x,i)=>{sxy+=(x-mx)*(ys[i]-my);sxx+=(x-mx)**2;syy+=(ys[i]-my)**2;});return sxy/Math.sqrt(sxx*syy);};
+  const P=[["Positive",x=>x+0.35*gauss(r)],["None",x=>gauss(r)],["Negative",x=>-0.7*x+0.7*gauss(r)],["U-shaped",x=>x*x+0.3*gauss(r)]];
+  P.forEach(([t,f],k)=>{const g=el("g",{transform:`translate(${k*150} 0)`},svg);
+    const xs=[...Array(n)].map(()=>gauss(r)),ys=xs.map(f);const rr=pear(xs,ys);
+    const mn=Math.min(...ys),mx=Math.max(...ys);
+    const ch=chart(g,{w:145,h:150,xmin:-3,xmax:3,ymin:mn-0.3,ymax:mx+0.3,pad:{l:8,r:8,t:24,b:8}});
+    el("text",{x:72,y:14,"text-anchor":"middle",class:"tk",style:"font-size:11.5px"},g,t);
+    xs.forEach((x,i)=>{if(Math.abs(x)<3)el("circle",{cx:ch.sx(x),cy:ch.sy(ys[i]),r:2.4,class:"f-acc2",style:"opacity:.75"},g);});
+    el("text",{x:72,y:168,"text-anchor":"middle",class:"t"},g,"r = "+rr.toFixed(2));});
+})();
+
+/* CLT */
+(function(){
+  const svg=document.getElementById("fig-clt");const r=rng(31),R=3000;
+  const expo=()=>-Math.log(1-r());
+  [1,5,30].forEach((n,k)=>{const g=el("g",{transform:`translate(${k*200} 0)`},svg);
+    const ms=[...Array(R)].map(()=>{let s=0;for(let i=0;i<n;i++)s+=expo();return s/n;});
+    const xmax=n===1?5:n===5?3:2,bins=30,bw=xmax/bins,cnt=[...Array(bins)].fill(0);ms.forEach(v=>{const b=Math.floor(v/bw);if(b<bins)cnt[b]++;});
+    const dens=cnt.map(c=>c/(R*bw)),ymax=Math.max(...dens,phi(0)*Math.sqrt(n))*1.1;
+    const ch=chart(g,{w:195,h:200,xmin:0,xmax,ymax,pad:{l:8,r:8,t:24,b:24}});
+    el("text",{x:98,y:14,"text-anchor":"middle",class:"tk",style:"font-size:11.5px"},g,"n = "+n);
+    dens.forEach((d,i)=>el("rect",{x:ch.sx(i*bw),y:ch.sy(d),width:ch.sx(bw)-ch.sx(0)-0.6,height:ch.sy(0)-ch.sy(d),class:"f-acc2",style:"opacity:.6"},g));
+    if(n>1)ch.line(x=>phi((x-1)*Math.sqrt(n))*Math.sqrt(n),"l-warn",0,xmax,150);
+    el("text",{x:98,y:216,"text-anchor":"middle",class:"t",style:"font-size:10px"},g,"SE = 1/√"+n+" = "+(1/Math.sqrt(n)).toFixed(2));});
+})();
+
+/* p-value */
+(function(){
+  const ch=chart(document.getElementById("fig-pvalue"),{w:600,h:250,xmin:-4,xmax:4,ymax:0.46,pad:{l:20,r:20,t:24,b:40}});
+  const zc=1.96,zo=2.3,pv=2*(1-Phi(zo));
+  function shade(a,b,cls,op){const pts=[];for(let i=0;i<=60;i++){const x=a+(b-a)*i/60;pts.push([x,phi(x)]);}
+    el("path",{d:"M"+ch.sx(a)+" "+ch.sy(0)+pts.map(q=>"L"+ch.sx(q[0]).toFixed(1)+" "+ch.sy(q[1]).toFixed(1)).join("")+"L"+ch.sx(b)+" "+ch.sy(0)+"Z",class:cls,style:"opacity:"+op},ch.svg);}
+  shade(-4,-zc,"f-wsoft",1);shade(zc,4,"f-wsoft",1);shade(-4,-zo,"f-bad",.75);shade(zo,4,"f-bad",.75);
+  ch.line(phi,"l-ink",-4,4,200);ch.svg.lastChild.setAttribute("style","stroke-dasharray:none");
+  [-zc,zc].forEach(z=>{el("line",{x1:ch.sx(z),x2:ch.sx(z),y1:ch.sy(0),y2:ch.sy(0.2),style:"stroke:var(--warn);stroke-width:1.6;stroke-dasharray:4 3"},ch.svg);
+    el("text",{x:ch.sx(z),y:ch.sy(0)+16,"text-anchor":"middle",class:"t"},ch.svg,(z>0?"+":"−")+zc);});
+  el("line",{x1:ch.sx(zo),x2:ch.sx(zo),y1:ch.sy(0),y2:ch.sy(0.3),style:"stroke:var(--bad);stroke-width:2.2"},ch.svg);
+  el("text",{x:ch.sx(zo)+4,y:ch.sy(0.31),class:"tk",style:"font-size:11.5px"},ch.svg,"observed z = "+zo);
+  el("text",{x:ch.sx(0),y:ch.sy(0.43),"text-anchor":"middle",class:"t"},ch.svg,"distribution of z if H₀ is true");
+  el("text",{x:ch.sx(-3.95),y:ch.sy(0.38),class:"t",style:"font-size:10.5px"},ch.svg,"shaded tails: rejection regions, α = 0.05");
+  el("text",{x:ch.sx(-3.95),y:ch.sy(0.34),class:"t",style:"font-size:10.5px;fill:var(--bad)"},ch.svg,"p-value = "+pv.toFixed(3)+" < 0.05 → reject H₀");
+})();
+
+/* test choice */
+(function(){
+  const svg=document.getElementById("fig-testchoice");const A=arrowDefs(svg);
+  box(svg,200,8,200,40,"f-soft2","What are you comparing?");
+  box(svg,40,82,150,40,"f-wsoft","Counts / categories");box(svg,330,82,170,40,"f-wsoft","Means");
+  arr(svg,A,260,48,130,80);arr(svg,A,340,48,410,80);
+  box(svg,40,170,150,44,"f-soft","Chi-square","χ² test");arr(svg,A,115,122,115,168);
+  box(svg,250,150,150,40,"f-wsoft","1 or 2 groups");box(svg,440,150,140,40,"f-wsoft","3+ groups");
+  arr(svg,A,390,122,330,148);arr(svg,A,430,122,505,148);
+  box(svg,440,214,140,44,"f-soft","ANOVA","F test");arr(svg,A,510,190,510,212);
+  box(svg,176,214,128,44,"f-soft","z-test","σ known, n≥30");box(svg,314,214,110,44,"f-soft","t-test","σ unknown");
+  arr(svg,A,300,190,240,212);arr(svg,A,340,190,369,212);
+  el("text",{x:369,y:278,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"paired data → paired t-test");
+})();
+
 /* contents menu: open the group of the current section */
 (function(){
   const groups=[...document.querySelectorAll("aside details.grp")];
@@ -4758,6 +5076,5 @@ b.addEventListener("click",function(){var t=document.querySelector(".cite .bib")
   function sel(){var r=document.createRange();r.selectNodeContents(document.querySelector(".cite .bib"));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selected: press Ctrl/Cmd+C";}
   try{navigator.clipboard.writeText(t).then(done,sel);}catch(e){sel();}});})();
 </script>
-
 </body>
 </html>
