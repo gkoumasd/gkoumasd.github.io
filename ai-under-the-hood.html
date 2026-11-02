@@ -72,6 +72,7 @@ code,.m{font:14px var(--mono)}
 .eq .math{overflow-x:auto;overflow-y:hidden;padding:2px 0;font-size:17px}
 .eq .math .katex{font-size:1.12em;color:var(--ink)}
 .eq .math .katex-display{margin:.3em 0}
+.tex .katex{font-size:1.05em;white-space:nowrap}
 .eq:has(.math){white-space:normal;font-family:var(--body)}
 .eq .c{color:var(--muted);font-size:13px;white-space:normal;display:block;margin-top:6px;font-family:var(--body);line-height:1.5}
 .tbl{overflow-x:auto;margin:16px 0}
@@ -286,12 +287,12 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <tr><td>Mode</td><td>135 and 140 cm</td><td>Each appears twice: the data is bimodal</td></tr>
 <tr><td>Sample variance s²</td><td>373.8 cm²</td><td>2242.9 / (7 − 1)</td></tr>
 <tr><td>Standard deviation s</td><td>19.3 cm</td><td>√373.8</td></tr>
-<tr><td>IQR</td><td>40 cm</td><td>Q₃ − Q₁ = 175 − 135 (medians of each half)</td></tr>
+<tr><td>IQR</td><td>40 cm</td><td>Q₃ − Q₁ = 175 − 135 (medians of the lower and upper halves; NumPy's default gives 30)</td></tr>
 <tr><td>z-score of 140 cm</td><td>−0.63</td><td>(140 − 152.1) / 19.3</td></tr>
 </table></div>
 <figure>
-  <div class="scroll"><svg id="fig-heights" viewBox="0 0 600 220" role="img" aria-label="Seven heights on a number line with a box showing the interquartile range, the median at 140, the mean at 152, a one-standard-deviation band, and the z-score of 140"></svg></div>
-  <figcaption><b>Figure 1.</b> The worked example. The mean sits right of the median because the two tall values pull it up: the data is right-skewed. All values are computed from the data.</figcaption>
+  <div class="scroll"><svg id="fig-heights" viewBox="0 24 600 196" role="img" aria-label="Seven heights on a number line with a box showing the interquartile range, the median at 140, the mean at 152, a one-standard-deviation band, and the z-score of 140"></svg></div>
+  <figcaption><b>Figure 1.</b> The worked example. The mean (152.1) sits right of the median (140) because the three tallest values (160, 175, 180) pull it up: the data is right-skewed. Q1 equals the minimum here, so the box plot has no left whisker. Quartiles use the medians of the lower and upper halves; other conventions (e.g. NumPy's default interpolation) give Q1 = 137.5, Q3 = 167.5, IQR = 30. All values are computed from the data.</figcaption>
 </figure>
 </section>
 
@@ -300,6 +301,7 @@ details p{margin:8px 0 2px;color:var(--ink)}
 <h3>Probability basics</h3>
 <p>The <strong>sample space</strong> Ω is the set of all outcomes (rolling a die: {1, …, 6}); an <strong>event</strong> is a subset of it. Probabilities lie in [0, 1] and sum to 1 over Ω.</p>
 <div class="eq"><div class="math">\begin{aligned} &amp;P(A\cup B) = P(A)+P(B)-P(A\cap B) &amp;&amp; \text{addition rule}\\ &amp;P(A\mid B) = \frac{P(A\cap B)}{P(B)} &amp;&amp; \text{conditional probability}\\ &amp;P(A\cap B) = P(A)\,P(B) &amp;&amp; \text{if } A, B \text{ are independent}\\ &amp;P(A\mid B) = \frac{P(B\mid A)\,P(A)}{P(B)} &amp;&amp; \text{Bayes' rule}\end{aligned}</div><span class="c">Set operations from the notes: with A = {1, …, 8} and B = {3, …, 7}, A ∩ B = {3, …, 7}, A ∪ B = {1, …, 8}, A − B = {1, 2, 8}, and B ⊂ A. Bayes' rule reappears in <a href="#gen-vs-disc">generative vs discriminative models</a>.</span></div>
+<div class="box key"><span class="lab">How to read</span><p><span class="tex">\cup</span> = OR &nbsp;·&nbsp; <span class="tex">\cap</span> = AND &nbsp;·&nbsp; <span class="tex">\mid</span> = GIVEN</p></div>
 <h3>Random variables and distributions</h3>
 <div class="tbl"><table>
 <tr><th></th><th>Discrete</th><th>Continuous</th></tr>
@@ -2737,18 +2739,30 @@ jobs:
 <section id="quiz">
 <h2><span class="n">68</span>Check yourself</h2>
 <p>Try to answer before opening each one.</p>
-<div class="qgroup">Statistics foundations</div>
+<div class="qgroup">I · Statistics foundations</div>
 <details><summary>Parameter vs statistic?</summary><p>A parameter describes the population (μ, σ); a statistic is computed from a sample (x̄, s) and estimates it.</p></details>
 <details><summary>Why can't you say 20 °C is twice as hot as 10 °C?</summary><p>Celsius is an interval scale: its zero is arbitrary, so ratios are meaningless. Ratio scales (kg, cm) have a true zero.</p></details>
+<details><summary>Income data has a few billionaires. Mean or median for the “typical” value?</summary><p>The median: the mean is pulled up by the outliers.</p></details>
 <details><summary>Why does sample variance divide by n − 1?</summary><p>Bessel's correction: deviations from the sample mean are slightly too small, so dividing by n underestimates σ²; n − 1 makes the estimate unbiased.</p></details>
 <details><summary>A value has z = −2. What does that mean?</summary><p>It lies two standard deviations below the mean; for normal data only about 2.3% of values are lower.</p></details>
+<details><summary>P(A | B) or P(B | A): which does Bayes' rule give you?</summary><p>It reverses a conditional: P(A | B) = P(B | A)·P(A) / P(B). Read “|” as “given”.</p></details>
+<details><summary>Two events are independent. What is P(A ∩ B)?</summary><p>P(A)·P(B); equivalently P(A | B) = P(A).</p></details>
 <details><summary>PMF vs PDF?</summary><p>A PMF gives probabilities of discrete values; a PDF is a density for continuous values, and probabilities are areas under it.</p></details>
+<details><summary>Positive (right) skew: is the mean above or below the median?</summary><p>Above. The long right tail pulls the mean up; the median and mode are more robust.</p></details>
+<details><summary>Why use stratified rather than simple random sampling?</summary><p>It keeps each group's share in the sample, so small groups (or rare classes) are always represented.</p></details>
+<details><summary>Pearson r ≈ 0: does that mean no relationship?</summary><p>Only no linear relationship. A U-shaped relationship can have r ≈ 0; plot the data.</p></details>
 <details><summary>What does the central limit theorem say?</summary><p>The mean of a large enough sample is approximately normal around μ with standard error σ/√n, whatever the population's shape.</p></details>
 <details><summary>p = 0.03: is there a 3% chance the null hypothesis is true?</summary><p>No. It is the probability of data this extreme if H₀ were true. It says nothing about effect size either.</p></details>
 <details><summary>Comparing average scores across four prompt variants: which test?</summary><p>One-way ANOVA (or repeated-measures ANOVA if the same inputs are scored under every prompt), followed by corrected pairwise tests.</p></details>
-<details><summary>Pearson r ≈ 0: does that mean no relationship?</summary><p>Only no linear relationship. A U-shaped relationship can have r ≈ 0; plot the data.</p></details>
-<div class="qgroup">ML foundations</div>
-<details><summary>Positive (right) skew: is the mean above or below the median?</summary><p>Above. The long right tail pulls the mean up; the median and mode are more robust.</p></details>
+<div class="qgroup">II · ML foundations</div>
+<details><summary>How does the IQR rule flag outliers?</summary><p>Values below Q1 − 1.5·IQR or above Q3 + 1.5·IQR. Check them before removing: they may be real.</p></details>
+<details><summary>What is data contamination?</summary><p>Test or benchmark data leaking into the training set, which inflates evaluation scores.</p></details>
+<details><summary>Why does Cleanlab need out-of-sample predictions?</summary><p>A model that trained on an example has memorised its label, so it can't flag that label as wrong. Cross-validation gives out-of-sample predictions.</p></details>
+<details><summary>Which examples does uncertainty sampling pick?</summary><p>Those the model is least sure about, typically the ones closest to the decision boundary.</p></details>
+<details><summary>Main risk of filtering synthetic data with a learned reward model?</summary><p>Reward hacking: the policy exploits the reward model's flaws. Verifiable checks (unit tests, exact answers) are more reliable.</p></details>
+<details><summary>Give an example of MNAR data.</summary><p>High earners leaving income blank: whether it's missing depends on the missing value itself.</p></details>
+<details><summary>Why resample only after splitting?</summary><p>Otherwise copies of the same minority example end up in both train and test, inflating scores.</p></details>
+<details><summary>About what fraction of distinct points does a bootstrap sample contain?</summary><p>1 − 1/e ≈ 63.2%. The other 36.8% are out-of-bag.</p></details>
 <details><summary>Why fit the scaler on the training set only?</summary><p>Fitting on all the data leaks information about the validation and test sets into training.</p></details>
 <details><summary>Why is PCA not a feature-importance method?</summary><p>It builds new features (components) from combinations of the old ones, ordered by variance, not by usefulness for predicting the label.</p></details>
 <details><summary>Under what noise assumption is minimising MSE the same as MLE?</summary><p>Gaussian noise: y = f(x) + ε, ε ∼ N(0, σ²).</p></details>
@@ -2759,25 +2773,19 @@ jobs:
 <details><summary>Are inertia and silhouette classification metrics?</summary><p>No, they are clustering metrics and need no labels. Inertia measures compactness; silhouette measures separation.</p></details>
 <details><summary>Does L2 regularisation fix unscaled features?</summary><p>No. It penalises all weights equally, so it is unfair to small-scale features. Scale first, then regularise.</p></details>
 <details><summary>What happens to unregularised logistic regression on linearly separable data?</summary><p>The weights grow without limit: the loss keeps decreasing as the boundary sharpens, so the MLE doesn't exist.</p></details>
-<details><summary>What is data contamination?</summary><p>Test or benchmark data leaking into the training set, which inflates evaluation scores.</p></details>
-<details><summary>Why does Cleanlab need out-of-sample predictions?</summary><p>A model that trained on an example has memorised its label, so it can't flag that label as wrong. Cross-validation gives out-of-sample predictions.</p></details>
-<details><summary>Which examples does uncertainty sampling pick?</summary><p>Those the model is least sure about, typically the ones closest to the decision boundary.</p></details>
-<details><summary>Main risk of filtering synthetic data with a learned reward model?</summary><p>Reward hacking: the policy exploits the reward model's flaws. Verifiable checks (unit tests, exact answers) are more reliable.</p></details>
-<details><summary>Give an example of MNAR data.</summary><p>High earners leaving income blank: whether it's missing depends on the missing value itself.</p></details>
-<details><summary>Why resample only after splitting?</summary><p>Otherwise copies of the same minority example end up in both train and test, inflating scores.</p></details>
-<details><summary>About what fraction of distinct points does a bootstrap sample contain?</summary><p>1 − 1/e ≈ 63.2%. The other 36.8% are out-of-bag.</p></details>
-<div class="qgroup">Generalisation</div>
+<details><summary>Why not split a time series randomly into train and test?</summary><p>Random splits let the model see the future (leakage); split by time instead.</p></details>
+<div class="qgroup">III · Generalisation</div>
 <details><summary>Training error 2%, validation error 25%. What's wrong, and what are two fixes?</summary><p>Overfitting (high variance). Fixes: more data, augmentation, L2/weight decay, dropout, early stopping, a smaller model.</p></details>
-<details><summary>Training error 30%, validation error 32%. What's wrong?</summary><p>Underfitting (high bias). Use a bigger model, train longer, add features, reduce regularisation. More data won't help much.</p></details>
+<details><summary>Does shuffling make data normally distributed?</summary><p>No. It ensures splits and mini-batches are representative. Reordering never changes the distribution.</p></details>
 <details><summary>What happens when λ in L2 regularisation is very large?</summary><p>Weights are pushed close to zero and the model underfits. Training still converges, to a too-simple solution.</p></details>
 <details><summary>L1 vs L2: which produces sparse weights?</summary><p>L1. It drives some weights to exactly zero. L2 shrinks all weights but rarely makes them exactly zero.</p></details>
-<details><summary>Is k-fold cross-validation an ensemble method?</summary><p>No. It is for evaluation and model selection. Each fold holds out 1/k of the data.</p></details>
 <details><summary>Bagging or boosting for a high-variance model?</summary><p>Bagging, which averages models trained on bootstrap samples and reduces variance. Boosting mainly reduces bias.</p></details>
+<details><summary>Does LayerNorm mainly prevent overfitting?</summary><p>No. It mainly stabilises training. BatchNorm has a mild regularising effect from batch noise; LayerNorm has very little.</p></details>
+<details><summary>Is k-fold cross-validation an ensemble method?</summary><p>No. It is for evaluation and model selection. Each fold holds out 1/k of the data.</p></details>
 <details><summary>Where does the peak in double descent occur?</summary><p>At the interpolation threshold, where the model can just fit the training data exactly (roughly, parameters ≈ data points).</p></details>
 <details><summary>Why can early stopping be a problem for grokking?</summary><p>Validation accuracy stays flat for a long time before jumping. Stopping on a plateau ends training before generalisation appears.</p></details>
-<details><summary>Does LayerNorm mainly prevent overfitting?</summary><p>No. It mainly stabilises training. BatchNorm has a mild regularising effect from batch noise; LayerNorm has very little.</p></details>
-<details><summary>Does shuffling make data normally distributed?</summary><p>No. It ensures splits and mini-batches are representative. Reordering never changes the distribution.</p></details>
-<div class="qgroup">Optimisation</div>
+<details><summary>Training error 30%, validation error 32%. What's wrong?</summary><p>Underfitting (high bias). Use a bigger model, train longer, add features, reduce regularisation. More data won't help much.</p></details>
+<div class="qgroup">IV · Optimisation</div>
 <details><summary>What is the key property of a convex loss?</summary><p>Every local minimum is a global minimum.</p></details>
 <details><summary>Why are saddle points a bigger problem than local minima in deep networks?</summary><p>In high dimensions they are far more common, and the gradient near them is tiny, so training slows to a crawl. Most local minima have similar, good loss values.</p></details>
 <details><summary>Why not initialise all weights to zero?</summary><p>Every neuron in a layer would receive the same gradient and learn the same thing (no symmetry breaking).</p></details>
@@ -2786,7 +2794,7 @@ jobs:
 <details><summary>Why is AdamW preferred over Adam with L2?</summary><p>In Adam, the L2 term is divided by √v̂, so weights with large past gradients are decayed less. AdamW applies the decay separately, uniformly for every weight.</p></details>
 <details><summary>What does learning-rate warmup make small: the weights or the updates?</summary><p>The updates. It starts with a small learning rate while gradients and Adam's moment estimates are unreliable.</p></details>
 <details><summary>max_norm = 1.0 and the gradient norm is 4. What happens?</summary><p>The gradient is multiplied by 1/4. Its direction stays the same; its length becomes 1.</p></details>
-<div class="qgroup">Generative models</div>
+<div class="qgroup">V · Generative models</div>
 <details><summary>Generative vs discriminative: which models p(y | x)?</summary><p>Discriminative. Generative models learn p(x) or p(x, y) and can sample new data.</p></details>
 <details><summary>What do the two terms of the VAE loss do?</summary><p>The reconstruction term makes the decoder rebuild x from z. The KL term keeps q_φ(z|x) close to the prior N(0, I), so the latent space is smooth and can be sampled.</p></details>
 <details><summary>Why does a VAE need the reparameterisation trick?</summary><p>Sampling isn't differentiable. Writing z = μ + σ·ε with ε ∼ N(0, I) lets gradients flow through μ and σ.</p></details>
@@ -2795,25 +2803,26 @@ jobs:
 <details><summary>Why must flow layers be invertible?</summary><p>So the change-of-variables formula applies and the model can compute an exact log-likelihood.</p></details>
 <details><summary>What does a diffusion network usually predict?</summary><p>The noise ε that was added to x₀ to make x_t, trained with ‖ε − ε_θ(x_t, t)‖².</p></details>
 <details><summary>Why are consistency models faster than diffusion models?</summary><p>They learn to map any point on the noise-to-data trajectory straight to the clean sample, so they need one or a few steps instead of many.</p></details>
-<div class="qgroup">Transformers &amp; attention</div>
+<div class="qgroup">VI · Transformers &amp; attention</div>
+<details><summary>Static vs contextual embeddings?</summary><p>word2vec/GloVe give one vector per word; transformers give a different vector depending on context (“river bank” vs “bank account”).</p></details>
+<details><summary>What does RoPE make the attention score depend on?</summary><p>The relative distance between the two tokens, because queries and keys are rotated by angles proportional to their positions.</p></details>
 <details><summary>Is “self-attention” the same as “scaled dot-product attention”?</summary><p>No. Scaled dot-product attention is the scoring formula. Self-attention means Q, K and V come from the same sequence; cross-attention uses the same formula with Q from one sequence and K, V from another.</p></details>
 <details><summary>Why divide by √d_k in attention?</summary><p>Large dot products push the softmax into saturation, where gradients are tiny. Scaling keeps them in a healthy range.</p></details>
 <details><summary>In causal attention, how are future positions removed, and do rows still sum to 1?</summary><p>Their scores are set to −∞ before the softmax, so their weights are 0. The softmax then spreads the weight over the remaining positions, so each row still sums to 1.</p></details>
 <details><summary>How are the outputs of the heads in multi-head attention combined?</summary><p>They are concatenated and multiplied by an output projection W_O.</p></details>
 <details><summary>In cross-attention, where do Q, K and V come from?</summary><p>Queries from the decoder; keys and values from the encoder's output.</p></details>
-<details><summary>What does RoPE make the attention score depend on?</summary><p>The relative distance between the two tokens, because queries and keys are rotated by angles proportional to their positions.</p></details>
 <details><summary>Which family is BERT, and what is it good for?</summary><p>Encoder-only, pretrained with masked language modelling. Good for classification, NER and embeddings, not generation.</p></details>
-<details><summary>32 query heads and 8 KV heads: how much smaller is the KV cache than MHA?</summary><p>4× smaller (h/g = 32/8). Query heads are unchanged.</p></details>
-<details><summary>What does MLA cache instead of full keys and values?</summary><p>A small compressed latent vector c_KV per token (plus a small RoPE key part). K and V are up-projected from it, or the up-projections are merged into W_Q and W_O.</p></details>
-<details><summary>Is FlashAttention an approximation?</summary><p>No. It computes exact attention, just with fewer reads and writes to GPU memory.</p></details>
-<details><summary>What is the main advantage of SSMs like Mamba over attention?</summary><p>Cost grows linearly with sequence length and memory per generated token is constant, versus O(n²) attention and a growing KV cache.</p></details>
 <details><summary>MoE: what scales with active parameters, and what with total parameters?</summary><p>Compute per token scales with active parameters; memory scales with total parameters, because all experts must be loaded.</p></details>
 <details><summary>How are the outputs of the selected experts combined?</summary><p>As a weighted sum, using the router's (usually renormalised) scores for the top-k experts.</p></details>
 <details><summary>Why use many small (fine-grained) experts instead of a few large ones?</summary><p>Same compute, but vastly more possible expert combinations (8 of 64 ≈ 4.4 billion vs 2 of 16 = 120), allowing more specialised experts.</p></details>
 <details><summary>What does a shared expert do?</summary><p>It is always active and learns common knowledge, so routed experts don't each have to relearn it.</p></details>
 <details><summary>Auxiliary loss vs expert capacity?</summary><p>The auxiliary loss encourages the router to spread tokens evenly. Capacity is a hard per-expert limit; overflow tokens are dropped and pass through the residual connection.</p></details>
 <details><summary>Little VRAM and low throughput: dense or MoE?</summary><p>Dense. An MoE must hold every expert in memory but only uses a few per token.</p></details>
-<div class="qgroup">Training at scale</div>
+<details><summary>32 query heads and 8 KV heads: how much smaller is the KV cache than MHA?</summary><p>4× smaller (h/g = 32/8). Query heads are unchanged.</p></details>
+<details><summary>What does MLA cache instead of full keys and values?</summary><p>A small compressed latent vector c_KV per token (plus a small RoPE key part). K and V are up-projected from it, or the up-projections are merged into W_Q and W_O.</p></details>
+<details><summary>Is FlashAttention an approximation?</summary><p>No. It computes exact attention, just with fewer reads and writes to GPU memory.</p></details>
+<details><summary>What is the main advantage of SSMs like Mamba over attention?</summary><p>Cost grows linearly with sequence length and memory per generated token is constant, versus O(n²) attention and a growing KV cache.</p></details>
+<div class="qgroup">VII · Training at scale</div>
 <details><summary>About how many bytes per parameter does mixed-precision training with Adam need?</summary><p>About 16: BF16 weights (2) + BF16 gradients (2) + FP32 master weights (4) + Adam m (4) + Adam v (4), plus activations.</p></details>
 <details><summary>What does gradient checkpointing trade?</summary><p>Compute for memory: fewer activations are stored, and the missing ones are recomputed in the backward pass (~30% extra compute for full recomputation).</p></details>
 <details><summary>Micro-batch 4, 8 accumulation steps, 16 data-parallel GPUs: what is the global batch?</summary><p>4 × 8 × 16 = 512.</p></details>
@@ -2822,31 +2831,17 @@ jobs:
 <details><summary>Does data parallelism reduce memory per GPU?</summary><p>No. Every GPU holds the full model, gradients and optimizer states. ZeRO/FSDP is what shards them.</p></details>
 <details><summary>How do you shrink the pipeline bubble?</summary><p>Use more micro-batches: bubble ≈ (p − 1)/m. Interleaved schedules help too.</p></details>
 <details><summary>Why keep tensor parallelism inside one node?</summary><p>It communicates activations on every layer, so it needs the fast NVLink links inside a node.</p></details>
+<details><summary>Which parallelism splits a long sequence across GPUs?</summary><p>Context parallelism (e.g. ring attention). Sequence parallelism complements tensor parallelism for LayerNorm and dropout activations.</p></details>
 <details><summary>Memory per GPU under ZeRO-3?</summary><p>16Ψ/N: parameters, gradients and optimizer states are all split across the N data-parallel GPUs. PyTorch FSDP is essentially ZeRO-3.</p></details>
 <details><summary>Why is ZeRO-1 rather than ZeRO-3 combined with pipeline parallelism?</summary><p>ZeRO-2/3 would have to communicate gradients or parameters for every micro-batch, which clashes with pipelining.</p></details>
-<details><summary>Which parallelism splits a long sequence across GPUs?</summary><p>Context parallelism (e.g. ring attention). Sequence parallelism complements tensor parallelism for LayerNorm and dropout activations.</p></details>
-<div class="qgroup">LLMs in practice</div>
+<div class="qgroup">VIII · LLMs in practice</div>
 <details><summary>What does the KV cache save?</summary><p>Recomputing keys and values of earlier tokens at every decoding step.</p></details>
 <details><summary>In the example tree, why does greedy search miss “The dog has”?</summary><p>Greedy takes “nice” (0.5) over “dog” (0.4) at step 1, ending at 0.5 × 0.4 = 0.20; “dog has” scores 0.4 × 0.9 = 0.36.</p></details>
 <details><summary>Why does beam search sum log-probabilities?</summary><p>Products of many small probabilities underflow; summing logs is numerically stable and preserves the ranking.</p></details>
 <details><summary>Why is length normalisation needed in beam search?</summary><p>Every token adds a negative log-probability, so unnormalised scores favour short outputs.</p></details>
 <details><summary>What is top-k's main weakness, and how does top-p fix it?</summary><p>A fixed k admits junk on peaked steps and cuts good options on flat ones; top-p keeps however many tokens are needed to reach probability p.</p></details>
 <details><summary>Temperature 2 vs 0.5: which gives more varied outputs?</summary><p>T = 2. Temperatures above 1 flatten the distribution; below 1 sharpen it.</p></details>
-<details><summary>RAG or fine-tuning for adding frequently changing company knowledge?</summary><p>RAG: re-index the documents instead of retraining, and the answers can cite sources. Fine-tuning suits style and behaviour.</p></details>
-<details><summary>What is the trade-off in chunk size?</summary><p>Small chunks retrieve precisely but lose context; large chunks keep context but give noisier embeddings.</p></details>
-<details><summary>Is FAISS a vector database?</summary><p>No, it is an in-memory similarity-search library without persistence, metadata filtering or access control.</p></details>
-<details><summary>Why add BM25 to vector search?</summary><p>Vector search misses exact matches such as IDs, names and rare terms. Hybrid search merges both rankings, e.g. with reciprocal rank fusion.</p></details>
-<details><summary>What are the two levers for faster vector search?</summary><p>Smaller vectors (quantisation, PCA) and a smaller search scope (IVF, HNSW, LSH).</p></details>
-<details><summary>Does raising nprobe in IVF cost memory or time?</summary><p>Time, not memory: more cells are searched, so recall goes up and speed goes down.</p></details>
-<details><summary>A 128-dim float32 vector compressed with PQ (m = 8, 256 centroids): how many bytes?</summary><p>8 bytes (one byte per subvector ID), down from 512: 64× smaller.</p></details>
-<details><summary>How does PQ compute distances quickly?</summary><p>Asymmetric distance computation: a per-query table of distances from each query subvector to every centroid; each vector's distance is the sum of m lookups.</p></details>
-<details><summary>Why does HNSW use memory heavily?</summary><p>It stores the full vectors plus every node's neighbour links on each layer.</p></details>
-<details><summary>Should t-SNE be used to shrink embeddings for search?</summary><p>No. It is for visualisation, distorts distances and can't consistently map new queries. Use PCA, random projection or Matryoshka embeddings.</p></details>
-<details><summary>Bi-encoder vs cross-encoder: which reranks, and why?</summary><p>The cross-encoder: it reads query and document together, so it is more accurate, but it needs one pass per pair, so it only runs on the top candidates.</p></details>
-<details><summary>What does “lost in the middle” mean for prompt building?</summary><p>LLMs use the start and end of the context best, so put the most relevant chunks there.</p></details>
-<details><summary>How should text-to-Cypher queries be made safe?</summary><p>Give the schema in the prompt, use a read-only connection, and validate generated queries before running them.</p></details>
-<details><summary>How does ColPali score a page?</summary><p>Late interaction: for each query-token vector, take its maximum similarity over the page's patch vectors, then sum over tokens.</p></details>
-<details><summary>VLM or vLLM for answering from page images?</summary><p>A VLM (vision-language model) such as Qwen2-VL. vLLM is an inference server.</p></details>
+<details><summary>Is DoLa a latency technique?</summary><p>No. It contrasts final and earlier layers to improve factuality, at a small extra cost.</p></details>
 <details><summary>What are the three families of test-time compute methods?</summary><p>Parallel (best-of-N, self-consistency), sequential (self-refine, long chain-of-thought) and search against a verifier (beam search, DVTS).</p></details>
 <details><summary>What is the main weakness of self-refinement?</summary><p>Without external feedback, models often can't fix their own reasoning errors and may turn correct answers into wrong ones.</p></details>
 <details><summary>Self-consistency: what does it need instead of a verifier?</summary><p>Comparable final answers, so the most common one can be chosen by majority vote.</p></details>
@@ -2864,7 +2859,6 @@ jobs:
 <details><summary>Does self-speculative decoding lower output quality?</summary><p>No. Early layers draft, but the full model verifies every token.</p></details>
 <details><summary>Batching vs tensor parallelism: which lowers per-request latency?</summary><p>Tensor parallelism. Batching raises throughput but can make each request slightly slower.</p></details>
 <details><summary>What does FlashAttention avoid?</summary><p>Writing the n × n attention matrix to slow GPU memory; it computes tiles in fast SRAM and gives exact results.</p></details>
-<details><summary>Is DoLa a latency technique?</summary><p>No. It contrasts final and earlier layers to improve factuality, at a small extra cost.</p></details>
 <details><summary>Why is the distillation KL term multiplied by T²?</summary><p>Softening with temperature T shrinks its gradients by about 1/T²; the factor keeps the soft- and hard-label terms balanced.</p></details>
 <details><summary>What is “dark knowledge”?</summary><p>The relative probabilities a teacher gives wrong classes (a “2” looks more like a “7” than a cat), revealed by softening with temperature.</p></details>
 <details><summary>Feature-based distillation with a narrower student: what is needed?</summary><p>A small learned projection mapping student features to the teacher's width before the MSE/cosine loss.</p></details>
@@ -2873,11 +2867,32 @@ jobs:
 <details><summary>Forward or reverse KL: which is mode-seeking?</summary><p>Reverse KL(student ‖ teacher): the student focuses on the teacher's main modes. Forward KL is mean-seeking.</p></details>
 <details><summary>Why is LoRA's B matrix initialised to zero?</summary><p>So ΔW = BA = 0 at the start, and fine-tuning begins exactly from the pretrained model.</p></details>
 <details><summary>How many trainable parameters does LoRA add for a 4096 × 4096 matrix with r = 16?</summary><p>r·(d + k) = 16 × 8192 = 131,072, about 0.8% of 16.8M.</p></details>
-<div class="qgroup">Deployment &amp; operations</div>
+<details><summary>RAG or fine-tuning for adding frequently changing company knowledge?</summary><p>RAG: re-index the documents instead of retraining, and the answers can cite sources. Fine-tuning suits style and behaviour.</p></details>
+<details><summary>What is the trade-off in chunk size?</summary><p>Small chunks retrieve precisely but lose context; large chunks keep context but give noisier embeddings.</p></details>
+<details><summary>Is FAISS a vector database?</summary><p>No, it is an in-memory similarity-search library without persistence, metadata filtering or access control.</p></details>
+<details><summary>Why add BM25 to vector search?</summary><p>Vector search misses exact matches such as IDs, names and rare terms. Hybrid search merges both rankings, e.g. with reciprocal rank fusion.</p></details>
+<details><summary>Bi-encoder vs cross-encoder: which reranks, and why?</summary><p>The cross-encoder: it reads query and document together, so it is more accurate, but it needs one pass per pair, so it only runs on the top candidates.</p></details>
+<details><summary>What does “lost in the middle” mean for prompt building?</summary><p>LLMs use the start and end of the context best, so put the most relevant chunks there.</p></details>
+<details><summary>What are the two levers for faster vector search?</summary><p>Smaller vectors (quantisation, PCA) and a smaller search scope (IVF, HNSW, LSH).</p></details>
+<details><summary>Does raising nprobe in IVF cost memory or time?</summary><p>Time, not memory: more cells are searched, so recall goes up and speed goes down.</p></details>
+<details><summary>A 128-dim float32 vector compressed with PQ (m = 8, 256 centroids): how many bytes?</summary><p>8 bytes (one byte per subvector ID), down from 512: 64× smaller.</p></details>
+<details><summary>How does PQ compute distances quickly?</summary><p>Asymmetric distance computation: a per-query table of distances from each query subvector to every centroid; each vector's distance is the sum of m lookups.</p></details>
+<details><summary>Why does HNSW use memory heavily?</summary><p>It stores the full vectors plus every node's neighbour links on each layer.</p></details>
+<details><summary>Should t-SNE be used to shrink embeddings for search?</summary><p>No. It is for visualisation, distorts distances and can't consistently map new queries. Use PCA, random projection or Matryoshka embeddings.</p></details>
+<details><summary>How should text-to-Cypher queries be made safe?</summary><p>Give the schema in the prompt, use a read-only connection, and validate generated queries before running them.</p></details>
+<details><summary>How does ColPali score a page?</summary><p>Late interaction: for each query-token vector, take its maximum similarity over the page's patch vectors, then sum over tokens.</p></details>
+<details><summary>VLM or vLLM for answering from page images?</summary><p>A VLM (vision-language model) such as Qwen2-VL. vLLM is an inference server.</p></details>
+<details><summary>What does a typical modern LLM architecture look like?</summary><p>Decoder-only Transformer, pre-LN with RMSNorm, RoPE positions, GQA or MLA attention, often MoE feed-forward layers.</p></details>
+<div class="qgroup">IX · Deployment &amp; operations</div>
+<details><summary>What stage closes the MLOps loop?</summary><p>Monitoring: what it finds (drift, quality drops) feeds back into data and retraining.</p></details>
 <details><summary>Does batching make each token faster?</summary><p>No. It raises throughput; per-request latency can rise slightly. For LLMs, continuous batching beats dynamic (time-window) batching.</p></details>
 <details><summary>At inference, which parallelism lowers latency, and which only adds throughput?</summary><p>Tensor parallelism lowers latency for big models; replicas (“data parallel”) only add throughput.</p></details>
 <details><summary>What signal should LLM autoscaling use?</summary><p>Queue depth or KV-cache usage, not CPU; and plan for cold starts while weights load.</p></details>
 <details><summary>Shadow vs canary deployment?</summary><p>Shadow sends real traffic to the new model without showing its answers; canary shows it to a growing share of users, gated on metrics, with rollback.</p></details>
+<details><summary>SSE or WebSockets for streaming LLM tokens?</summary><p>Usually Server-Sent Events: one-way, plain HTTP, used by the OpenAI API. WebSockets suit two-way connections such as voice.</p></details>
+<details><summary>Does async code batch requests?</summary><p>No. It lets one worker serve other requests while waiting on I/O; GPU batching is the model server's job.</p></details>
+<details><summary>Vertical vs horizontal scaling for LLMs?</summary><p>Vertical (bigger GPU) when the model doesn't fit; horizontal (more replicas) for throughput and resilience.</p></details>
+<details><summary>Managed platform or self-hosted vLLM?</summary><p>Managed (SageMaker, Vertex AI, Azure ML): little operations work, higher cost per token. Self-hosted vLLM: full control and lowest cost at scale, but you run the infrastructure.</p></details>
 <details><summary>Why run the Gradio UI and the model in separate pods?</summary><p>Otherwise every UI replica loads its own model copy on a GPU. Separate pods let cheap CPU UI pods and GPU model pods scale independently.</p></details>
 <details><summary>Deployment vs Service in Kubernetes?</summary><p>A Deployment keeps N replica pods running and handles rolling updates; a Service gives them a stable address and load-balances between them.</p></details>
 <details><summary>Why does an LLM pod need a readiness probe?</summary><p>Loading the model takes minutes; the probe keeps traffic away until the pod can answer.</p></details>
@@ -2887,15 +2902,12 @@ jobs:
 <details><summary>What is a quality gate in ML CI?</summary><p>A check that fails the build if the new model is worse than production (e.g. score below baseline or latency above the SLO).</p></details>
 <details><summary>Why not commit trained models to git?</summary><p>They bloat the repository and large files are rejected; use DVC, Git LFS, a model registry or the Hugging Face Hub.</p></details>
 <details><summary>What does continuous training (CT) add to CI/CD?</summary><p>Automatic retraining when new data arrives or drift is detected, because models degrade even when code doesn't change.</p></details>
-<details><summary>What stage closes the MLOps loop?</summary><p>Monitoring: what it finds (drift, quality drops) feeds back into data and retraining.</p></details>
-<details><summary>SSE or WebSockets for streaming LLM tokens?</summary><p>Usually Server-Sent Events: one-way, plain HTTP, used by the OpenAI API. WebSockets suit two-way connections such as voice.</p></details>
-<details><summary>Does async code batch requests?</summary><p>No. It lets one worker serve other requests while waiting on I/O; GPU batching is the model server's job.</p></details>
-<details><summary>Vertical vs horizontal scaling for LLMs?</summary><p>Vertical (bigger GPU) when the model doesn't fit; horizontal (more replicas) for throughput and resilience.</p></details>
 <details><summary>Data drift vs concept drift?</summary><p>Data drift: the inputs change. Concept drift: the right answer for the same input changes, which needs labels or a judge to detect.</p></details>
 <details><summary>What does the KS statistic measure?</summary><p>The largest gap between two samples' cumulative distributions of one numeric feature.</p></details>
 <details><summary>Is MLflow a production monitoring tool?</summary><p>No, it is for experiment tracking and the model registry; use Prometheus/Grafana, Evidently or Langfuse for monitoring.</p></details>
+<details><summary>How do registry aliases make rollback fast?</summary><p>Deployments point at an alias (e.g. “champion”); rolling back means moving the alias to the previous version.</p></details>
 <details><summary>Interpretability vs explainability?</summary><p>Interpretability: the model is understandable by design (linear models, small trees). Explainability: post-hoc explanations of black boxes (SHAP, LIME).</p></details>
-<div class="qgroup">Agents &amp; tool use</div>
+<div class="qgroup">X · Agents &amp; tool use</div>
 <details><summary>How many MCP clients does a host connected to three servers run?</summary><p>Three: each client keeps a 1:1 connection with one server.</p></details>
 <details><summary>stdio vs Streamable HTTP?</summary><p>stdio: the server runs locally as a subprocess of the host. Streamable HTTP: the server runs remotely over the network. Neither limits the number of servers.</p></details>
 <details><summary>Does the LLM call the MCP server directly?</summary><p>No. It proposes a tool call; the host and client execute it via tools/call and return the result as context.</p></details>
@@ -4930,25 +4942,37 @@ function invPhi(p){const a=[-39.6968302866538,220.946098424521,-275.928510446969
 
 /* heights */
 (function(){
-  const svg=document.getElementById("fig-heights");const A=arrowDefs(svg);
+  const svg=document.getElementById("fig-heights");
   const d=[175,180,140,140,135,160,135],n=d.length,m=d.reduce((a,b)=>a+b)/n,s=Math.sqrt(d.reduce((a,x)=>a+(x-m)**2,0)/(n-1));
-  const st=d.slice().sort((a,b)=>a-b),med=st[3],q1=st[1],q3=st[5];
-  const X=v=>40+(v-120)/(195-120)*520,y=120;
-  el("line",{x1:X(120),x2:X(195),y1:y+40,y2:y+40,class:"ax"},svg);
-  for(let v=120;v<=190;v+=10){el("line",{x1:X(v),x2:X(v),y1:y+40,y2:y+45,class:"ax"},svg);el("text",{x:X(v),y:y+60,"text-anchor":"middle",class:"t"},svg,v+" cm");}
-  el("rect",{x:X(m-s),y:y-50,width:X(m+s)-X(m-s),height:76,class:"f-soft2",style:"opacity:.55"},svg);
-  el("text",{x:X(m+s)-4,y:y-38,"text-anchor":"end",class:"t",style:"font-size:10px"},svg,"mean ± 1 s");
-  el("rect",{x:X(q1),y:y-14,width:X(q3)-X(q1),height:28,rx:3,style:"fill:none;stroke:var(--ink);stroke-width:1.6"},svg);
-  el("line",{x1:X(med),x2:X(med),y1:y-14,y2:y+14,style:"stroke:var(--ink);stroke-width:3"},svg);
-  el("line",{x1:X(st[0]),x2:X(q1),y1:y,y2:y,style:"stroke:var(--ink)"},svg);el("line",{x1:X(q3),x2:X(st[6]),y1:y,y2:y,style:"stroke:var(--ink)"},svg);
-  const seen={};d.forEach(v=>{seen[v]=(seen[v]||0)+1;el("circle",{cx:X(v),cy:y+28-seen[v]*0,r:5,class:"f-acc",style:"opacity:.85",transform:`translate(0 ${-(seen[v]-1)*12})`},svg);});
-  el("path",{d:`M${X(m)} ${y-24} l-6 -10 h12 z`,class:"f-warn"},svg);
-  el("text",{x:X(m),y:y-60,"text-anchor":"middle",class:"tk",style:"font-size:11.5px"},svg,"mean "+m.toFixed(1));
-  el("text",{x:X(med)-8,y:y-22,"text-anchor":"end",class:"tk",style:"font-size:11.5px"},svg,"median "+med);
-  el("text",{x:X(q1),y:y+80,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"Q1 = "+q1);
-  el("text",{x:X(q3),y:y+80,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"Q3 = "+q3);
-  el("text",{x:(X(q1)+X(q3))/2,y:y+96,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"IQR = "+(q3-q1));
-  el("text",{x:20,y:24,class:"t"},svg,"z(140) = (140 − "+m.toFixed(1)+") / "+s.toFixed(1)+" = "+((140-m)/s).toFixed(2));
+  const st=d.slice().sort((a,b)=>a-b),med=st[3],q1=(st[0]+st[1]+st[2])/3===st[1]?st[1]:st[1],q3=st[5];
+  const X=v=>50+(v-125)/(190-125)*500;
+  const yBox=96,yDot=168,yAx=190;
+  /* mean ± 1 s bracket */
+  el("line",{x1:X(m-s),x2:X(m+s),y1:44,y2:44,style:"stroke:var(--accent2);stroke-width:2"},svg);
+  [m-s,m+s].forEach(v=>el("line",{x1:X(v),x2:X(v),y1:38,y2:50,style:"stroke:var(--accent2);stroke-width:2"},svg));
+  el("text",{x:X(m+s)+6,y:48,class:"t",style:"font-size:10.5px;fill:var(--accent2)"},svg,"mean ± 1 s = "+(m-s).toFixed(1)+" to "+(m+s).toFixed(1));
+  /* mean and median reference lines */
+  el("line",{x1:X(m),x2:X(m),y1:58,y2:yAx,style:"stroke:var(--warn);stroke-width:2;stroke-dasharray:5 4"},svg);
+  el("text",{x:X(m)+5,y:68,class:"tk",style:"font-size:11.5px;fill:var(--warn)"},svg,"mean "+m.toFixed(1));
+  el("text",{x:X(med)-5,y:68,"text-anchor":"end",class:"tk",style:"font-size:11.5px"},svg,"median "+med);
+  /* box plot */
+  el("line",{x1:X(st[0]),x2:X(st[6]),y1:yBox,y2:yBox,style:"stroke:var(--ink);stroke-width:1.4"},svg);
+  [st[0],st[6]].forEach(v=>el("line",{x1:X(v),x2:X(v),y1:yBox-8,y2:yBox+8,style:"stroke:var(--ink);stroke-width:1.4"},svg));
+  el("rect",{x:X(q1),y:yBox-14,width:X(q3)-X(q1),height:28,rx:3,class:"f-soft",style:"stroke:var(--ink);stroke-width:1.6"},svg);
+  el("line",{x1:X(med),x2:X(med),y1:yBox-14,y2:yBox+14,style:"stroke:var(--ink);stroke-width:3.5"},svg);
+  el("text",{x:(X(med)+X(q3))/2,y:yBox+4,"text-anchor":"middle",class:"t",style:"font-size:10.5px"},svg,"IQR = "+q3+" − "+q1+" = "+(q3-q1));
+  el("text",{x:X(q1),y:yBox+28,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"Q1 = min = "+q1);
+  el("text",{x:X(q3),y:yBox+28,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"Q3 = "+q3);
+  el("text",{x:X(st[6])+6,y:yBox+4,class:"t",style:"font-size:10px"},svg,"max "+st[6]);
+  /* dots, duplicates stacked */
+  const seen={};st.forEach(v=>{seen[v]=(seen[v]||0)+1;el("circle",{cx:X(v),cy:yDot-(seen[v]-1)*13,r:5.5,class:"f-acc"},svg);});
+  /* z of 140 */
+  el("text",{x:X(140),y:yDot-30,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"z(140) = "+((140-m)/s).toFixed(2).replace("-","−"));
+  /* axis */
+  el("line",{x1:X(125),x2:X(190),y1:yAx,y2:yAx,class:"ax"},svg);
+  for(let v=130;v<=190;v+=10){el("line",{x1:X(v),x2:X(v),y1:yAx,y2:yAx+5,class:"ax"},svg);el("text",{x:X(v),y:yAx+19,"text-anchor":"middle",class:"t"},svg,v+" cm");}
+  el("text",{x:14,y:yBox+4,class:"t",style:"font-size:10px"},svg,"box plot");
+  el("text",{x:14,y:yDot+4,class:"t",style:"font-size:10px"},svg,"data");
 })();
 
 /* empirical rule */
@@ -5066,6 +5090,7 @@ function invPhi(p){const a=[-39.6968302866538,220.946098424521,-275.928510446969
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <script>
+(function(){if(!window.katex)return;document.querySelectorAll(".tex").forEach(function(el){try{katex.render(el.textContent,el,{displayMode:false,output:"htmlAndMathml",throwOnError:false});}catch(e){}});})();
 (function(){if(!window.katex)return;document.querySelectorAll(".eq .math").forEach(function(el){
   try{var t=el.textContent;katex.render(t,el,{displayMode:true,output:"htmlAndMathml",throwOnError:false});el.setAttribute("data-tex",t);}catch(e){}});})();
 </script>
