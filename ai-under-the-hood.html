@@ -1211,7 +1211,7 @@ details.more summary{cursor:pointer;color:var(--accent);font-weight:600;font-siz
 <h2><span class="n">36</span>Attention</h2>
 <h3>Self-attention</h3>
 <p>Each token builds a <strong>contextual representation</strong> by weighing every other token in the same sequence, all positions in parallel. In <strong>self-attention</strong>, queries, keys and values all come from the same sequence X:</p>
-<div class="eq"><div class="math">\begin{aligned} &amp;Q=XW_Q,\quad K=XW_K,\quad V=XW_V\\ &amp;\text{Attention}(Q,K,V) = \text{softmax}\!\Big(\frac{QK^\top}{\sqrt{d_k}}\Big)V\end{aligned}</div><span class="c">Each query is compared with every key; the softmax turns the scores into weights that sum to 1 per row; the output mixes the values with those weights. Dividing by √d_k stops large dot products from saturating the softmax.</span></div>
+<div class="eq"><div class="math">\begin{aligned} &amp;Q=XW_Q,\quad K=XW_K,\quad V=XW_V\\ &amp;\small X\in\mathbb R^{n\times d_{\text{model}}},\ \ W_Q,W_K\in\mathbb R^{d_{\text{model}}\times d_k},\ \ W_V\in\mathbb R^{d_{\text{model}}\times d_v},\ \ QK^\top\in\mathbb R^{n\times n}\\ &amp;\text{Attention}(Q,K,V) = \text{softmax}\!\Big(\frac{QK^\top}{\sqrt{d_k}}\Big)V\end{aligned}</div><span class="c">n = number of tokens. Each query is compared with every key; the softmax turns the scores into weights that sum to 1 per row; the output mixes the values with those weights. Dividing by √d_k stops large dot products from saturating the softmax.</span></div>
 <div class="tbl"><table>
 <tr><th>Term</th><th>Meaning</th></tr>
 <tr><td><strong>Scaled dot-product attention</strong></td><td>The scoring formula above. Used by every variant below.</td></tr>
@@ -1229,7 +1229,7 @@ details.more summary{cursor:pointer;color:var(--accent);font-weight:600;font-siz
 
 <h3>Multi-head attention</h3>
 <p>Run several attentions in parallel, each with its own learned projections, then <strong>concatenate</strong> the results and mix them with an output projection. Each head can focus on a different kind of relation (syntax, coreference, nearby words) in a different representation subspace.</p>
-<div class="eq"><div class="math">\begin{aligned} \text{head}_i &amp;= \text{Attention}(XW_Q^{i},\, XW_K^{i},\, XW_V^{i})\\ \text{MultiHead}(X) &amp;= \text{Concat}(\text{head}_1,\dots,\text{head}_h)\,W_O\end{aligned}</div><span class="c">Each head works in d_head = d_model / h dimensions, so h heads cost about the same as one full-size head.</span></div>
+<div class="eq"><div class="math">\begin{aligned} \text{head}_i &amp;= \text{Attention}(XW_Q^{i},\, XW_K^{i},\, XW_V^{i})\\ \text{MultiHead}(X) &amp;= \text{Concat}(\text{head}_1,\dots,\text{head}_h)\,W_O\\ &amp;\small W_Q^{i},W_K^{i},W_V^{i}\in\mathbb R^{d_{\text{model}}\times d_{\text{head}}},\ \ W_O\in\mathbb R^{h\,d_{\text{head}}\times d_{\text{model}}}\end{aligned}</div><span class="c">Each head works in d_head = d_model / h dimensions, so h heads cost about the same as one full-size head.</span></div>
 <figure>
   <div class="scroll"><svg id="fig-mha" viewBox="0 0 600 260" role="img" aria-label="Input X goes into h parallel heads, each with its own Q, K, V projections and attention; outputs are concatenated and projected by W_O"></svg></div>
   <figcaption><b>Figure 45.</b> Multi-head attention: parallel heads, concatenation, output projection.</figcaption>
@@ -1272,11 +1272,11 @@ details.more summary{cursor:pointer;color:var(--accent);font-weight:600;font-siz
 </figure>
 <h3>How a token is routed</h3>
 <ol>
-  <li><strong>Router input:</strong> the token's hidden state x. The router is usually a linear layer followed by a softmax, trained together with the rest of the network. It decides <em>before</em> seeing any expert output.</li>
+  <li><strong>Router input:</strong> the token's hidden state x. The router is usually a linear layer followed by a softmax, trained together with the rest of the network. It decides <em>before</em> seeing any expert output. It is not a full feed-forward network: a single matrix maps x to one score per expert (output size = number of experts), and the softmax turns these scores into weights, of which the top-k are kept.</li>
   <li><strong>Expert computation:</strong> the selected experts each process the same x with their own weights.</li>
   <li><strong>Combination:</strong> their outputs are summed, weighted by the router's scores, and passed on to the next layer.</li>
 </ol>
-<div class="eq"><div class="math">\begin{aligned} g &amp;= \text{softmax}(W_r x) &amp;&amp; \text{one score per expert}\\ y &amp;= \sum_{i\in \text{TopK}(g)} g_i\,E_i(x) &amp;&amp; \text{weighted sum of chosen experts}\end{aligned}</div><span class="c">The top-k scores are often renormalised to sum to 1. Variants: noisy top-k gating (Shazeer et al., 2017) adds noise to encourage exploration; Switch Transformer routes each token to a single expert (top-1); DeepSeek-V3 uses sigmoid gates.</span></div>
+<div class="eq"><div class="math">\begin{aligned} g &amp;= \text{softmax}(W_r x),\ \ W_r\in\mathbb R^{N\times d_{\text{model}}} &amp;&amp; \text{one score per expert } (N\text{ experts})\\ y &amp;= \sum_{i\in \text{TopK}(g)} g_i\,E_i(x) &amp;&amp; \text{weighted sum of chosen experts}\end{aligned}</div><span class="c">The top-k scores are often renormalised to sum to 1. Variants: noisy top-k gating (Shazeer et al., 2017) adds noise to encourage exploration; Switch Transformer routes each token to a single expert (top-1); DeepSeek-V3 uses sigmoid gates.</span></div>
 <ul>
   <li>MoE layers may replace every FFN or only some. DeepSeek-V3, for example, keeps its first 3 layers dense.</li>
   <li>Experts tend to specialise in token types and syntax patterns rather than clear topics such as “maths” or “biology”.</li>
@@ -1345,10 +1345,16 @@ details.more summary{cursor:pointer;color:var(--accent);font-weight:600;font-siz
 <div class="eq"><div class="math">\text{KV cache} = 2 \times n_{\text{layers}} \times n_{\text{kv\_heads}} \times d_{\text{head}} \times \text{seq\_len} \times \text{bytes per value}</div><span class="c">The 2 is for keys and values. The variants below shrink n_kv_heads (GQA, MQA) or replace K and V with a compressed latent (MLA).</span></div>
 
 <h3>MHA, GQA and MQA</h3>
-<p><strong>Grouped-query attention</strong> lets groups of query heads share one key–value head. Query heads stay separate; only K and V are shared.</p>
+<p>MHA, MQA, and GQA all compute attention in the same way; they differ only in how the Key (K) and Value (V) heads are shared across query heads.</p>
+<ul>
+  <li><strong>Multi-Head Attention (MHA):</strong> Each query head has its own K and V heads, so the number of KV heads equals the number of query heads (h).</li>
+  <li><strong>Multi-Query Attention (MQA):</strong> All query heads share a single K and V head (1 KV head). This reduces the KV cache size by a factor of h, although it may slightly affect model quality.</li>
+  <li><strong>Grouped-Query Attention (GQA):</strong> Query heads are divided into g groups, with each group sharing one K and V head. For example, with 32 query heads and 8 KV heads, each KV head is shared by 4 query heads.</li>
+</ul>
+<p>Importantly, query heads always remain separate. Only the K and V heads are shared, reducing the amount of information that needs to be stored in the KV cache.</p>
 <figure>
-  <div class="scroll"><svg id="fig-gqa" viewBox="0 0 600 250" role="img" aria-label="Four query heads connected to four, two, or one key-value heads for MHA, GQA and MQA"></svg></div>
-  <figcaption><b>Figure 50.</b> With 4 query heads: MHA keeps 4 KV heads, GQA shares 2, MQA shares 1.</figcaption>
+  <div class="scroll"><svg id="fig-gqa" style="min-width:0" viewBox="0 0 600 270" role="img" aria-label="Eight query heads connected to eight, one, or four key and value heads for MHA, MQA and GQA"></svg></div>
+  <figcaption><b>Figure 50.</b> With 8 query heads: MHA has 8 K/V heads (one per query), MQA has 1 K/V head shared by all 8 queries, and GQA has 4 K/V heads, each shared by a group of 2 queries.</figcaption>
 </figure>
 <div class="tbl"><table>
 <tr><th>Variant</th><th>KV heads</th><th>KV cache</th><th>Quality</th></tr>
@@ -1368,9 +1374,9 @@ details.more summary{cursor:pointer;color:var(--accent);font-weight:600;font-siz
   <figcaption><b>Figure 51.</b> What gets cached per token in standard attention versus MLA.</figcaption>
 </figure>
 <ol>
-  <li><strong>Down-project</strong> each token to a latent vector: c_KV = W_DKV · x, with d_c ≪ n_heads × d_head.</li>
+  <li><strong>Down-project</strong> each token to a latent vector: c_KV = W_DKV · x, with W_DKV of size d_c × d_model and d_c ≪ n_heads × d_head.</li>
   <li><strong>Cache only c_KV.</strong></li>
-  <li><strong>Up-project</strong> when needed: K = W_UK · c_KV, V = W_UV · c_KV.</li>
+  <li><strong>Up-project</strong> when needed: K = W_UK · c_KV, V = W_UV · c_KV, with W_UK and W_UV of size (n_heads × d_head) × d_c.</li>
 </ol>
 <ul>
   <li><strong>The up-projection can be skipped at inference:</strong> W_UK can be merged into the query projection and W_UV into the output projection, so full K and V are never built.</li>
@@ -1842,7 +1848,7 @@ details.more summary{cursor:pointer;color:var(--accent);font-weight:600;font-siz
 </figure>
 
 <h3>GPU-side techniques</h3>
-<p><strong>FlashAttention</strong> splits attention into <strong>tiles</strong> that fit in fast on-chip memory (SRAM) and <strong>never writes the n × n score matrix</strong> to slower GPU memory (HBM). It is IO-aware and <strong>exact</strong>.</p>
+<p><strong>FlashAttention</strong> gives <strong>exactly</strong> the same result as normal attention, but splits Q, K and V into small <strong>blocks</strong> that fit in the GPU's fast on-chip memory (SRAM) and computes the softmax block by block with a running max and sum (<strong>online softmax</strong>), so the huge <strong>n × n attention matrix is never written</strong> to slow GPU memory (HBM). This cuts memory from O(n²) to O(n) and makes attention about 2–4× faster, because the bottleneck was moving data, not doing the arithmetic.</p>
 <figure>
   <div class="scroll"><svg id="fig-flash" viewBox="0 0 600 250" role="img" aria-label="Standard attention writes the full score matrix to slow HBM and reads it back; FlashAttention loads blocks of Q, K and V into fast SRAM, computes there, and writes only the output"></svg></div>
   <figcaption><b>Figure 74.</b> The saving is memory traffic, not arithmetic: the same maths, far fewer slow reads and writes.</figcaption>
@@ -1957,7 +1963,7 @@ details.more summary{cursor:pointer;color:var(--accent);font-weight:600;font-siz
   <li><strong>Initialisation:</strong> A is random (Gaussian), <strong>B is zero</strong>, so ΔW = 0 at the start and training begins exactly from the pretrained model.</li>
   <li><strong>Parameter savings:</strong> r·(d + k) instead of d·k. With d = k = 4096 and r = 8: 65,536 versus 16.8M, about 0.4%. Memory is saved mainly on gradients and optimiser states (Adam's m and v).</li>
   <li><strong>No extra inference cost:</strong> after training, merge W′ = W + (α/r)·BA, or keep adapters separate and swap them per task.</li>
-  <li><strong>Where:</strong> the original paper (Hu et al., 2021) adapted the attention projections W_q and W_v; today often all linear layers.</li>
+  <li><strong>Where:</strong> the original paper (Hu et al., 2021) adapted the attention projections W_q and W_v (each d_model × d_model); today often all linear layers.</li>
   <li><strong>QLoRA</strong> keeps the frozen base model in 4-bit precision, making fine-tuning of very large models possible on one GPU.</li>
   <li>Fewer trainable parameters means less capacity to memorise, but LoRA can still overfit on small datasets.</li>
 </ul>
@@ -3546,27 +3552,27 @@ function arr(svg,A,x1,y1,x2,y2,cls="l-mut",m="ink"){return el("line",{x1,y1,x2,y
   el("text",{x:300,y:252,"text-anchor":"middle",class:"t"},svg,"each head: its own projections, d_head = d_model / h");
 })();
 
-/* Fig 24 — MHA / GQA / MQA */
+/* Fig 24 — MHA / MQA / GQA */
 (function(){
   const svg=document.getElementById("fig-gqa");
-  [["MHA",4,"cache ×1"],["GQA",2,"cache ×½"],["MQA",1,"cache ×¼"]].forEach(([name,g,cache],p)=>{
-    const ox=p*200+15, qx=i=>ox+12+i*44, qw=30;
-    el("text",{x:ox+85,y:20,"text-anchor":"middle",class:"tk"},svg,name);
-    const per=4/g;
+  const H=8,bw=14,step=23,yV=44,yK=96,yQ=172,bh=34;
+  const st={V:"fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.5",K:"fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.5",Q:"fill:var(--accent2-soft);stroke:var(--accent2);stroke-width:1.5"};
+  const rect=(x,y,t)=>el("rect",{x:x-bw/2,y,width:bw,height:bh,rx:5,style:st[t]},svg);
+  [["MHA",8],["MQA",1],["GQA",4]].forEach(([name,g],p)=>{
+    const ox=14+p*200, qx=i=>ox+bw/2+i*step+4, per=H/g;
+    el("text",{x:ox+88,y:24,"text-anchor":"middle",class:"tk",style:"font-size:15px"},svg,name);
     for(let k=0;k<g;k++){
       const members=[...Array(per)].map((_,m)=>k*per+m);
-      const cx=members.reduce((a,i)=>a+qx(i)+qw/2,0)/per;
-      el("rect",{x:cx-19,y:42,width:38,height:32,rx:4,class:"f-wsoft",style:"stroke:var(--warn)"},svg);
-      el("text",{x:cx,y:62,"text-anchor":"middle",class:"tk",style:"font-size:11.5px"},svg,"k, v");
-      members.forEach(i=>el("line",{x1:qx(i)+qw/2,y1:140,x2:cx,y2:74,class:"ax",style:"stroke:var(--muted)"},svg));
+      const cx=members.reduce((a,i)=>a+qx(i),0)/per;
+      rect(cx,yV,"V");rect(cx,yK,"K");
+      members.forEach(i=>el("line",{x1:qx(i),y1:yQ,x2:cx,y2:yK+bh,style:"stroke:var(--muted);stroke-width:1.4;stroke-dasharray:2 3"},svg));
     }
-    for(let i=0;i<4;i++){
-      el("rect",{x:qx(i),y:140,width:qw,height:30,rx:4,class:"f-soft2",style:"stroke:var(--accent2)"},svg);
-      el("text",{x:qx(i)+qw/2,y:159,"text-anchor":"middle",class:"tk",style:"font-size:11.5px"},svg,"q"+(i+1));
-    }
-    el("text",{x:ox+85,y:200,"text-anchor":"middle",class:"t"},svg,g+(g===1?" KV head":" KV heads"));
-    el("text",{x:ox+85,y:220,"text-anchor":"middle",class:"tk"},svg,cache);
+    for(let i=0;i<H;i++)rect(qx(i),yQ,"Q");
+    el("text",{x:ox+88,y:228,"text-anchor":"middle",class:"t"},svg,g+(g===1?" KV head":" KV heads")+" · cache ×"+(g===8?"1":g===1?"1/8":"1/2"));
   });
+  [["V","values"],["K","keys"],["Q","queries"]].forEach(([t,l],i)=>{const x=190+i*85;
+    el("rect",{x,y:246,width:10,height:16,rx:3,style:st[t]},svg);
+    el("text",{x:x+16,y:259,class:"t"},svg,l);});
 })();
 
 /* Fig 25 — MLA vs standard caching */
