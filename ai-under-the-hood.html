@@ -2569,8 +2569,8 @@ details.more summary{cursor:pointer;color:var(--accent);font-weight:600;font-siz
 <h2><span class="n">65</span>Deploying LLMs in production</h2>
 <p>Production work runs along three axes: making each request fast, building infrastructure that scales, and operating the system safely. The first axis is covered in earlier sections; this one links to them and adds the rest.</p>
 <figure>
-  <div class="scroll"><svg id="fig-axes" viewBox="0 0 600 344" role="img" aria-label="A grid with three layers as rows (model and serving engine, infrastructure, operations) and four goals as columns (lower latency, higher throughput, lower cost, reliability); each cell lists the techniques that serve that goal on that layer"></svg></div>
-  <figcaption><b>Figure 97.</b> The three axes of LLM deployment split by goal. Rows are the layers (the model runs on the infrastructure; operations wraps both); columns are what each technique improves. Some techniques help several goals: quantization cuts both latency and cost. Section numbers point to where each layer is covered.</figcaption>
+  <div class="scroll"><svg id="fig-axes" viewBox="0 0 690 432" role="img" aria-label="A grid with four layers as rows (model and serving engine, infrastructure, delivery with CI/CD and MLOps, monitoring) and five goals as columns (lower latency, higher throughput, lower cost, reliability, reproducibility); each cell lists the techniques that serve that goal on that layer"></svg></div>
+  <figcaption><b>Figure 97.</b> LLM deployment by layer and goal. Rows are the layers: the model runs on the infrastructure, delivery (CI/CD, MLOps) tests and releases changes, and monitoring watches the live system. Columns are what each technique improves; some help several goals, e.g. quantization cuts both latency and cost. Even at temperature 0, outputs can differ slightly between runs, because batching changes the GPU's floating-point arithmetic; exact reproducibility needs batch-invariant kernels or saved outputs.</figcaption>
 </figure>
 
 <h3>Axis 1: inference latency</h3>
@@ -5331,32 +5331,33 @@ function arr(svg,A,x1,y1,x2,y2,cls="l-mut",m="ink"){return el("line",{x1,y1,x2,y
   el("text",{x:tx,y:212,class:"t",style:"font-size:10.5px"},svg,"locks onto one mode");
 })();
 
-/* three axes x four goals */
+/* deployment: four layers x five goals */
 (function(){
-  const svg=document.getElementById("fig-axes");const A=arrowDefs(svg);
+  const svg=document.getElementById("fig-axes");
   const n=id=>{const e=document.querySelector("#"+id+" h2 .n");return e?e.textContent:"?";};
-  const cols=[["Lower latency","TTFT · TPOT","var(--accent2)"],["Higher throughput","tokens/s, users","var(--accent)"],["Lower cost","cost per token","var(--warn)"],["Reliability","uptime · quality","var(--bad)"]];
-  const rows=[["Model & engine","sections "+n("inference-basics")+"–"+n("inference-map"),"var(--accent2-soft)",
-      [["Prefix caching","Speculative decoding","Quantization"],["Continuous batching","PagedAttention","GQA / MLA"],["Quantization","Distillation / SLM"],[]]],
-    ["Infrastructure","sections "+n("realtime")+"–"+n("kubernetes"),"var(--warn-soft)",
-      [["Tensor parallelism","Fast GPU memory","Warm replicas"],["More replicas","Autoscale on queue","Bigger GPU memory"],["Right-size the GPU","Scale to zero"],["Multi-region","Health checks"]]],
-    ["Operations","sections "+n("cicd")+"–"+n("governance"),"var(--accent-soft)",
-      [["SLOs on TTFT, TPOT","Load tests (p95)"],["Capacity tests","Queue alerts"],["Response caching","Track cost/token"],["Canary / shadow","Rollbacks","Drift, guardrails"]]]];
-  const x0=112,cw=121,y0=46,rh=96;
+  const cols=[["Lower latency","TTFT · TPOT","var(--accent2)"],["Higher throughput","tokens/s, users","var(--accent)"],["Lower cost","cost per token","var(--warn)"],["Reliability","uptime · quality","var(--bad)"],["Reproducibility","same result again","var(--muted)"]];
+  const rows=[["Model & engine",["sections "+n("inference-basics")+"–"+n("inference-map"),"runs on ↓"],"var(--accent2-soft)",
+      [["Prefix caching","Speculative dec.","Quantization"],["Continuous batching","PagedAttention","GQA / MLA"],["Quantization","Distillation / SLM"],[],["Pinned model","Pinned tokenizer","Fixed seed, T = 0"]]],
+    ["Infrastructure",["sections "+n("realtime")+"–"+n("kubernetes")],"var(--warn-soft)",
+      [["Tensor parallelism","Fast GPU memory","Warm replicas"],["More replicas","Autoscale on queue","Bigger GPU memory"],["Right-size the GPU","Scale to zero"],["Multi-region","Health checks"],["Pinned images","Same GPU & CUDA","Infra as code"]]],
+    ["Delivery",["CI/CD · MLOps","sections "+n("mlops")+", "+n("cicd")],"var(--accent-soft)",
+      [["Latency tests in CI"],["Load tests"],["Cost per release"],["Canary / shadow","Eval gates","Rollbacks"],["Versioned pipelines","Model registry"]]],
+    ["Monitoring",["live system","sections "+n("drift")+"–"+n("governance")],"var(--surface)",
+      [["SLOs on TTFT, TPOT","p95 / p99 alerts"],["Queue alerts","GPU-use alerts"],["Track cost/token","Response caching"],["Drift alerts","Guardrails"],["Versions in logs"]]]];
+  const x0=118,cw=113,y0=46,rh=94;
   cols.forEach(([t,sub,c],j)=>{const x=x0+j*cw+cw/2;
-    el("text",{x,y:18,"text-anchor":"middle",class:"tk",style:`font-size:11.5px;fill:${c}`},svg,t);
+    el("text",{x,y:18,"text-anchor":"middle",class:"tk",style:`font-size:11.5px;fill:${c==="var(--muted)"?"var(--ink)":c}`},svg,t);
     el("text",{x,y:32,"text-anchor":"middle",class:"t",style:"font-size:9.5px"},svg,sub);});
-  rows.forEach(([name,ref,bg,cells],i)=>{const y=y0+i*rh;
-    el("rect",{x:6,y,width:588,height:rh-8,rx:8,style:`fill:${bg};stroke:var(--rule)`},svg);
-    el("text",{x:14,y:y+28,class:"tk",style:"font-size:11.5px"},svg,name);
-    el("text",{x:14,y:y+43,class:"t",style:"font-size:9.5px"},svg,ref);
-    const note=["runs on ↓","","wraps both"][i];if(note)el("text",{x:14,y:y+58,class:"t",style:"font-size:9.5px"},svg,note);
+  rows.forEach(([name,notes,bg,cells],i)=>{const y=y0+i*rh;
+    el("rect",{x:6,y,width:x0+5*cw-2,height:rh-8,rx:8,style:`fill:${bg};stroke:var(--rule)`},svg);
+    el("text",{x:14,y:y+26,class:"tk",style:"font-size:11.5px"},svg,name);
+    notes.forEach((t,k)=>el("text",{x:14,y:y+41+k*14,class:"t",style:"font-size:9.5px"},svg,t));
     cells.forEach((list,j)=>{const cx=x0+j*cw;
       if(!list.length){el("text",{x:cx+cw/2,y:y+46,"text-anchor":"middle",class:"t"},svg,"—");return;}
-      list.forEach((t,k)=>{const yy=y+10+k*25+(3-list.length)*12.5;
+      list.forEach((t,k)=>{const yy=y+8+k*25+(3-list.length)*12.5;
         el("rect",{x:cx+4,y:yy,width:cw-8,height:20,rx:10,style:`fill:var(--surface);stroke:${cols[j][2]}`},svg);
-        el("text",{x:cx+cw/2,y:yy+14,"text-anchor":"middle",style:"font:600 10px var(--body);fill:var(--ink)"},svg,t);});});});
-  el("text",{x:300,y:y0+3*rh+6,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"Operations measures every column and shows which layer to tune next.");
+        el("text",{x:cx+cw/2,y:yy+14,"text-anchor":"middle",style:"font:600 9.5px var(--body);fill:var(--ink)"},svg,t);});});});
+  el("text",{x:(x0+5*cw)/2+3,y:y0+4*rh+6,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"Monitoring measures every column and shows which layer to tune next.");
 })();
 
 /* request path */
