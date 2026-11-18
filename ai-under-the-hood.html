@@ -252,17 +252,19 @@ details.more summary{cursor:pointer;color:var(--accent);font-weight:600;font-siz
     <li><a href="#vector-index"><span class="tn">62</span>Vector search indexes</a></li>
     <li><a href="#graph-mm-rag"><span class="tn">63</span>Graph &amp; multimodal RAG</a></li>
   </ol></details>
-  <details class="grp"><summary>XI · Deployment &amp; operations</summary><ol>
-    <li><a href="#mlops"><span class="tn">64</span>The MLOps lifecycle</a></li>
-    <li><a href="#deployment"><span class="tn">65</span>Deploying in production</a></li>
-    <li><a href="#realtime"><span class="tn">66</span>Batch &amp; real-time serving</a></li>
-    <li><a href="#serving-options"><span class="tn">67</span>Model serving options</a></li>
-    <li><a href="#kubernetes"><span class="tn">68</span>Serving on Kubernetes</a></li>
+  <details class="grp"><summary>XI · Serving in production</summary><ol>
+    <li><a href="#deployment"><span class="tn">64</span>Deploying in production</a></li>
+    <li><a href="#realtime"><span class="tn">65</span>Batch &amp; real-time serving</a></li>
+    <li><a href="#serving-options"><span class="tn">66</span>Model serving options</a></li>
+    <li><a href="#kubernetes"><span class="tn">67</span>Serving on Kubernetes</a></li>
+  </ol></details>
+  <details class="grp"><summary>XII · MLOps</summary><ol>
+    <li><a href="#mlops"><span class="tn">68</span>The MLOps lifecycle</a></li>
     <li><a href="#cicd"><span class="tn">69</span>CI/CD for ML</a></li>
     <li><a href="#drift"><span class="tn">70</span>Drift &amp; monitoring</a></li>
     <li><a href="#governance"><span class="tn">71</span>Versioning &amp; governance</a></li>
   </ol></details>
-  <details class="grp"><summary>XII · Agents &amp; tool use</summary><ol>
+  <details class="grp"><summary>XIII · Agents &amp; tool use</summary><ol>
     <li><a href="#mcp"><span class="tn">72</span>Model Context Protocol</a></li>
     <li><a href="#agent-memory"><span class="tn">73</span>Agent memory</a></li>
   </ol></details>
@@ -292,7 +294,7 @@ details.more summary{cursor:pointer;color:var(--accent);font-weight:600;font-siz
 <tr><td><strong>New to ML</strong></td><td><a href="#part-1">Part I</a> to <a href="#part-4">Part IV</a>, then <a href="#part-5">Part V</a></td></tr>
 <tr><td><strong>Building with LLMs</strong></td><td><a href="#part-6">VI</a> Transformers, <a href="#part-8">VIII</a> inference, <a href="#part-9">IX</a> fine-tuning, <a href="#part-10">X</a> RAG</td></tr>
 <tr><td><strong>Training large models</strong></td><td><a href="#part-4">IV</a> optimisation, <a href="#part-6">VI</a> Transformers, <a href="#part-7">VII</a> training at scale</td></tr>
-<tr><td><strong>Shipping to production</strong></td><td><a href="#part-8">VIII</a> inference, <a href="#part-11">XI</a> deployment, <a href="#part-12">XII</a> agents</td></tr>
+<tr><td><strong>Shipping to production</strong></td><td><a href="#part-8">VIII</a> inference, <a href="#part-11">XI</a> serving, <a href="#part-12">XII</a> MLOps, <a href="#part-13">XIII</a> agents</td></tr>
 <tr><td><strong>Review your knowledge</strong></td><td>The <strong>Key takeaways</strong> box at the end of each part, then <a href="#quiz">Check yourself</a></td></tr>
 </table></div>
 </section>
@@ -1862,6 +1864,14 @@ details.more summary{cursor:pointer;color:var(--accent);font-weight:600;font-siz
   <li><strong>Dynamic batching:</strong> still collects requests into batches, but without a fixed batch size. It sets a <strong>time window</strong> and processes whatever requests have arrived in that time.</li>
   <li><strong>Continuous batching:</strong> doesn't wait for the whole batch to finish. Each sequence finishes <strong>independently</strong> and is immediately replaced by a new one, like an assembly line where a new item is added as soon as one is done, keeping the line at full capacity (<a href="#fig-batching">Figure 68</a>).</li>
 </ul>
+<div class="tbl"><table>
+<tr><th></th><th>Static</th><th>Dynamic</th><th>Continuous</th></tr>
+<tr><td><strong>Groups</strong></td><td>A fixed number of requests</td><td>Whatever arrives within a time window (up to a maximum size)</td><td>Requests at every generation step</td></tr>
+<tr><td><strong>A slot frees when</strong></td><td>The whole batch finishes</td><td>The whole batch finishes</td><td>Any single sequence finishes</td></tr>
+<tr><td><strong>Waiting</strong></td><td>Can wait a long time for the batch to fill</td><td>At most the time window</td><td>New requests join at the next step</td></tr>
+<tr><td><strong>Typical in</strong></td><td>Offline batch jobs</td><td>Triton, classic model servers</td><td>vLLM, TGI, SGLang, TensorRT-LLM</td></tr>
+<tr><td><strong>Best for</strong></td><td>Offline work where latency doesn't matter</td><td><strong>Fixed-size outputs</strong> (classifiers, embedding models): every request takes about the same time</td><td><strong>LLM generation</strong>, where output lengths vary</td></tr>
+</table></div>
 <figure>
   <div class="scroll"><svg id="fig-batching" viewBox="0 0 600 374" role="img" aria-label="Token grid of four slots over eight steps. Static batching: after sequences S1, S3 and S4 end, their slots sit idle until S2 finishes. Continuous batching: new sequences S5, S6 and S7 take over freed slots at the next step, so seven sequences share the same time"></svg></div>
   <figcaption><b>Figure 68.</b> Four batch slots over eight decoding steps (T1–T8); each cell is one token. In static batching, slots freed by S1, S3 and S4 stay idle until S2 ends. In continuous batching, S5, S6 and S7 start as soon as a slot frees up, so the GPU stays busy. Layout after Anyscale's continuous-batching figure (Figure 3 in Modular's <a href="https://handbook.modular.com/inference-optimization/static-dynamic-continuous-batching/">LLM Inference Handbook</a>); sequence lengths are illustrative.</figcaption>
@@ -2542,54 +2552,50 @@ details.more summary{cursor:pointer;color:var(--accent);font-weight:600;font-siz
 </section>
 
 <!-- ============ PART VIII ============ -->
-<div class="part" id="part-11"><div class="k">Part XI</div><h2>Deployment &amp; operations</h2><p>Running ML and LLM systems in production: the MLOps lifecycle, serving, Kubernetes, CI/CD, monitoring, drift and governance.</p></div>
-
-<section id="mlops">
-<h2><span class="n">64</span>The MLOps lifecycle</h2>
-<p><strong>MLOps</strong> is a set of practices that streamline the whole machine-learning lifecycle, from data and development to deployment, monitoring and maintenance. It is a <strong>loop</strong>, not a line: what monitoring finds feeds back into data and retraining.</p>
-<figure>
-  <div class="scroll"><svg id="fig-mlops" viewBox="0 0 600 290" role="img" aria-label="A loop of six stages: data management, model development, CI/CD, model serving, monitoring and observability, governance; monitoring feeds back into data"></svg></div>
-  <figcaption><b>Figure 96.</b> The MLOps loop, with typical tools per stage and the section that covers each.</figcaption>
-</figure>
-<div class="tbl"><table>
-<tr><th>Stage</th><th>Does</th><th>Tools</th></tr>
-<tr><td><strong>Data management</strong></td><td>Collect, store, preprocess and <strong>version</strong> datasets</td><td>DVC, lakeFS (data versioning)</td></tr>
-<tr><td><strong>Model development</strong></td><td>Track experiments, ensure reproducibility</td><td>MLflow, Weights &amp; Biases</td></tr>
-<tr><td><strong>CI/CD</strong></td><td>Automate testing, training pipelines and model registries</td><td>GitHub Actions, MLflow registry</td></tr>
-<tr><td><strong>Model serving</strong></td><td>APIs, batch jobs, streaming; containers</td><td>FastAPI, vLLM, Kubernetes</td></tr>
-<tr><td><strong>Monitoring &amp; observability</strong></td><td>Accuracy, latency, drift, system metrics</td><td>Prometheus, Grafana, Evidently, Langfuse</td></tr>
-<tr><td><strong>Governance / responsible AI</strong></td><td>Compliance, fairness, explainability</td><td>WhyLabs, Fiddler, model cards</td></tr>
-</table></div>
-<ul>
-  <li><strong>Reproducibility</strong> runs through every stage: version data, code, dependencies and environments; use containers and automated pipelines; document every step and configuration.</li>
-</ul>
-</section>
+<div class="part" id="part-11"><div class="k">Part XI</div><h2>Serving in production</h2><p>Running models so users can call them: the deployment layers and goals, batch, streaming and real-time serving, serving platforms and Kubernetes.</p></div>
 
 <section id="deployment">
-<h2><span class="n">65</span>Deploying LLMs in production</h2>
-<p>Production work runs along three axes: making each request fast, building infrastructure that scales, and operating the system safely. The first axis is covered in earlier sections; this one links to them and adds the rest.</p>
+<h2><span class="n">64</span>Deploying LLMs in production</h2>
+<p>Production work happens on five layers: the <strong>model and serving engine</strong>, the <strong>API and serving pattern</strong> clients use to call it, the <strong>infrastructure</strong> it runs on, <strong>delivery</strong> (testing and releasing changes with CI/CD and MLOps), and <strong>monitoring</strong> the live system. On each layer, techniques serve one or more goals: lower latency, higher throughput, lower cost, reliability and reproducibility (<a href="#fig-axes">Figure 96</a>). The model layer is covered in <a href="#part-8">Part VIII</a>; this section links to it and adds the rest.</p>
 <figure>
-  <div class="scroll"><svg id="fig-axes" viewBox="0 0 690 432" role="img" aria-label="A grid with four layers as rows (model and serving engine, infrastructure, delivery with CI/CD and MLOps, monitoring) and five goals as columns (lower latency, higher throughput, lower cost, reliability, reproducibility); each cell lists the techniques that serve that goal on that layer"></svg></div>
-  <figcaption><b>Figure 97.</b> LLM deployment by layer and goal. Rows are the layers: the model runs on the infrastructure, delivery (CI/CD, MLOps) tests and releases changes, and monitoring watches the live system. Columns are what each technique improves; some help several goals, e.g. quantization cuts both latency and cost. Even at temperature 0, outputs can differ slightly between runs, because batching changes the GPU's floating-point arithmetic; exact reproducibility needs batch-invariant kernels or saved outputs.</figcaption>
+  <div class="scroll"><svg id="fig-axes" viewBox="0 0 690 581" role="img" aria-label="A grid with four layers as rows (model and serving engine, infrastructure, delivery with CI/CD and MLOps, monitoring) and five goals as columns (lower latency, higher throughput, lower cost, reliability, reproducibility); each cell lists the techniques that serve that goal on that layer"></svg></div>
+  <figcaption><b>Figure 96.</b> LLM deployment by layer and goal. Rows are the layers: the model, the API and serving pattern clients use to call it, the infrastructure it runs on, delivery (CI/CD, MLOps) that tests and releases changes, and monitoring that watches the live system. Columns are what each technique improves; some help several goals, e.g. quantization cuts both latency and cost. Even at temperature 0, outputs can differ slightly between runs, because batching changes the GPU's floating-point arithmetic; exact reproducibility needs batch-invariant kernels or saved outputs.</figcaption>
 </figure>
 
-<h3>Axis 1: inference latency</h3>
+<h3>Model and serving engine</h3>
 <ul>
-  <li><strong>Smaller models:</strong> quantization (INT8/INT4/FP8), pruning, <a href="#distillation">distillation</a>. All are lossy: “minimal accuracy loss”, not “preserved accuracy”, so measure quality on your task. For inference, run in <strong>FP16/BF16</strong> rather than FP32; “mixed precision” is a <a href="#single-gpu">training</a> term.</li>
-  <li><strong>Fast generation:</strong> <a href="#specdec">speculative decoding</a> and multi-token prediction, both lossless when the target verifies the draft.</li>
-  <li><strong>GPU optimisation:</strong> MQA/GQA shrink the <strong>KV cache</strong> (more requests fit, less memory traffic per step); FlashAttention and PagedAttention (<a href="#inference-map">section 55</a>).</li>
+  <li><strong>Lower latency:</strong> prefix caching, chunked prefill and FlashAttention cut TTFT (<a href="#paged">section 50</a>, <a href="#batching">section 51</a>, <a href="#flashattention">section 49</a>); speculative decoding and weight-only quantization cut TPOT (<a href="#specdec">section 52</a>). Serve in <strong>FP16/BF16</strong> rather than FP32; “mixed precision” is a <a href="#single-gpu">training</a> term.</li>
+  <li><strong>Higher throughput:</strong> continuous batching and PagedAttention let many requests share the GPU, and GQA/MLA models fit more requests because their KV cache is smaller (<a href="#efficient-attention">section 48</a>, <a href="#paged">section 50</a>, <a href="#batching">section 51</a>). Batching raises throughput, not per-token speed, and can make each request slightly slower. Classic servers such as Triton use dynamic batching; vLLM, TGI and SGLang use continuous batching.</li>
+  <li><strong>Lower cost:</strong> quantization, pruning and a smaller model (distillation, an <a href="#distillation">SLM</a>) need fewer or cheaper GPUs. All are lossy (“minimal accuracy loss”, not “preserved accuracy”), so measure quality on your task.</li>
+  <li><strong>Reliability:</strong> <strong>structured outputs</strong> (constrained decoding: the engine only allows tokens that keep the output valid JSON or match a schema; supported by vLLM and SGLang), so downstream code never receives malformed output; a small <strong>guardrail model</strong> (e.g. Llama Guard) that checks inputs and outputs for unsafe content; and a <strong>fallback model</strong> that takes over when the main one times out or fails.</li>
+  <li><strong>Reproducibility:</strong> pin the exact model weights and tokenizer version, and use a fixed seed or temperature 0 for evaluation. Even then, outputs can differ slightly, because batching changes the GPU's floating-point order.</li>
 </ul>
-<h3>Batching: dynamic vs continuous</h3>
-<div class="tbl"><table>
-<tr><th></th><th>Dynamic batching</th><th>Continuous batching</th></tr>
-<tr><td><strong>Groups</strong></td><td>Requests arriving within a short time window</td><td>Requests at every generation step</td></tr>
-<tr><td><strong>A slot frees when</strong></td><td>The whole batch finishes</td><td>Any single request finishes</td></tr>
-<tr><td><strong>Typical in</strong></td><td>Triton, classic model servers</td><td>vLLM, TGI, SGLang</td></tr>
-<tr><td><strong>Best for</strong></td><td>Fixed-size outputs (classification, embeddings)</td><td>LLM generation</td></tr>
-</table></div>
-<p>Both raise <strong>throughput</strong>, not per-token speed; per-request latency can rise slightly. See the <a href="#fig-batching">batching figure</a>.</p>
+<p>Full details and the optimisation map are in <a href="#part-8">Part VIII</a>.</p>
 
-<h3>Axis 2: infrastructure</h3>
+<h3>API and serving pattern</h3>
+<p>How clients call the model: synchronously or as jobs, streamed or in batches (details in <a href="#realtime">section 65</a>).</p>
+<ul>
+  <li><strong>Lower latency:</strong> stream tokens with <strong>Server-Sent Events</strong>, so users see text after the first token; use <strong>WebSockets</strong> for two-way, low-latency interaction such as voice.</li>
+  <li><strong>Higher throughput:</strong> an <strong>async job queue</strong> keeps workers busy and absorbs spikes; <strong>dynamic batching</strong> suits fixed-size outputs such as classifiers and embedding models (LLM generation uses continuous batching inside the engine).</li>
+  <li><strong>Lower cost:</strong> run work that nobody is waiting for in <strong>batch mode</strong>, on scheduled capacity; provider batch APIs are often about 50% cheaper.</li>
+  <li><strong>Reliability:</strong> queued jobs are <strong>retried</strong> instead of failing, every call has a <strong>timeout</strong>, and jobs are <strong>idempotent</strong>, so a retry doesn't repeat a side effect such as sending an email twice.</li>
+  <li><strong>Reproducibility:</strong> every job gets an <strong>ID</strong>, and its request, model version and result are logged, so any answer can be traced back and re-run.</li>
+</ul>
+
+<h3>Infrastructure</h3>
+<ul>
+  <li><strong>Lower latency:</strong> tensor parallelism inside one node; GPUs with high <strong>memory bandwidth</strong>, because decode is memory-bound; and <strong>warm replicas</strong>, because loading tens of GB of weights takes minutes (fast NVMe storage, safetensors and cached weights shorten cold starts).</li>
+  <li><strong>Higher throughput:</strong> more replicas behind the load balancer; autoscale on <strong>queue depth or KV-cache usage</strong>, not CPU; more GPU memory fits larger batches.</li>
+  <li><strong>Lower cost:</strong> right-size the GPU: memory ≈ bytes per weight × parameters, plus 20–30% for the KV cache (a 7B model in BF16 needs about 14 GB for weights alone). Scale to zero or use serverless GPUs when traffic is spiky, accepting cold starts. Cloud suits elastic scaling; on-premise gives data control at a higher up-front cost.</li>
+  <li><strong>Reliability:</strong> several machines and regions, so there is no single point of failure; <strong>health checks</strong> (readiness and liveness probes) keep traffic away from replicas that aren't ready (<a href="#kubernetes">section 67</a>).</li>
+  <li><strong>Reproducibility:</strong> pinned container images with fixed library versions; the same GPU type, driver and CUDA version; and infrastructure as code (Terraform, Helm), so an environment can be rebuilt exactly.</li>
+</ul>
+<p><a href="#fig-reqpath">Figure 97</a> shows how these pieces fit together for one request: it passes through a gateway, a load balancer and one of several model replicas, while monitoring feeds the autoscaler. The coloured dots mark which goal each part serves.</p>
+<figure>
+  <div class="scroll"><svg id="fig-reqpath" viewBox="0 0 600 288" role="img" aria-label="Request path: clients go through a gateway with auth, rate limiting, caching and guardrails, then a load balancer to three model replicas; each replica runs vLLM with tensor parallelism on two GPUs; monitoring collects metrics from every layer"></svg></div>
+  <figcaption><b>Figure 97.</b> A typical serving stack. Each replica is a tensor-parallel group; the autoscaler adds replicas based on queue depth or KV-cache usage. Coloured dots mark which goal from <a href="#fig-axes">Figure 96</a> each part serves.</figcaption>
+</figure>
+<p>Large models often don't fit on one GPU, so each replica may itself be split across several GPUs. The table compares the ways to split or copy a model at inference time, and what each does to latency and throughput.</p>
 <div class="tbl"><table>
 <tr><th>Strategy at inference</th><th>What it does</th><th>Effect</th></tr>
 <tr><td><strong>Tensor parallelism</strong></td><td>Splits each layer across GPUs in one node</td><td>Lower latency for big models</td></tr>
@@ -2598,54 +2604,89 @@ details.more summary{cursor:pointer;color:var(--accent);font-weight:600;font-siz
 <tr><td><strong>Expert parallelism</strong></td><td>Spreads <a href="#moe">MoE</a> experts</td><td>Needed for large MoE models</td></tr>
 </table></div>
 <p>Replicas are not model parallelism, and ZeRO/FSDP are training techniques that don't apply here.</p>
-<figure>
-  <div class="scroll"><svg id="fig-reqpath" viewBox="0 0 600 260" role="img" aria-label="Request path: clients go through a gateway with auth, rate limiting, caching and guardrails, then a load balancer to three model replicas; each replica runs vLLM with tensor parallelism on two GPUs; monitoring collects metrics from every layer"></svg></div>
-  <figcaption><b>Figure 98.</b> A typical serving stack. Each replica is a tensor-parallel group; the autoscaler adds replicas based on queue depth or KV-cache usage.</figcaption>
-</figure>
-<ul>
-  <li><strong>GPU choice:</strong> memory ≈ bytes per weight × parameters, plus 20–30% headroom for the KV cache. A 7B model in BF16 needs about 14 GB for weights alone.</li>
-  <li><strong>Cloud, on-premise or serverless:</strong> cloud for fast scaling and managed services; on-premise for data control at a higher up-front cost; serverless GPUs and managed APIs for no idle cost, with less control and cold starts.</li>
-  <li><strong>Autoscale on the right signal:</strong> queue depth or KV-cache usage, not CPU. Watch <strong>cold starts</strong>: loading tens of GB of weights takes minutes. Fast NVMe storage, safetensors and cached weights shorten it.</li>
-  <li><strong>Containers and orchestration:</strong> Docker for consistent images, Kubernetes to schedule and scale them, with serving layers such as KServe, Ray Serve, or NVIDIA Triton / NIM.</li>
-  <li><strong>Distributed architecture:</strong> several machines and regions remove single points of failure.</li>
-</ul>
+<p>Tooling: Docker for images, Kubernetes to schedule and scale them, with serving layers such as KServe, Ray Serve or NVIDIA Triton / NIM (<a href="#kubernetes">section 67</a>).</p>
 
-<h3>Axis 3: deployment, testing and monitoring</h3>
+<h3>Delivery (CI/CD · MLOps)</h3>
+<ul>
+  <li><strong>Lower latency:</strong> benchmark in CI against <strong>SLOs</strong> (e.g. “p95 TTFT &lt; 500 ms at 50 concurrent users”) and block a release that regresses.</li>
+  <li><strong>Higher throughput:</strong> load-test at the target concurrency with realistic prompt and output lengths (vLLM's benchmark scripts, NVIDIA GenAI-Perf, Locust).</li>
+  <li><strong>Lower cost:</strong> check the cost per 1M tokens of each release; use the smallest model that meets quality, and a <strong>router</strong> that sends easy queries to a cheaper model; run offline jobs as batch processing.</li>
+  <li><strong>Reliability:</strong> release in stages, first in shadow mode and then as a canary, each step gated on latency, error and quality metrics, with automatic rollback (<a href="#cicd">section 69</a>).</li>
+  <li><strong>Reproducibility:</strong> versioned pipelines; infrastructure as code (Terraform provisions it; Kubernetes manifests or Helm charts describe deployments); a model registry (MLflow, Hugging Face Hub) for models, with prompts and data versioned too (<a href="#governance">section 71</a>).</li>
+</ul>
+<p><a href="#fig-canary">Figure 98</a> shows a staged release: the new model first runs in the shadow of the old one, then takes a growing share of real traffic only while its metrics stay healthy.</p>
+<figure>
+  <div class="scroll"><svg id="fig-canary" viewBox="0 0 600 250" role="img" aria-label="Canary rollout: traffic to the new model steps from 0 to 5, 25, 50 and 100 percent, with metric checks at each step; a failing check triggers rollback to 0 percent"></svg></div>
+  <figcaption><b>Figure 98.</b> Releasing a new model. A <strong>shadow</strong> phase first sends real traffic to the new model without showing its answers; the <strong>canary</strong> then grows its share in steps, each gated on latency, error and quality metrics. The dashed line shows an automatic rollback. Percentages are illustrative.</figcaption>
+</figure>
+
+<h3>Monitoring</h3>
+<p>Watch the live system with metrics for each goal:</p>
 <div class="tbl"><table>
-<tr><th>Area</th><th>Metrics</th></tr>
+<tr><th>Goal</th><th>Metrics</th></tr>
 <tr><td><strong>Latency</strong></td><td>TTFT, TPOT, p50 / p95 / p99 end-to-end latency</td></tr>
-<tr><td><strong>Throughput</strong></td><td>Tokens/s, requests/s, queue length</td></tr>
-<tr><td><strong>Resources</strong></td><td>GPU utilisation, KV-cache usage, memory, cost per 1M tokens</td></tr>
-<tr><td><strong>Reliability</strong></td><td>Error rate, timeouts, rate-limit hits</td></tr>
-<tr><td><strong>Quality</strong></td><td>User feedback, LLM-as-judge scores, hallucination and refusal rates, input drift</td></tr>
+<tr><td><strong>Throughput</strong></td><td>Tokens/s, requests/s, queue length, GPU utilisation, KV-cache usage</td></tr>
+<tr><td><strong>Cost</strong></td><td>Cost per 1M tokens, GPU hours, cache hit rate</td></tr>
+<tr><td><strong>Reliability</strong></td><td>Error rate, timeouts, rate-limit hits; quality: user feedback, LLM-as-judge scores, hallucination and refusal rates, input drift (<a href="#drift">section 70</a>)</td></tr>
+<tr><td><strong>Reproducibility</strong></td><td>Model, prompt and config versions logged with every request</td></tr>
 </table></div>
 <ul>
   <li><strong>Tools:</strong> Prometheus and Grafana for system metrics; LLM observability (Langfuse, LangSmith, Arize Phoenix) to trace prompts, responses and RAG steps.</li>
-  <li><strong>Benchmarking:</strong> load-test against <strong>SLOs</strong> (e.g. “p95 TTFT &lt; 500 ms at 50 concurrent users”) with vLLM's benchmark scripts, NVIDIA GenAI-Perf or Locust, using realistic prompt and output lengths.</li>
-  <li><strong>Infrastructure as code and CI/CD:</strong> Terraform provisions infrastructure; Kubernetes manifests or Helm charts describe deployments; a model registry (MLflow, Hugging Face Hub) versions models.</li>
-</ul>
-<figure>
-  <div class="scroll"><svg id="fig-canary" viewBox="0 0 600 250" role="img" aria-label="Canary rollout: traffic to the new model steps from 0 to 5, 25, 50 and 100 percent, with metric checks at each step; a failing check triggers rollback to 0 percent"></svg></div>
-  <figcaption><b>Figure 99.</b> Releasing a new model. A <strong>shadow</strong> phase first sends real traffic to the new model without showing its answers; the <strong>canary</strong> then grows its share in steps, each gated on latency, error and quality metrics. The dashed line shows an automatic rollback. Percentages are illustrative.</figcaption>
-</figure>
-
-<h3>Security, caching and cost</h3>
-<ul>
-  <li><strong>Security and safety:</strong> authentication, rate limiting, input/output guardrails, PII filtering, prompt-injection defences.</li>
-  <li><strong>Caching:</strong> exact and semantic response caches, plus <a href="#paged">prefix caching</a>.</li>
-  <li><strong>Cost:</strong> the smallest model that meets quality; a <strong>router</strong> that sends easy queries to a cheaper model; batch processing for offline jobs.</li>
+  <li><strong>Caching for cost:</strong> exact and semantic response caches, plus <a href="#paged">prefix caching</a>.</li>
+  <li><strong>Security and guardrails:</strong> authentication, rate limiting, input/output guardrails, PII filtering, prompt-injection defences.</li>
 </ul>
 </section>
 
 <section id="realtime">
-<h2><span class="n">66</span>Batch and real-time serving</h2>
+<h2><span class="n">65</span>Batch and real-time serving</h2>
 <p><strong>Model serving</strong> turns a trained model into a network service that other applications can call, typically over a REST API.</p>
 <div class="tbl"><table>
-<tr><th>Mode</th><th>Latency</th><th>Example</th><th>Cost</th></tr>
-<tr><td><strong>Batch</strong></td><td>Hours</td><td>Nightly reports, bulk tagging</td><td>Cheapest; LLM batch APIs are often about 50% off</td></tr>
-<tr><td><strong>Streaming / near-real-time</strong></td><td>Seconds</td><td>Event pipelines (Kafka)</td><td>Medium</td></tr>
-<tr><td><strong>Real-time (online)</strong></td><td>Milliseconds to seconds</td><td>Chat, fraud detection</td><td>Highest: always-on capacity</td></tr>
+<tr><th>Mode</th><th>Triggered by</th><th>Latency</th><th>Example</th><th>Cost</th></tr>
+<tr><td><strong>Batch</strong></td><td>A schedule</td><td>Hours</td><td>Nightly reports, bulk tagging</td><td>Cheapest; LLM batch APIs are often about 50% off</td></tr>
+<tr><td><strong>Streaming / near-real-time</strong></td><td>Each event</td><td>Seconds</td><td>Event pipelines (Kafka), flagging transactions</td><td>Medium</td></tr>
+<tr><td><strong>Real-time (online)</strong></td><td>Each user request</td><td>Milliseconds to seconds</td><td>Chat, search, fraud checks at payment time</td><td>Highest: always-on capacity</td></tr>
 </table></div>
+<p>The three modes move data in different ways (<a href="#fig-modes">Figure 99</a>). In <strong>batch</strong>, a scheduler runs the model over a whole dataset and writes the results to a table that apps look up later. In <strong>streaming</strong>, a consumer reads events from a stream such as Kafka, scores each one, and publishes the result for other services to react to. In <strong>real-time</strong> serving, a user calls an API and waits while a warm replica answers. Real-time services are usually synchronous; batch and streaming are asynchronous by nature.</p>
+<figure>
+  <div class="scroll"><svg id="fig-modes" viewBox="0 0 600 290" role="img" aria-label="Three data flows. Batch: a nightly scheduler reads a data warehouse, the model scores it in big batches, results go to a table that apps look up. Streaming: events go to a Kafka stream, a consumer scores each event, results go to an output stream that services react to. Real-time: a user calls an API through a gateway and load balancer to a warm model replica and receives the response or token stream"></svg></div>
+  <figcaption><b>Figure 99.</b> How batch, streaming and real-time serving move data. Only in real-time serving does a user wait for the model; in the other two, results land somewhere and are picked up later.</figcaption>
+</figure>
+
+<h3>Synchronous vs asynchronous APIs</h3>
+<p><strong>Synchronous:</strong> the caller waits until a task finishes before doing anything else. <strong>Asynchronous:</strong> the caller hands the task off, keeps working, and picks up the result when it is ready (<a href="#fig-syncconcept">Figure 100</a>). Neither is better; most applications use both.</p>
+<figure>
+  <div class="scroll"><svg id="fig-syncconcept" viewBox="0 0 600 280" role="img" aria-label="Two timelines. Synchronous: process A calls process B and is blocked while B works, then gets the response and continues. Asynchronous: A calls B and keeps working while B runs, then picks up the response when it arrives"></svg></div>
+  <figcaption><b>Figure 100.</b> Who waits for whom. Solid bars show a process doing work; the dashed bar shows process A blocked, waiting for B.</figcaption>
+</figure>
+<div class="tbl"><table>
+<tr><th>Example</th><th>Mode</th><th>Why</th></tr>
+<tr><td><strong>User interfaces</strong></td><td>Synchronous</td><td>People expect an immediate reply when they click or type, so the interaction feels synchronous. (The UI <em>code</em> itself is usually async, so the screen doesn't freeze while it waits.)</td></tr>
+<tr><td><strong>HTTP APIs</strong></td><td>Synchronous</td><td>The client sends a request and expects a fast response on the same connection.</td></tr>
+<tr><td><strong>Batch processing</strong></td><td>Asynchronous</td><td>Large amounts of data are processed at scheduled times (<a href="#fig-modes">Figure 99</a>), so the work doesn't block resources that interactive requests need.</td></tr>
+<tr><td><strong>Long-running tasks</strong></td><td>Asynchronous</td><td>Fulfilling an online order, running an agent workflow or processing a large document takes minutes or more; nobody should hold a connection or a server open waiting for it.</td></tr>
+</table></div>
+<p>For an LLM service, a <strong>synchronous</strong> API simply keeps the connection open until the answer or token stream arrives. An <strong>asynchronous</strong> one needs a few more parts: the client <strong>submits a job</strong> and fetches the result later, with a queue and workers in between. <a href="#fig-syncasync">Figure 101</a> shows a multi-step job (A → B → C) for one user, and how jobs from several users share the workers.</p>
+<figure>
+  <div class="scroll"><svg id="fig-syncasync" viewBox="0 0 600 470" role="img" aria-label="Top: one user submits a job, gets 202 and a job ID, the job is queued, and a worker runs steps A, B and C in order while the client polls for progress and finally gets the result. Bottom: three users' jobs on two workers over time; jobs 1 and 2 run in parallel, job 3 waits in the queue until worker 1 is free, and inside every job the steps run A, B, C in order"></svg></div>
+  <figcaption><b>Figure 101.</b> How an asynchronous LLM service works. Top: one user's job; submitting and fetching are separate calls, and the worker runs the steps A → B → C in order. Bottom: with several users, jobs run in parallel on different workers, and extra jobs wait in the queue instead of failing. Timings are illustrative.</figcaption>
+</figure>
+<p>Async isn't mainly about having many users: it applies even with one. That user's app doesn't wait on an open connection while A → B → C runs; it gets a job ID and is free to close the page, start something else or watch progress, while the steps still run strictly in order. With many users, the queue adds a second benefit: different users' jobs run in parallel on different workers, extra jobs wait in the queue instead of failing, and the autoscaler adds workers based on queue length.</p>
+<div class="box key"><span class="lab">Three separate ideas</span><ul style="margin:4px 0 0;padding-left:20px">
+  <li><strong>Inside one job:</strong> steps run in order (B needs A's output).</li>
+  <li><strong>Between a user and their job:</strong> sync means they wait; async means they don't.</li>
+  <li><strong>Across users:</strong> jobs run in parallel on several workers, and the queue absorbs the extra.</li>
+</ul></div>
+<div class="tbl"><table>
+<tr><th></th><th>Synchronous (request–response)</th><th>Asynchronous (job queue)</th></tr>
+<tr><td><strong>Client gets the result</strong></td><td>On the same connection, as a response or a token stream</td><td>Later: polls a status endpoint or receives a <strong>webhook</strong></td></tr>
+<tr><td><strong>Latency</strong></td><td>Lowest; the user sees tokens at once</td><td>Higher: queueing plus a second call for the result</td></tr>
+<tr><td><strong>Long jobs</strong></td><td>Fail at gateway or HTTP timeouts (often 30–60 s)</td><td>Fine: minutes or hours</td></tr>
+<tr><td><strong>Spikes and failures</strong></td><td>Requests wait or fail; the client must retry</td><td>The queue absorbs spikes; workers retry failed jobs</td></tr>
+<tr><td><strong>Scale on</strong></td><td>Concurrent requests, KV-cache usage</td><td>Queue length</td></tr>
+<tr><td><strong>Typical uses</strong></td><td>Chat, autocomplete, short RAG answers</td><td>Agent runs, document processing, bulk summarisation, image and video generation</td></tr>
+<tr><td><strong>Tools</strong></td><td>FastAPI + vLLM, Server-Sent Events</td><td>A queue (Redis, SQS, Kafka) with workers (e.g. Celery), plus webhooks</td></tr>
+</table></div>
+<div class="box mistake"><span class="lab">Don't confuse: async service vs async code</span><p><strong>Async code</strong> (<code>async def</code>, below) lets one server handle many waiting requests at once. An <strong>async service</strong> separates submitting work from getting the result. Both come from the same idea of not waiting, but they are independent: a synchronous chat API is usually written with async code, and an async job service can run ordinary blocking workers. Async also means <strong>concurrent</strong>, not necessarily parallel: on one thread, async tasks take turns while each waits on I/O.</p></div>
 
 <h3>Building a real-time LLM endpoint</h3>
 <ol>
@@ -2676,24 +2717,24 @@ async def chat(msg: str):
 </ul>
 <figure>
   <div class="scroll"><svg id="fig-async" viewBox="0 0 600 226" role="img" aria-label="Three requests on one worker: blocking code handles them one after another; async code starts all three and handles them while waiting, finishing much sooner"></svg></div>
-  <figcaption><b>Figure 100.</b> Three requests on one worker, each mostly waiting on the LLM. Blocking code serves them in turn; async code overlaps the waiting. Durations are illustrative.</figcaption>
+  <figcaption><b>Figure 102.</b> Three requests on one worker, each mostly waiting on the LLM. Blocking code serves them in turn; async code overlaps the waiting. Durations are illustrative.</figcaption>
 </figure>
 
 <h3>Scaling up and out</h3>
 <figure>
   <div class="scroll"><svg id="fig-scale" viewBox="0 0 600 200" role="img" aria-label="Vertical scaling replaces a server with a bigger one; horizontal scaling adds more servers behind a load balancer"></svg></div>
-  <figcaption><b>Figure 101.</b> Vertical scaling makes one machine bigger; horizontal scaling adds machines.</figcaption>
+  <figcaption><b>Figure 103.</b> Vertical scaling makes one machine bigger; horizontal scaling adds machines.</figcaption>
 </figure>
 <ul>
   <li><strong>Vertical:</strong> a bigger GPU or more memory. Needed when the model doesn't fit at all.</li>
   <li><strong>Horizontal:</strong> more replicas behind a load balancer. Adds throughput and removes single points of failure.</li>
   <li>LLMs usually need both: a big enough GPU per replica, then enough replicas.</li>
-  <li><strong>Microservices:</strong> split the system (UI, retrieval, model, guardrails) into services that scale independently (<a href="#kubernetes">section 68</a>). Data and model parallelism for training are covered in <a href="#parallelism">section 43</a>.</li>
+  <li><strong>Microservices:</strong> split the system (UI, retrieval, model, guardrails) into services that scale independently (<a href="#kubernetes">section 67</a>). Data and model parallelism for training are covered in <a href="#parallelism">section 43</a>.</li>
 </ul>
 </section>
 
 <section id="serving-options">
-<h2><span class="n">67</span>Model serving options</h2>
+<h2><span class="n">66</span>Model serving options</h2>
 <p>Model serving bridges development and production: it packages a trained model into a network-accessible service so other applications can request predictions, classifications or generated content.</p>
 <div class="tbl"><table>
 <tr><th>Approach</th><th>Type</th><th>What it does</th><th>Hosting</th><th>Artifact storage</th><th>Why it's good</th><th>Open source?</th></tr>
@@ -2710,15 +2751,15 @@ async def chat(msg: str):
 <tr><td><strong>General serving frameworks</strong></td><td>Triton, Ray Serve, BentoML, KServe</td><td>Multi-model, multi-framework serving on your own cluster</td></tr>
 </table></div>
 
-<p>For self-hosting on your own cluster, see <a href="#kubernetes">section 68</a>; for how vLLM works inside, see <a href="#paged">section 50</a>.</p>
+<p>For self-hosting on your own cluster, see <a href="#kubernetes">section 67</a>; for how vLLM works inside, see <a href="#paged">section 50</a>.</p>
 </section>
 
 <section id="kubernetes">
-<h2><span class="n">68</span>Serving on Kubernetes</h2>
+<h2><span class="n">67</span>Serving on Kubernetes</h2>
 <p>A common path from notebook to production: wrap the model in a Python app, give it a <strong>Gradio</strong> interface, package it in a <strong>Docker</strong> container, and run it on <strong>Kubernetes</strong> (K8s), which handles deployment, scaling and recovery.</p>
 <figure>
   <div class="scroll"><svg id="fig-k8spipe" viewBox="0 0 600 170" role="img" aria-label="Six steps: LLM app, Gradio interface, Docker container, Kubernetes Deployment and Service, autoscaling, monitoring and logging"></svg></div>
-  <figcaption><b>Figure 102.</b> From inference code to a monitored service.</figcaption>
+  <figcaption><b>Figure 104.</b> From inference code to a monitored service.</figcaption>
 </figure>
 
 <h3>Gradio</h3>
@@ -2736,7 +2777,7 @@ demo.launch()</pre>
 <p>If the model runs inside the Gradio process, every UI pod loads its own copy onto a GPU, wasting expensive GPUs on an idle interface.</p>
 <figure>
   <div class="scroll"><svg id="fig-k8scluster" viewBox="0 0 600 270" role="img" aria-label="Kubernetes cluster: ingress routes users to two Gradio UI pods on CPU nodes, which call a model Service that load-balances across three vLLM pods on GPU nodes; weights are mounted from a shared volume; Prometheus collects metrics"></svg></div>
-  <figcaption><b>Figure 103.</b> UI pods on cheap CPU nodes, model pods on GPU nodes, each scaled on its own signal. Weights come from a volume instead of being baked into the image.</figcaption>
+  <figcaption><b>Figure 105.</b> UI pods on cheap CPU nodes, model pods on GPU nodes, each scaled on its own signal. Weights come from a volume instead of being baked into the image.</figcaption>
 </figure>
 <div class="tbl"><table>
 <tr><th>Pods</th><th>Runs</th><th>Hardware</th><th>Scales on</th></tr>
@@ -2778,7 +2819,7 @@ spec:
 <h3>Autoscaling</h3>
 <figure>
   <div class="scroll"><svg id="fig-k8sscale" viewBox="0 0 600 280" role="img" aria-label="Over a traffic spike, CPU usage of GPU inference pods barely changes while the request queue grows; scaling on queue length adds replicas, scaling on CPU adds none"></svg></div>
-  <figcaption><b>Figure 104.</b> Simulated traffic spike. GPU inference keeps CPU low, so a CPU-based autoscaler never reacts; a queue-based one adds replicas as requests wait. Values are illustrative.</figcaption>
+  <figcaption><b>Figure 106.</b> Simulated traffic spike. GPU inference keeps CPU low, so a CPU-based autoscaler never reacts; a queue-based one adds replicas as requests wait. Values are illustrative.</figcaption>
 </figure>
 <ul>
   <li>The default <strong>Horizontal Pod Autoscaler (HPA)</strong> scales on CPU or memory, which barely move for GPU inference.</li>
@@ -2803,6 +2844,38 @@ spec:
 <tr><td><strong>Feature flags</strong></td><td>Yes, chosen users</td><td>Turn features on per user or group</td><td>Instant</td><td>Per-flag metrics</td></tr>
 </table></div>
 <p>A typical order: <strong>shadow → canary → full rollout</strong> (see the <a href="#deployment">canary figure</a>), with A/B tests for product decisions.</p>
+<div class="box take"><span class="lab">Part XI · Key takeaways</span><ul>
+  <li>Deployment has five layers (model, API pattern, infrastructure, delivery, monitoring) and five goals: latency, throughput, cost, reliability and reproducibility.</li>
+  <li>Choose batch, streaming or real-time serving by who waits and how fast; real-time is usually synchronous, batch and streaming asynchronous.</li>
+  <li>Use an async job API for long or spiky work (submit, get a job ID, poll or receive a webhook); stream tokens with SSE when a user is waiting.</li>
+  <li>Tensor parallelism lowers latency, replicas raise throughput; autoscale LLMs on queue depth or KV-cache usage, not CPU.</li>
+  <li>Run models in containers on Kubernetes or a managed platform, with readiness probes and warm replicas to avoid cold starts.</li>
+</ul></div>
+</section>
+
+<!-- ============ PART XII (MLOps) ============ -->
+
+<div class="part" id="part-12"><div class="k">Part XII</div><h2>MLOps</h2><p>Keeping ML and LLM systems improving and under control: the lifecycle, CI/CD, drift and monitoring, versioning and governance.</p></div>
+
+<section id="mlops">
+<h2><span class="n">68</span>The MLOps lifecycle</h2>
+<p><strong>MLOps</strong> is a set of practices that streamline the whole machine-learning lifecycle, from data and development to deployment, monitoring and maintenance. It is a <strong>loop</strong>, not a line: what monitoring finds feeds back into data and retraining.</p>
+<figure>
+  <div class="scroll"><svg id="fig-mlops" viewBox="0 0 600 290" role="img" aria-label="A loop of six stages: data management, model development, CI/CD, model serving, monitoring and observability, governance; monitoring feeds back into data"></svg></div>
+  <figcaption><b>Figure 107.</b> The MLOps loop, with typical tools per stage and the section that covers each.</figcaption>
+</figure>
+<div class="tbl"><table>
+<tr><th>Stage</th><th>Does</th><th>Tools</th></tr>
+<tr><td><strong>Data management</strong></td><td>Collect, store, preprocess and <strong>version</strong> datasets</td><td>DVC, lakeFS (data versioning)</td></tr>
+<tr><td><strong>Model development</strong></td><td>Track experiments, ensure reproducibility</td><td>MLflow, Weights &amp; Biases</td></tr>
+<tr><td><strong>CI/CD</strong></td><td>Automate testing, training pipelines and model registries</td><td>GitHub Actions, MLflow registry</td></tr>
+<tr><td><strong>Model serving</strong></td><td>APIs, batch jobs, streaming; containers</td><td>FastAPI, vLLM, Kubernetes</td></tr>
+<tr><td><strong>Monitoring &amp; observability</strong></td><td>Accuracy, latency, drift, system metrics</td><td>Prometheus, Grafana, Evidently, Langfuse</td></tr>
+<tr><td><strong>Governance / responsible AI</strong></td><td>Compliance, fairness, explainability</td><td>WhyLabs, Fiddler, model cards</td></tr>
+</table></div>
+<ul>
+  <li><strong>Reproducibility</strong> runs through every stage: version data, code, dependencies and environments; use containers and automated pipelines; document every step and configuration.</li>
+</ul>
 </section>
 
 <section id="cicd">
@@ -2810,7 +2883,7 @@ spec:
 <p><strong>Continuous integration (CI)</strong> tests every change automatically; <strong>continuous deployment (CD)</strong> ships changes that pass. For ML, “every change” includes code, data and models, so the pipeline also trains, evaluates and versions models.</p>
 <figure>
   <div class="scroll"><svg id="fig-cicd" viewBox="0 0 600 300" role="img" aria-label="Code and data go to a pull request; CI runs lint and tests, data validation, training, evaluation and a quality gate, then posts a CML report; after merge, CD registers the model, builds an image and deploys with a canary rollout"></svg></div>
-  <figcaption><b>Figure 105.</b> CI runs on every pull request and blocks the merge if any check fails; CD runs only after CI passes on main.</figcaption>
+  <figcaption><b>Figure 108.</b> CI runs on every pull request and blocks the merge if any check fails; CD runs only after CI passes on main.</figcaption>
 </figure>
 
 <h3>Triggers</h3>
@@ -2857,7 +2930,7 @@ jobs:
 </table></div>
 <figure>
   <div class="scroll"><svg id="fig-gate" viewBox="0 0 600 230" role="img" aria-label="Five pull requests' model scores compared with the production baseline; three pass and two fail the quality gate"></svg></div>
-  <figcaption><b>Figure 106.</b> A quality gate on five pull requests: each new model must match the production model's score within a tolerance and stay under the latency limit. Scores are illustrative.</figcaption>
+  <figcaption><b>Figure 109.</b> A quality gate on five pull requests: each new model must match the production model's score within a tolerance and stay under the latency limit. Scores are illustrative.</figcaption>
 </figure>
 
 <h3>Versioning models and data</h3>
@@ -2872,7 +2945,7 @@ jobs:
   <li>Fetch the trained model (CI artifact or registry).</li>
   <li>Upload it to the model registry or Hugging Face Hub.</li>
   <li>Build and push a Docker image.</li>
-  <li>Deploy to Hugging Face Spaces (Gradio) or <a href="#kubernetes">Kubernetes</a>, releasing via shadow → canary → full rollout with automatic rollback (<a href="#deployment">section 65</a>).</li>
+  <li>Deploy to Hugging Face Spaces (Gradio) or <a href="#kubernetes">Kubernetes</a>, releasing via shadow → canary → full rollout with automatic rollback (<a href="#deployment">section 64</a>).</li>
 </ol>
 <ul>
   <li><strong>Authentication:</strong> store tokens such as <code>HF_TOKEN</code> as <strong>GitHub Secrets</strong>, never in code; for cloud providers prefer OIDC to long-lived keys.</li>
@@ -2899,7 +2972,7 @@ jobs:
 </table></div>
 <figure>
   <div class="scroll"><svg id="fig-drift" viewBox="0 0 600 260" role="img" aria-label="Distributions of input similarity to a baseline for last month and this week; this week's distribution has shifted lower, and the KS statistic is computed between them"></svg></div>
-  <figcaption><b>Figure 107.</b> Cosine similarity of each input's embedding to the baseline centroid, simulated for two periods. The shift is measured with a two-sample Kolmogorov–Smirnov statistic (largest gap between the cumulative distributions), computed from the samples.</figcaption>
+  <figcaption><b>Figure 110.</b> Cosine similarity of each input's embedding to the baseline centroid, simulated for two periods. The shift is measured with a two-sample Kolmogorov–Smirnov statistic (largest gap between the cumulative distributions), computed from the samples.</figcaption>
 </figure>
 <ul>
   <li><strong>Embedding-based detection:</strong> compare embeddings of current inputs and outputs with a baseline; a falling similarity suggests a shift in meaning. For full embeddings, use multivariate tests (MMD) or a <strong>classifier</strong> trained to tell old inputs from new.</li>
@@ -2952,24 +3025,24 @@ jobs:
 <tr><td><strong>Scope</strong></td><td>Usually the whole model's logic</td><td>Usually individual predictions (why this output for this input)</td></tr>
 </table></div>
 <p>The terms are often used loosely, so define them when you use them.</p>
-<div class="box take"><span class="lab">Part XI · Key takeaways</span><ul>
+<div class="box take"><span class="lab">Part XII · Key takeaways</span><ul>
   <li>MLOps is a loop: data → train → evaluate → deploy → monitor → retrain.</li>
-  <li>Choose batch or real-time serving by how fast predictions are needed.</li>
-  <li>Package models in containers and scale them on Kubernetes with autoscaling.</li>
-  <li>CI/CD for ML tests code, data and models; roll out safely with canary or shadow deployments and keep rollbacks ready.</li>
-  <li>Monitor for drift, and version data, code and models for governance and audits.</li>
+  <li>CI/CD for ML tests code, data and models, with quality gates before anything is released.</li>
+  <li>Roll out safely with shadow, canary or blue-green deployments, and keep rollbacks ready.</li>
+  <li>Monitor for data and concept drift, not only latency, errors and cost.</li>
+  <li>Version data, code, prompts and models in a registry for reproducibility, governance and audits.</li>
 </ul></div>
 </section>
 
 <!-- ============ PART IX ============ -->
-<div class="part" id="part-12"><div class="k">Part XII</div><h2>Agents &amp; tool use</h2><p>How LLMs reach tools and data, how agents remember, and how agents are built on top.</p></div>
+<div class="part" id="part-13"><div class="k">Part XIII</div><h2>Agents &amp; tool use</h2><p>How LLMs reach tools and data, how agents remember, and how agents are built on top.</p></div>
 
 <section id="mcp">
 <h2><span class="n">72</span>Model Context Protocol (MCP)</h2>
 <p><strong>MCP</strong> is an open protocol that standardises how AI applications connect to tools and data. Instead of a custom connector for every pair of app and system, each app implements an MCP <strong>client</strong> and each system an MCP <strong>server</strong>.</p>
 <figure>
   <div class="scroll"><svg id="fig-mxn" viewBox="0 0 600 220" role="img" aria-label="Left: three apps each wired to four systems with custom connectors, twelve links. Right: the same apps and systems connected through MCP, seven links"></svg></div>
-  <figcaption><b>Figure 108.</b> Without a standard, M apps and N systems need M × N connectors (here 3 × 4 = 12); with MCP they need M + N (here 3 + 4 = 7).</figcaption>
+  <figcaption><b>Figure 111.</b> Without a standard, M apps and N systems need M × N connectors (here 3 × 4 = 12); with MCP they need M + N (here 3 + 4 = 7).</figcaption>
 </figure>
 
 <h3>Host, client and server</h3>
@@ -2981,7 +3054,7 @@ jobs:
 </ul>
 <figure>
   <div class="scroll"><svg id="fig-mcparch" viewBox="0 0 600 270" role="img" aria-label="A host containing an LLM and three MCP clients; two clients connect over stdio to local servers for files and git, one connects over HTTP to a remote financial-data server that calls an external API"></svg></div>
-  <figcaption><b>Figure 109.</b> One host, three servers, three clients. Local servers use stdio; the remote server uses Streamable HTTP.</figcaption>
+  <figcaption><b>Figure 112.</b> One host, three servers, three clients. Local servers use stdio; the remote server uses Streamable HTTP.</figcaption>
 </figure>
 <h3>Transports</h3>
 <div class="tbl"><table>
@@ -2994,7 +3067,7 @@ jobs:
 <h3>A tool call, step by step</h3>
 <figure>
   <div class="scroll"><svg id="fig-mcpseq" viewBox="0 0 600 340" role="img" aria-label="Sequence: the user asks for Apple's 2025 earnings; the host gives the LLM the question and tool list; the LLM proposes get_earnings; the client sends tools/call to the server; the server calls the financial API; results flow back to the LLM, which writes the answer shown to the user"></svg></div>
-  <figcaption><b>Figure 110.</b> The worked example as a sequence. The returned value is illustrative.</figcaption>
+  <figcaption><b>Figure 113.</b> The worked example as a sequence. The returned value is illustrative.</figcaption>
 </figure>
 <div class="box key"><span class="lab">Key point</span><p>The <strong>LLM never talks to the server directly</strong>. It only <em>proposes</em> a tool call; the host and client execute it. That is also where the host can ask the user for approval.</p></div>
 
@@ -3038,7 +3111,7 @@ jobs:
 <p>An LLM forgets everything between calls. Agents add memory around it: <strong>short-term memory</strong> holds the immediate context of one interaction; <strong>long-term memory</strong> persists knowledge across sessions, tasks and time. The taxonomy follows cognitive science and the CoALA framework (Sumers et al., 2023).</p>
 <figure>
   <div class="scroll"><svg id="fig-memarch" viewBox="0 0 600 300" role="img" aria-label="The orchestrator assembles short-term working memory for each LLM call from three long-term stores: episodic, semantic and procedural memory"></svg></div>
-  <figcaption><b>Figure 111.</b> For every LLM call, the orchestrator builds the context window from the three long-term memories, and writes new episodes back afterwards.</figcaption>
+  <figcaption><b>Figure 114.</b> For every LLM call, the orchestrator builds the context window from the three long-term memories, and writes new episodes back afterwards.</figcaption>
 </figure>
 
 <h3>Short-term (working) memory</h3>
@@ -3063,7 +3136,7 @@ jobs:
 <h3>Writing and managing memory</h3>
 <figure>
   <div class="scroll"><svg id="fig-memlife" viewBox="0 0 600 220" role="img" aria-label="Memory lifecycle: an interaction is written to episodic memory in the hot path or in the background, consolidated into semantic facts, updated or forgotten, and retrieved into the next context window"></svg></div>
-  <figcaption><b>Figure 112.</b> The memory lifecycle. Consolidation turns many episodes into a few durable facts.</figcaption>
+  <figcaption><b>Figure 115.</b> The memory lifecycle. Consolidation turns many episodes into a few durable facts.</figcaption>
 </figure>
 <ul>
   <li><strong>Hot path:</strong> the agent calls a <code>save_memory</code> tool during the conversation. Memory is immediate, but each turn is slower.</li>
@@ -3077,7 +3150,7 @@ jobs:
 <div class="eq"><div class="math">\text{score}(m) = \alpha\cdot\text{recency}(m) + \beta\cdot\text{importance}(m) + \gamma\cdot\text{relevance}(m,q), \qquad \text{recency}(m) = 0.995^{\,\text{hours since last access}}</div><span class="c">Each term is scaled to [0, 1]. Importance is rated by the LLM when the memory is written; relevance is the cosine similarity between the memory and the query q.</span></div>
 <figure>
   <div class="scroll"><svg id="fig-memscore" viewBox="0 0 600 250" role="img" aria-label="Four memories with stacked recency, importance and relevance bars; the most relevant memory is not the top-ranked one once recency and importance are added"></svg></div>
-  <figcaption><b>Figure 113.</b> Scoring four memories for the query “book a restaurant tonight” with α = β = γ = 1. Scores are computed from the formula; the inputs are illustrative.</figcaption>
+  <figcaption><b>Figure 116.</b> Scoring four memories for the query “book a restaurant tonight” with α = β = γ = 1. Scores are computed from the formula; the inputs are illustrative.</figcaption>
 </figure>
 
 <h3>Risks</h3>
@@ -3094,7 +3167,7 @@ jobs:
   <li><strong>Letta</strong> (formerly MemGPT): manages memory like an operating system, paging information between the context window and external storage.</li>
 </ul>
 <p>Further reading: Sumers et al., <em>Cognitive Architectures for Language Agents</em> (2023); Park et al., <em>Generative Agents</em> (2023).</p>
-<div class="box take"><span class="lab">Part XII · Key takeaways</span><ul>
+<div class="box take"><span class="lab">Part XIII · Key takeaways</span><ul>
   <li>MCP is an open standard: hosts run one client per server, and servers expose tools, resources and prompts. M apps + N systems need M + N connectors, not M × N.</li>
   <li>Treat tool output as untrusted: prompt injection is a key security risk.</li>
   <li>Short-term memory is the context window; long-term memory (episodic, semantic, procedural) persists across sessions and is retrieved into it when needed.</li>
@@ -3271,31 +3344,35 @@ jobs:
 <details><summary>How should text-to-Cypher queries be made safe?</summary><p>Give the schema in the prompt, use a read-only connection, and validate generated queries before running them.</p></details>
 <details><summary>How does ColPali score a page?</summary><p>Late interaction: for each query-token vector, take its maximum similarity over the page's patch vectors, then sum over tokens.</p></details>
 <details><summary>VLM or vLLM for answering from page images?</summary><p>A VLM (vision-language model) such as Qwen2-VL. vLLM is an inference server.</p></details>
-<div class="qgroup">XI · Deployment &amp; operations</div>
-<details><summary>What stage closes the MLOps loop?</summary><p>Monitoring: what it finds (drift, quality drops) feeds back into data and retraining.</p></details>
+<div class="qgroup">XI · Serving in production</div>
 <details><summary>Does batching make each token faster?</summary><p>No. It raises throughput; per-request latency can rise slightly. For LLMs, continuous batching beats dynamic (time-window) batching.</p></details>
 <details><summary>At inference, which parallelism lowers latency, and which only adds throughput?</summary><p>Tensor parallelism lowers latency for big models; replicas (“data parallel”) only add throughput.</p></details>
 <details><summary>What signal should LLM autoscaling use?</summary><p>Queue depth or KV-cache usage, not CPU; and plan for cold starts while weights load.</p></details>
-<details><summary>Shadow vs canary deployment?</summary><p>Shadow sends real traffic to the new model without showing its answers; canary shows it to a growing share of users, gated on metrics, with rollback.</p></details>
 <details><summary>SSE or WebSockets for streaming LLM tokens?</summary><p>Usually Server-Sent Events: one-way, plain HTTP, used by the OpenAI API. WebSockets suit two-way connections such as voice.</p></details>
+<details><summary>How do structured outputs make an LLM service more reliable?</summary><p>Constrained decoding only allows tokens that keep the output valid JSON or match a schema, so downstream code never receives malformed output.</p></details>
+<details><summary>A request runs a 5-minute agent workflow: synchronous or asynchronous API?</summary><p>Asynchronous: return 202 with a job ID, put the job on a queue, and let the client poll or receive a webhook. A synchronous call would hit gateway timeouts.</p></details>
+<details><summary>Async service vs async code?</summary><p>Async code lets one server handle many waiting requests at once; an async service separates submitting a job from fetching its result. You can use either without the other.</p></details>
 <details><summary>Does async code batch requests?</summary><p>No. It lets one worker serve other requests while waiting on I/O; GPU batching is the model server's job.</p></details>
 <details><summary>Vertical vs horizontal scaling for LLMs?</summary><p>Vertical (bigger GPU) when the model doesn't fit; horizontal (more replicas) for throughput and resilience.</p></details>
 <details><summary>Managed platform or self-hosted vLLM?</summary><p>Managed (SageMaker, Vertex AI, Azure ML): little operations work, higher cost per token. Self-hosted vLLM: full control and lowest cost at scale, but you run the infrastructure.</p></details>
 <details><summary>Why run the Gradio UI and the model in separate pods?</summary><p>Otherwise every UI replica loads its own model copy on a GPU. Separate pods let cheap CPU UI pods and GPU model pods scale independently.</p></details>
 <details><summary>Deployment vs Service in Kubernetes?</summary><p>A Deployment keeps N replica pods running and handles rolling updates; a Service gives them a stable address and load-balances between them.</p></details>
 <details><summary>Why does an LLM pod need a readiness probe?</summary><p>Loading the model takes minutes; the probe keeps traffic away until the pod can answer.</p></details>
-<details><summary>Blue-green vs canary?</summary><p>Blue-green switches all traffic between two full environments at once (instant rollback, 2× capacity); canary shifts a small share first and grows it gradually.</p></details>
+<div class="qgroup">XII · MLOps</div>
+<details><summary>What stage closes the MLOps loop?</summary><p>Monitoring: what it finds (drift, quality drops) feeds back into data and retraining.</p></details>
 <details><summary>Why trigger CI on pull requests rather than only on push to main?</summary><p>So problems are caught before the change is merged; on push to main, a bad change is already in.</p></details>
 <details><summary>Where does CML put its evaluation report?</summary><p>As a comment on the pull request or commit; emails come from GitHub notifications.</p></details>
 <details><summary>What is a quality gate in ML CI?</summary><p>A check that fails the build if the new model is worse than production (e.g. score below baseline or latency above the SLO).</p></details>
 <details><summary>Why not commit trained models to git?</summary><p>They bloat the repository and large files are rejected; use DVC, Git LFS, a model registry or the Hugging Face Hub.</p></details>
 <details><summary>What does continuous training (CT) add to CI/CD?</summary><p>Automatic retraining when new data arrives or drift is detected, because models degrade even when code doesn't change.</p></details>
+<details><summary>Shadow vs canary deployment?</summary><p>Shadow sends real traffic to the new model without showing its answers; canary shows it to a growing share of users, gated on metrics, with rollback.</p></details>
+<details><summary>Blue-green vs canary?</summary><p>Blue-green switches all traffic between two full environments at once (instant rollback, 2× capacity); canary shifts a small share first and grows it gradually.</p></details>
 <details><summary>Data drift vs concept drift?</summary><p>Data drift: the inputs change. Concept drift: the right answer for the same input changes, which needs labels or a judge to detect.</p></details>
 <details><summary>What does the KS statistic measure?</summary><p>The largest gap between two samples' cumulative distributions of one numeric feature.</p></details>
 <details><summary>Is MLflow a production monitoring tool?</summary><p>No, it is for experiment tracking and the model registry; use Prometheus/Grafana, Evidently or Langfuse for monitoring.</p></details>
 <details><summary>How do registry aliases make rollback fast?</summary><p>Deployments point at an alias (e.g. “champion”); rolling back means moving the alias to the previous version.</p></details>
 <details><summary>Interpretability vs explainability?</summary><p>Interpretability: the model is understandable by design (linear models, small trees). Explainability: post-hoc explanations of black boxes (SHAP, LIME).</p></details>
-<div class="qgroup">XII · Agents &amp; tool use</div>
+<div class="qgroup">XIII · Agents &amp; tool use</div>
 <details><summary>How many MCP clients does a host connected to three servers run?</summary><p>Three: each client keeps a 1:1 connection with one server.</p></details>
 <details><summary>stdio vs Streamable HTTP?</summary><p>stdio: the server runs locally as a subprocess of the host. Streamable HTTP: the server runs remotely over the network. Neither limits the number of servers.</p></details>
 <details><summary>Does the LLM call the MCP server directly?</summary><p>No. It proposes a tool call; the host and client execute it via tools/call and return the result as context.</p></details>
@@ -3311,7 +3388,7 @@ jobs:
 </section>
 <section id="glossary">
 <h2>Glossary</h2>
-<p>108 key terms, each linked to the section that explains it.</p>
+<p>111 key terms, each linked to the section that explains it.</p>
 <input type="search" class="gl-filter" id="gl-filter" placeholder="Filter terms…" aria-label="Filter glossary terms">
 <dl class="gloss" id="gloss">
   <div class="gl-letter">A</div>
@@ -3429,6 +3506,8 @@ jobs:
   <dt><a href="#stats-descriptive">Standard deviation / variance</a></dt><dd>How spread out values are around the mean; variance is the standard deviation squared.</dd>
   <dt><a href="#ssm">State space model (SSM)</a></dt><dd>A sequence model such as Mamba that runs in linear time with constant memory per generated token.</dd>
   <div class="gl-letter">T</div>
+  <dt><a href="#deployment">Structured outputs</a></dt><dd>Constrained decoding: the serving engine only allows tokens that keep the output valid JSON or match a schema.</dd>
+  <dt><a href="#realtime">Synchronous vs asynchronous API</a></dt><dd>Synchronous: the client waits on an open connection for the response. Asynchronous: it submits a job, gets a job ID, and later polls for the result or receives a webhook.</dd>
   <dt><a href="#temperature">Temperature / top-k / top-p</a></dt><dd>Sampling controls: temperature sharpens or flattens the distribution; top-k and top-p restrict which tokens can be picked.</dd>
   <dt><a href="#parallelism">Tensor parallelism</a></dt><dd>Split each layer&#x27;s matrices across GPUs, so one request runs faster.</dd>
   <dt><a href="#test-time">Test-time compute</a></dt><dd>Spend more computation at inference (sampling, search, refinement) to get better answers.</dd>
@@ -3442,6 +3521,7 @@ jobs:
   <dt><a href="#bias-variance">Variance (model)</a></dt><dd>How much a model&#x27;s predictions change with a different training sample; high variance means overfitting.</dd>
   <dt><a href="#vector-index">Vector index</a></dt><dd>A data structure for fast nearest-neighbour search over embeddings.</dd>
   <div class="gl-letter">W</div>
+  <dt><a href="#deployment">Warm replica / cold start</a></dt><dd>A warm replica is a model copy already loaded on a GPU and ready to serve; a cold start is the minutes needed to start a new one and load its weights. Warm replicas cut latency spikes but cost money while idle.</dd>
   <dt><a href="#adaptive">Weight decay</a></dt><dd>Shrink weights a little at every step; a form of regularisation.</dd>
   <div class="gl-letter">Z</div>
   <dt><a href="#stats-descriptive">z-score</a></dt><dd>How many standard deviations a value lies from the mean.</dd>
@@ -5337,27 +5417,30 @@ function arr(svg,A,x1,y1,x2,y2,cls="l-mut",m="ink"){return el("line",{x1,y1,x2,y
   const n=id=>{const e=document.querySelector("#"+id+" h2 .n");return e?e.textContent:"?";};
   const cols=[["Lower latency","TTFT · TPOT","var(--accent2)"],["Higher throughput","tokens/s, users","var(--accent)"],["Lower cost","cost per token","var(--warn)"],["Reliability","uptime · quality","var(--bad)"],["Reproducibility","same result again","var(--muted)"]];
   const rows=[["Model & engine",["sections "+n("inference-basics")+"–"+n("inference-map"),"runs on ↓"],"var(--accent2-soft)",
-      [["Prefix caching","Speculative dec.","Quantization"],["Continuous batching","PagedAttention","GQA / MLA"],["Quantization","Distillation / SLM"],[],["Pinned model","Pinned tokenizer","Fixed seed, T = 0"]]],
+      [["Prefix caching","Chunked prefill","FlashAttention","Speculative dec.","Quantization"],["Continuous batching","PagedAttention","GQA / MLA"],["Quantization","Pruning","Distillation / SLM"],["Structured outputs","Guardrail model","Fallback model"],["Pinned model","Pinned tokenizer","Fixed seed, T = 0"]]],
+    ["API & pattern",["client interface","section "+n("realtime")],"var(--bg)",
+      [["SSE streaming","WebSockets (voice)"],["Async job queue","Dynamic batching"],["Batch mode","Batch APIs, 50% off"],["Retries via queue","Timeouts","Idempotent jobs"],["Job IDs","Logged requests"]]],
     ["Infrastructure",["sections "+n("realtime")+"–"+n("kubernetes")],"var(--warn-soft)",
       [["Tensor parallelism","Fast GPU memory","Warm replicas"],["More replicas","Autoscale on queue","Bigger GPU memory"],["Right-size the GPU","Scale to zero"],["Multi-region","Health checks"],["Pinned images","Same GPU & CUDA","Infra as code"]]],
     ["Delivery",["CI/CD · MLOps","sections "+n("mlops")+", "+n("cicd")],"var(--accent-soft)",
       [["Latency tests in CI"],["Load tests"],["Cost per release"],["Canary / shadow","Eval gates","Rollbacks"],["Versioned pipelines","Model registry"]]],
     ["Monitoring",["live system","sections "+n("drift")+"–"+n("governance")],"var(--surface)",
       [["SLOs on TTFT, TPOT","p95 / p99 alerts"],["Queue alerts","GPU-use alerts"],["Track cost/token","Response caching"],["Drift alerts","Guardrails"],["Versions in logs"]]]];
-  const x0=118,cw=113,y0=46,rh=94;
+  const x0=118,cw=113,y0=46,rhs=rows.map(r=>Math.max(94,Math.max(...r[3].map(l=>l.length))*25+20)),ys=rhs.map((h,i)=>y0+rhs.slice(0,i).reduce((a,b)=>a+b,0));
   cols.forEach(([t,sub,c],j)=>{const x=x0+j*cw+cw/2;
     el("text",{x,y:18,"text-anchor":"middle",class:"tk",style:`font-size:11.5px;fill:${c==="var(--muted)"?"var(--ink)":c}`},svg,t);
     el("text",{x,y:32,"text-anchor":"middle",class:"t",style:"font-size:9.5px"},svg,sub);});
-  rows.forEach(([name,notes,bg,cells],i)=>{const y=y0+i*rh;
+  rows.forEach(([name,notes,bg,cells],i)=>{const y=ys[i],rh=rhs[i],mx=Math.max(3,...cells.map(l=>l.length));
     el("rect",{x:6,y,width:x0+5*cw-2,height:rh-8,rx:8,style:`fill:${bg};stroke:var(--rule)`},svg);
     el("text",{x:14,y:y+26,class:"tk",style:"font-size:11.5px"},svg,name);
     notes.forEach((t,k)=>el("text",{x:14,y:y+41+k*14,class:"t",style:"font-size:9.5px"},svg,t));
     cells.forEach((list,j)=>{const cx=x0+j*cw;
-      if(!list.length){el("text",{x:cx+cw/2,y:y+46,"text-anchor":"middle",class:"t"},svg,"—");return;}
-      list.forEach((t,k)=>{const yy=y+8+k*25+(3-list.length)*12.5;
+      if(!list.length){el("text",{x:cx+cw/2,y:y+(rh-8)/2+4,"text-anchor":"middle",class:"t"},svg,"—");return;}
+      list.forEach((t,k)=>{const yy=y+(rh-8)/2-(list.length*25-5)/2+k*25;
         el("rect",{x:cx+4,y:yy,width:cw-8,height:20,rx:10,style:`fill:var(--surface);stroke:${cols[j][2]}`},svg);
         el("text",{x:cx+cw/2,y:yy+14,"text-anchor":"middle",style:"font:600 9.5px var(--body);fill:var(--ink)"},svg,t);});});});
-  el("text",{x:(x0+5*cw)/2+3,y:y0+4*rh+6,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"Monitoring measures every column and shows which layer to tune next.");
+  el("text",{x:(x0+5*cw)/2+3,y:ys[4]+rhs[4]+6,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"Monitoring measures every column and shows which layer to tune next.");
+  svg.setAttribute("viewBox","0 0 690 "+(ys[4]+rhs[4]+14));
 })();
 
 /* request path */
@@ -5367,7 +5450,7 @@ function arr(svg,A,x1,y1,x2,y2,cls="l-mut",m="ink"){return el("line",{x1,y1,x2,y
   el("rect",{x:98,y:40,width:118,height:166,rx:6,class:"f-wsoft",style:"stroke:var(--warn)"},svg);
   el("text",{x:157,y:60,"text-anchor":"middle",class:"tk"},svg,"Gateway");
   ["auth","rate limit","cache","guardrails"].forEach((s,i)=>{el("rect",{x:108,y:72+i*32,width:98,height:24,rx:4,class:"f-surf",style:"stroke:var(--rule)"},svg);
-    el("text",{x:157,y:88+i*32,"text-anchor":"middle",style:"font:10.5px var(--mono);fill:var(--ink)"},svg,s);});
+    el("text",{x:163,y:88+i*32,"text-anchor":"middle",style:"font:10.5px var(--mono);fill:var(--ink)"},svg,s);});
   box(svg,236,100,82,44,"f-soft2","Load","balancer");
   arr(svg,A,78,122,96,122);arr(svg,A,216,122,234,122);
   [0,1,2].forEach(i=>{const y=22+i*76;
@@ -5378,9 +5461,19 @@ function arr(svg,A,x1,y1,x2,y2,cls="l-mut",m="ink"){return el("line",{x1,y1,x2,y
     arr(svg,A,318,122,340,y+31);});
   el("text",{x:417,y:252,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"TP = 2 inside each replica");
   el("rect",{x:512,y:22,width:80,height:214,rx:6,class:"f-soft2",style:"stroke:var(--accent2)"},svg);
-  ["Monitor","TTFT","TPOT","KV cache","errors","quality"].forEach((s,i)=>el("text",{x:552,y:44+i*26,"text-anchor":"middle",class:i?"t":"tk",style:i?"font-size:10.5px":""},svg,s));
+  ["Monitor","TTFT","TPOT","KV cache","errors","quality"].forEach((s,i)=>el("text",{x:i?548:552,y:44+i*26,"text-anchor":"middle",class:i?"t":"tk",style:i?"font-size:10.5px":""},svg,s));
   el("text",{x:552,y:212,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"→ autoscaler");
   el("line",{x1:492,x2:510,y1:120,y2:120,class:"l-mut"},svg);
+  // goal tags (same colours as the deployment figure)
+  const G={lat:"var(--accent2)",thr:"var(--accent)",cost:"var(--warn)",rel:"var(--bad)"};
+  const dot=(x,y,c)=>el("circle",{cx:x,cy:y,r:4.5,style:`fill:${G[c]}`},svg);
+  ["rel","rel","cost","rel"].forEach((c,i)=>dot(117,84+i*32,c));
+  dot(245,109,"thr");
+  [0,1,2].forEach(i=>{const y=22+i*76;dot(470,y+14,"thr");dot(482,y+14,"rel");[0,1].forEach(g=>dot(360+g*68,y+40,"lat"));});
+  ["lat","lat","thr","rel","rel"].forEach((c,i)=>dot(585,66+i*26,c));
+  dot(536,226,"thr");dot(548,226,"cost");
+  [["lat","lower latency"],["thr","higher throughput"],["cost","lower cost"],["rel","reliability"]].forEach(([c,l],i)=>{const x=[60,190,340,460][i];
+    dot(x,275,c);el("text",{x:x+10,y:279,class:"t",style:"font-size:10.5px"},svg,l);});
 })();
 
 /* canary */
@@ -5512,6 +5605,93 @@ function arr(svg,A,x1,y1,x2,y2,cls="l-mut",m="ink"){return el("line",{x1,y1,x2,y
     el("text",{x,y:y+21,"text-anchor":"middle",style:"font:9.5px var(--mono);fill:var(--muted)"},svg,t);});
   el("text",{x:cx,y:cy-4,"text-anchor":"middle",class:"tk"},svg,"MLOps loop");
   el("text",{x:cx,y:cy+14,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"findings feed back into data");
+})();
+
+/* batch / streaming / real-time flows */
+(function(){
+  const svg=document.getElementById("fig-modes");const A=arrowDefs(svg);
+  const bw=100,gap=18,x=i=>8+i*(bw+gap);
+  const node=(i,y,t,sub,cls)=>{el("rect",{x:x(i),y,width:bw,height:40,rx:6,class:cls||"f-surf",style:"stroke:var(--rule)"},svg);
+    el("text",{x:x(i)+bw/2,y:y+(sub?17:25),"text-anchor":"middle",class:"tk",style:"font-size:11px"},svg,t);
+    if(sub)el("text",{x:x(i)+bw/2,y:y+31,"text-anchor":"middle",class:"t",style:"font-size:9.5px"},svg,sub);};
+  const go=(i,y)=>el("line",{x1:x(i)+bw+2,x2:x(i+1)-3,y1:y+20,y2:y+20,style:"stroke:var(--muted);stroke-width:1.4","marker-end":A("ink")},svg);
+  const lane=(y,title,meta,c)=>{el("text",{x:8,y:y-8,class:"tk",style:`fill:${c}`},svg,title);el("text",{x:592,y:y-8,"text-anchor":"end",class:"t",style:"font-size:10px"},svg,meta);};
+  // batch
+  lane(30,"Batch","hours · nobody waits","var(--warn)");
+  node(0,30,"Scheduler","nightly job");node(1,30,"Data warehouse","all records");node(2,30,"Model","big batches","f-wsoft");node(3,30,"Results table","");node(4,30,"Apps","look up later");
+  [0,1,2].forEach(i=>go(i,30));
+  el("line",{x1:x(4)-3,x2:x(3)+bw+2,y1:50,y2:50,style:"stroke:var(--muted);stroke-width:1.4;stroke-dasharray:4 3","marker-end":A("ink")},svg);
+  // streaming
+  lane(124,"Streaming","seconds · systems react","var(--accent)");
+  node(0,124,"Events","clicks, payments");node(1,124,"Stream","e.g. Kafka");node(2,124,"Consumer","scores each event","f-soft");node(3,124,"Output stream","or database");node(4,124,"Services","react to results");
+  [0,1,2,3].forEach(i=>go(i,124));
+  // real-time
+  lane(218,"Real-time","ms to seconds · the user waits","var(--accent2)");
+  node(0,218,"User","");node(1,218,"Gateway / API","");node(2,218,"Load balancer","");node(3,218,"Model replica","warm, always on","f-soft2");
+  [0,1,2].forEach(i=>go(i,218));
+  el("path",{d:`M${x(3)+bw/2} 258 L${x(3)+bw/2} 274 L${x(0)+bw/2} 274 L${x(0)+bw/2} 262`,fill:"none",style:"stroke:var(--accent2);stroke-width:1.4","marker-end":A("acc2")},svg);
+  el("text",{x:(x(0)+x(3)+bw)/2,y:286,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"response or token stream back to the waiting user");
+  el("text",{x:x(4)+bw/2,y:238,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"synchronous");
+  el("text",{x:x(4)+bw/2,y:252,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"(usually)");
+})();
+
+/* sync vs async: concept */
+(function(){
+  const svg=document.getElementById("fig-syncconcept");const A=arrowDefs(svg);
+  const head=(x,t,c)=>{el("rect",{x:x-48,y:30,width:96,height:28,rx:5,style:`fill:var(--${c}-soft);stroke:var(--${c})`},svg);
+    el("text",{x,y:48,"text-anchor":"middle",class:"tk",style:"font-size:11.5px"},svg,t);
+    el("line",{x1:x,x2:x,y1:58,y2:262,style:"stroke:var(--rule)"},svg);};
+  const bar=(x,y1,y2,dash)=>el("rect",{x:x-6,y:y1,width:12,height:y2-y1,rx:2,style:dash?"fill:var(--surface);stroke:var(--bad);stroke-dasharray:3 2":"fill:var(--bad)"},svg);
+  const msg=(x1,x2,y)=>el("line",{x1:x1+(x2>x1?7:-7),x2:x2+(x2>x1?-9:9),y1:y,y2:y,style:"stroke:var(--ink);stroke-width:1.4","marker-end":A("ink")},svg);
+  const lab=(x,y,lines,anchor)=>lines.forEach((t,i)=>el("text",{x,y:y+i*13,"text-anchor":anchor||"end",class:"t",style:"font-size:10px"},svg,t));
+  // sync
+  el("text",{x:150,y:16,"text-anchor":"middle",class:"tk"},svg,"Synchronous");
+  head(90,"Process A","accent2");head(220,"Process B","warn");
+  bar(90,66,96);msg(90,220,96);bar(220,96,206);bar(90,96,206,true);msg(220,90,206);bar(90,206,250);
+  lab(76,84,["call B"]);lab(76,146,["waits","(blocked)"]);lab(76,222,["gets result,","continues"]);
+  el("line",{x1:300,x2:300,y1:24,y2:266,class:"grid"},svg);
+  // async
+  el("text",{x:450,y:16,"text-anchor":"middle",class:"tk"},svg,"Asynchronous");
+  head(390,"Process A","accent2");head(520,"Process B","warn");
+  bar(390,66,250);msg(390,520,96);bar(520,96,206);msg(520,390,206);
+  lab(376,84,["call B"]);lab(376,146,["keeps","working"]);lab(376,222,["picks up","result"]);
+  lab(150,276,["A is idle while B works"],"middle");lab(450,276,["A keeps working while B runs"],"middle");
+})();
+
+/* async job API: one user's multi-step job, then many users */
+(function(){
+  const svg=document.getElementById("fig-syncasync");const A=arrowDefs(svg);
+  const life=(x,t)=>{el("rect",{x:x-44,y:28,width:88,height:24,rx:5,class:"f-surf",style:"stroke:var(--rule)"},svg);
+    el("text",{x,y:44,"text-anchor":"middle",class:"tk",style:"font-size:11px"},svg,t);
+    el("line",{x1:x,x2:x,y1:52,y2:276,style:"stroke:var(--rule);stroke-dasharray:3 3"},svg);};
+  const msg=(x1,x2,y,t)=>{el("line",{x1,x2:x2+(x2>x1?-3:3),y1:y,y2:y,style:"stroke:var(--ink);stroke-width:1.4","marker-end":A("ink")},svg);
+    el("text",{x:(x1+x2)/2,y:y-5,"text-anchor":"middle",style:"font:10px var(--mono);fill:var(--ink);paint-order:stroke;stroke:var(--surface);stroke-width:4px"},svg,t);};
+  const stepCls={A:"fill:var(--accent2)",B:"fill:var(--accent)",C:"fill:var(--warn)"};
+  el("text",{x:10,y:16,class:"tk"},svg,"One user: a multi-step job");
+  const C=80,P=230,Q=380,W=530;
+  life(C,"Client");life(P,"API");life(Q,"Queue");life(W,"Worker");
+  msg(C,P,74,"POST /jobs");msg(P,C,94,"202 + job_id");msg(P,Q,114,"enqueue");msg(Q,W,134,"pull job");
+  [["A",138,170],["B",170,200],["C",200,228]].forEach(([t,y1,y2])=>{el("rect",{x:W-8,y:y1,width:16,height:y2-y1-2,rx:3,style:stepCls[t]},svg);
+    el("text",{x:W+14,y:(y1+y2)/2+3,class:"tk",style:"font-size:10.5px"},svg,"step "+t);});
+  msg(C,P,170,"GET /jobs/id");msg(P,C,188,"running: step B");
+  msg(W,P,238,"store result");
+  msg(C,P,252,"GET /jobs/id");msg(P,C,268,"done + result");
+  el("text",{x:300,y:288,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"or progress events / a webhook instead of polling");
+  el("line",{x1:10,x2:590,y1:300,y2:300,class:"grid"},svg);
+  // many users: timeline
+  el("text",{x:10,y:322,class:"tk"},svg,"Several users: jobs share the workers");
+  const x0=110,u=40,row=(y,l)=>{el("text",{x:x0-10,y:y+15,"text-anchor":"end",class:"t",style:"font-size:10.5px"},svg,l);el("line",{x1:x0,x2:x0+11*u,y1:y+22,y2:y+22,style:"stroke:var(--rule)"},svg);};
+  row(336,"Worker 1");row(372,"Worker 2");row(408,"Queue");
+  const job=(y,t0,user)=>["A","B","C"].forEach((st,k)=>{el("rect",{x:x0+(t0+k)*u+1,y,width:u-2,height:22,rx:3,style:stepCls[st]},svg);
+    el("text",{x:x0+(t0+k)*u+u/2,y:y+15,"text-anchor":"middle",style:"font:600 10px var(--body);fill:var(--surface)"},svg,"U"+user+"·"+st);});
+  job(336,0,1);job(372,1,2);job(336,3,3);
+  el("rect",{x:x0+1.5*u,y:408,width:1.5*u-2,height:22,rx:3,style:"fill:var(--surface);stroke:var(--muted);stroke-dasharray:3 3"},svg);
+  el("text",{x:x0+2.25*u,y:423,"text-anchor":"middle",class:"t",style:"font-size:10px"},svg,"U3 waits");
+  el("line",{x1:x0+3*u-2,x2:x0+3*u+6,y1:408,y2:362,style:"stroke:var(--muted);stroke-width:1.2","marker-end":A("ink")},svg);
+  el("line",{x1:x0,x2:x0+11*u,y1:446,y2:446,style:"stroke:var(--muted)","marker-end":A("ink")},svg);
+  el("text",{x:x0+11*u,y:462,"text-anchor":"end",class:"t",style:"font-size:10px"},svg,"time →");
+  el("text",{x:x0+6.6*u,y:352,class:"t",style:"font-size:10px"},svg,"steps in order inside each job");
+  el("text",{x:x0+6.6*u,y:388,class:"t",style:"font-size:10px"},svg,"different jobs in parallel");
 })();
 
 /* async vs blocking */
